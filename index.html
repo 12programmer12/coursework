@@ -1,0 +1,535 @@
+﻿<!DOCTYPE html>
+<html lang="ru" data-theme="light" data-accessibility="normal">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" data-i18n="meta.description" content="Аренда коттеджей и домов в Казани. Большой выбор, честные цены, бесплатный подбор.">
+    <meta name="keywords" content="аренда дома, коттедж Казань, снять дом посуточно">
+
+    <title data-i18n="meta.title">DOMIKTUT - Аренда коттеджей и домов в Казани</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/adaptive.css">
+
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+
+    <meta name="theme-color" content="#FF6B35">
+</head>
+<body>
+<div class="preloader" data-preloader>
+    <div class="preloader__spinner"></div>
+    <div class="preloader__text" data-i18n="common.loading">Загрузка...</div>
+</div>
+
+<a href="#main-content" class="skip-link" data-i18n="common.skipToContent">Перейти к основному содержанию</a>
+
+<header class="header" data-header>
+    <div class="container header__container">
+        <a href="index.html" class="header__logo" aria-label="DOMIKTUT - на главную">
+            <svg class="header__logo-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M20 5L5 17.5V35H15V25H25V35H35V17.5L20 5Z" fill="#FF6B35"/>
+            </svg>
+            <span class="header__logo-text">DOMIKTUT.RU</span>
+        </a>
+
+        <nav class="header__nav" role="navigation" aria-label="Главная навигация">
+            <a href="pages/catalog.html" class="header__link header__link--active" data-i18n="header.catalog">Каталог</a>
+            <a href="pages/about.html" class="header__link" data-i18n="header.about">О компании</a>
+            <a href="pages/contacts.html" class="header__link" data-i18n="header.contacts">Контакты</a>
+            <a href="pages/catalog.html#cooperation" class="header__link" data-i18n="footer.cooperation">Сотрудничество</a>
+            <a href="#faq" class="header__link" data-i18n="footer.faq">Частые вопросы</a>
+        </nav>
+
+        <div class="header__right">
+            <div class="header__location">
+                <svg class="header__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M10 2C6.13 2 3 5.13 3 9c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
+                </svg>
+                <span class="header__location-text">Казань</span>
+                <svg class="header__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                    <path d="M2.5 4.5L6 8l3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <div class="header__search">
+                <button class="header__search-btn" aria-label="Открыть поиск" data-i18n-aria="header.search">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                        <path d="M9 2a7 7 0 105.196 11.804l3.5 3.5a1 1 0 001.414-1.414l-3.5-3.5A7 7 0 009 2zm0 2a5 5 0 110 10A5 5 0 019 4z" fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>
+
+            <a href="tel:88435286548" class="header__phone" data-i18n="header.phone">8 (843) 528-65-48</a>
+
+            <button class="header__favorites" aria-label="Избранное">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M10 2.5l1.903 3.854a1 1 0 00.754.547l4.243.616-3.07 3.003a1 1 0 00-.288.884l.724 4.226L10 13.5l-3.766 1.98.724-4.226a1 1 0 00-.288-.884l-3.07-3.003 4.243-.616a1 1 0 00.754-.547L10 2.5z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                </svg>
+            </button>
+
+            <div class="header__user" data-user-menu>
+                <button class="header__user-btn" aria-label="Личный кабинет">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                        <path d="M10 2a4 4 0 100 8 4 4 0 000-8zm0 10c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5z" fill="currentColor"/>
+                    </svg>
+                </button>
+                <div class="header__user-dropdown" hidden>
+                    <a href="pages/login.html" class="header__dropdown-link" data-i18n="header.login">Войти</a>
+                    <a href="pages/register.html" class="header__dropdown-link" data-i18n="header.register">Регистрация</a>
+                </div>
+            </div>
+
+            <div class="header__settings" data-settings-menu>
+                <button class="header__settings-btn" aria-label="Настройки" data-i18n-aria="header.settings">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                        <path d="M10 6a4 4 0 100 8 4 4 0 000-8zm8.314-1.636l-1.166.673a6.003 6.003 0 00-.526-.91l.673-1.166a1 1 0 00-1.732-1l-.673 1.166a6.003 6.003 0 00-.91-.526l-.673-1.166a1 1 0 00-1.732 1l.673 1.166c-.296.14-.58.303-.848.486l-1.166-.673a1 1 0 00-1 1.732l1.166.673c-.04.3-.06.606-.06.914s.02.614.06.914l-1.166.673a1 1 0 001 1.732l1.166-.673c.268.183.552.346.848.486l-.673 1.166a1 1 0 001.732 1l.673-1.166c.296.14.602.26.91.373l.673 1.166a1 1 0 001.732-1l-.673-1.166c.183-.268.346-.552.486-.848l1.166.673a1 1 0 001-1.732l-1.166-.673c.04-.3.06-.606.06-.914s-.02-.614-.06-.914l1.166-.673a1 1 0 00-1-1.732z" fill="currentColor"/>
+                    </svg>
+                </button>
+                <div class="header__settings-dropdown" hidden>
+                    <div class="settings__group">
+                        <div class="settings__label" data-i18n="settings.language">Язык</div>
+                        <div class="settings__buttons">
+                            <button class="settings__btn active" data-lang="ru" aria-label="Русский">RU</button>
+                            <button class="settings__btn" data-lang="be" aria-label="Беларуская">BY</button>
+                            <button class="settings__btn" data-lang="en" aria-label="English">EN</button>
+                        </div>
+                    </div>
+
+                    <div class="settings__group">
+                        <div class="settings__label" data-i18n="settings.theme">Тема</div>
+                        <div class="settings__buttons">
+                            <button class="settings__btn active" data-theme-toggle="light" data-i18n="theme.light">Светлая</button>
+                            <button class="settings__btn" data-theme-toggle="dark" data-i18n="theme.dark">Тёмная</button>
+                        </div>
+                    </div>
+
+                    <div class="settings__group">
+                        <div class="settings__label" data-i18n="settings.accessibility">Доступность</div>
+                        <div class="settings__buttons">
+                            <button class="settings__btn active" data-accessibility-toggle="normal" data-i18n="accessibility.normal">Обычная</button>
+                            <button class="settings__btn" data-accessibility-toggle="high-contrast" data-i18n="accessibility.contrast">Контраст</button>
+                            <button class="settings__btn" data-accessibility-toggle="large-text" data-i18n="accessibility.large">Крупный</button>
+                        </div>
+                    </div>
+
+                    <button class="settings__reset" data-i18n="settings.reset">Сбросить настройки</button>
+                </div>
+            </div>
+
+            <button class="header__burger" aria-label="Открыть меню" aria-expanded="false" data-burger>
+                <span class="header__burger-line"></span>
+                <span class="header__burger-line"></span>
+                <span class="header__burger-line"></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<div class="mobile-menu" data-mobile-menu hidden>
+    <nav class="mobile-menu__nav">
+        <a href="pages/catalog.html" class="mobile-menu__link" data-i18n="header.catalog">Каталог</a>
+        <a href="pages/about.html" class="mobile-menu__link" data-i18n="header.about">О компании</a>
+        <a href="pages/contacts.html" class="mobile-menu__link" data-i18n="header.contacts">Контакты</a>
+        <a href="#faq" class="mobile-menu__link" data-i18n="footer.faq">Частые вопросы</a>
+    </nav>
+    <div class="mobile-menu__footer">
+        <a href="tel:88435286548" class="mobile-menu__phone" data-i18n="header.phone">8 (843) 528-65-48</a>
+    </div>
+</div>
+
+<main id="main-content">
+    <section class="hero" data-hero>
+        <div class="hero__bg">
+            <img src="assets/images/hero-bg.jpg" alt="" aria-hidden="true" data-preserve="true">
+            <div class="hero__overlay"></div>
+        </div>
+
+        <div class="container hero__container">
+            <h1 class="hero__title" data-i18n="hero.title">Аренда коттеджей и домов в Казани</h1>
+            <p class="hero__subtitle" data-i18n="hero.subtitle">Найдите идеальный вариант сами или предоставьте это нам</p>
+
+            <div class="hero__search-form">
+                <div class="search-form__row">
+                    <div class="search-form__group">
+                        <label class="search-form__label" data-i18n="hero.checkin">Заезд</label>
+                        <input type="date" class="search-form__input" data-i18n-placeholder="hero.checkin" aria-label="Дата заезда">
+                    </div>
+
+                    <div class="search-form__group">
+                        <label class="search-form__label" data-i18n="hero.checkout">Выезд</label>
+                        <input type="date" class="search-form__input" data-i18n-placeholder="hero.checkout" aria-label="Дата выезда">
+                    </div>
+
+                    <div class="search-form__group">
+                        <label class="search-form__label" data-i18n="hero.guests">Количество человек</label>
+                        <input type="number" class="search-form__input" min="1" max="50" value="12" data-i18n-placeholder="hero.guests" aria-label="Количество гостей">
+                    </div>
+
+                    <div class="search-form__group search-form__group--price">
+                        <label class="search-form__label" data-i18n="hero.priceRange">Цена за сутки</label>
+                        <div class="search-form__price-range">
+                            <input type="number" class="search-form__price-from" min="0" value="13000" aria-label="Цена от">
+                            <span data-i18n="common.to">до</span>
+                            <input type="number" class="search-form__price-to" max="1000000" value="150000" aria-label="Цена до">
+                        </div>
+                    </div>
+
+                    <button class="search-form__btn" data-i18n="hero.find">Найти</button>
+                </div>
+            </div>
+        </div>
+
+        <button class="hero__show-header" data-i18n="hero.showHeader">Показать шапку</button>
+    </section>
+
+    <section class="about" data-about>
+        <div class="container">
+            <h2 class="section-title" data-i18n="about.title">О нас</h2>
+
+            <div class="about__grid">
+                <div class="about__item">
+                    <div class="about__icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                            <path d="M8 8h24v24H8V8zm4 4v16h16V12H12z" fill="#FF6B35"/>
+                            <path d="M14 18h12M14 22h8" stroke="#FF6B35" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <p class="about__text" data-i18n="about.legal">Работаем с юридическими и физическими лицами</p>
+                </div>
+
+                <div class="about__item">
+                    <div class="about__icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                            <circle cx="20" cy="15" r="6" fill="#FF6B35"/>
+                            <path d="M10 35c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="#FF6B35" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <p class="about__text" data-i18n="about.consultation">Бесплатный подбор, честные консультации и открытость к сотрудничеству</p>
+                </div>
+
+                <div class="about__item">
+                    <div class="about__icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                            <path d="M20 5l3 9h9l-7 6 3 9-8-6-8 6 3-9-7-6h9l3-9z" fill="#FF6B35"/>
+                        </svg>
+                    </div>
+                    <p class="about__text" data-i18n="about.experience">Работаем с 2014 года. Консультируем 30-80 человек в сутки, заселяем от 3 до 5 компаний в день. Помогли более 21 000 клиентам</p>
+                </div>
+
+                <div class="about__item">
+                    <div class="about__icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                            <path d="M20 5l4.5 9.5L35 16l-7.5 7 2 10.5L20 28l-9.5 5.5 2-10.5L5 16l10.5-1.5L20 5z" stroke="#FF6B35" stroke-width="2" fill="none"/>
+                        </svg>
+                    </div>
+                    <p class="about__text" data-i18n="about.rating">Средний рейтинг компании 4,5 из 5 (Avito, Google, Отзовик)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="catalog-preview" data-catalog-preview>
+        <div class="container">
+            <h2 class="section-title" data-i18n="catalog.title">Популярное в каталоге</h2>
+
+            <div class="catalog-grid" data-catalog-grid>
+                <div class="catalog-card" data-skeleton>
+                    <div class="catalog-card__image"></div>
+                    <div class="catalog-card__content">
+                        <div class="catalog-card__title"></div>
+                        <div class="catalog-card__features"></div>
+                        <div class="catalog-card__price"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="catalog-preview__actions">
+                <a href="pages/catalog.html" class="btn btn--primary" data-i18n="catalog.showAll">Перейти в каталог</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" data-services>
+        <div class="container">
+            <h2 class="section-title" data-i18n="services.title">Можем организовать для Вас</h2>
+
+            <div class="services__grid">
+                <div class="services__item">
+                    <div class="services__icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                            <path d="M20 5L5 15v5h30v-5L20 5z" fill="#FF6B35"/>
+                            <rect x="5" y="20" width="30" height="15" rx="2" fill="#FF6B35"/>
+                        </svg>
+                    </div>
+                    <span class="services__name" data-i18n="services.catering">Кейтеринг</span>
+                </div>
+
+                <div class="services__item">
+                    <div class="services__icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                            <circle cx="20" cy="20" r="8" fill="#FF6B35"/>
+                            <path d="M12 12l4 4M28 12l-4 4M12 28l4-4M28 28l-4-4" stroke="#FF6B35" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <span class="services__name" data-i18n="services.show">Шоу программа</span>
+                </div>
+
+                <div class="services__item">
+                    <div class="services__icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                            <path d="M20 8c-4 0-7 3-7 7v3H10v14h20V18h-3v-3c0-4-3-7-7-7z" fill="#FF6B35"/>
+                        </svg>
+                    </div>
+                    <span class="services__name" data-i18n="services.chef">Выездной повар</span>
+                </div>
+
+                <div class="services__item">
+                    <div class="services__icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                            <path d="M10 25h20M15 25V15a5 5 0 0110 0v10" stroke="#FF6B35" stroke-width="2"/>
+                            <circle cx="20" cy="10" r="3" fill="#FF6B35"/>
+                        </svg>
+                    </div>
+                    <span class="services__name" data-i18n="services.buffet">Фуршет</span>
+                </div>
+
+                <div class="services__item">
+                    <div class="services__icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                            <rect x="8" y="12" width="24" height="16" rx="2" fill="#FF6B35"/>
+                            <circle cx="14" cy="30" r="2" fill="#FF6B35"/>
+                            <circle cx="26" cy="30" r="2" fill="#FF6B35"/>
+                        </svg>
+                    </div>
+                    <span class="services__name" data-i18n="services.transfer">Трансфер</span>
+                </div>
+
+                <div class="services__item">
+                    <div class="services__icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                            <path d="M8 28l4-12h16l4 12H8z" fill="#FF6B35"/>
+                            <circle cx="14" cy="30" r="3" fill="#FF6B35"/>
+                            <circle cx="26" cy="30" r="3" fill="#FF6B35"/>
+                            <path d="M12 16l4-8h8l4 8" stroke="#FF6B35" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <span class="services__name" data-i18n="services.events">Мероприятия под ключ</span>
+                </div>
+            </div>
+
+            <div class="services__actions">
+                <button class="btn btn--primary" data-i18n="services.learnMore">Узнать подробнее</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq" id="faq" data-faq>
+        <div class="container">
+            <h2 class="section-title" data-i18n="faq.title">Частые вопросы</h2>
+
+            <div class="faq__list" data-accordion>
+                <div class="faq__item">
+                    <button class="faq__question" aria-expanded="false">
+                        <span data-i18n="faq.booking">Как происходит бронирование?</span>
+                        <svg class="faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="faq__answer" hidden>
+                        <p data-i18n="faq.bookingAnswer">После выбора дома вы оставляете заявку, мы связываемся с вами для подтверждения дат и деталей. Вносится предоплата 30-50% от стоимости аренды.</p>
+                    </div>
+                </div>
+
+                <div class="faq__item">
+                    <button class="faq__question" aria-expanded="false">
+                        <span data-i18n="faq.prepayment">Какая сумма предоплаты нужна?</span>
+                        <svg class="faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="faq__answer" hidden>
+                        <p data-i18n="faq.prepaymentAnswer">Стандарт предоплаты 50% от суммы аренды, если сумма аренды большая, то можно уменьшить предоплату до 30%.</p>
+                    </div>
+                </div>
+
+                <div class="faq__item">
+                    <button class="faq__question" aria-expanded="false">
+                        <span data-i18n="faq.split">Можно ли разбить предоплату на несколько частей?</span>
+                        <svg class="faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="faq__answer" hidden>
+                        <p data-i18n="faq.splitAnswer">Да, мы понимаем, что не всегда удобно вносить всю сумму сразу. Обсудите с нами удобный график платежей.</p>
+                    </div>
+                </div>
+
+                <div class="faq__item">
+                    <button class="faq__question" aria-expanded="false">
+                        <span data-i18n="faq.legal">Как работаете с юр. лицами?</span>
+                        <svg class="faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="faq__answer" hidden>
+                        <p data-i18n="faq.legalAnswer">Работаем по договору с предоставлением всех закрывающих документов. Возможна оплата по безналичному расчету с НДС и без НДС.</p>
+                    </div>
+                </div>
+
+                <div class="faq__item">
+                    <button class="faq__question" aria-expanded="false">
+                        <span data-i18n="faq.viewing">Можно ли приехать на просмотр?</span>
+                        <svg class="faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="faq__answer" hidden>
+                        <p data-i18n="faq.viewingAnswer">Конечно! Мы организуем просмотр любого дома в удобное для вас время. Просто свяжитесь с нами заранее.</p>
+                    </div>
+                </div>
+
+                <div class="faq__item">
+                    <button class="faq__question" aria-expanded="false">
+                        <span data-i18n="faq.time">Какое время заезда и выезда в дом и есть ли возможность сдвинуть заезд или выезд?</span>
+                        <svg class="faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="faq__answer" hidden>
+                        <p data-i18n="faq.timeAnswer">Стандартное время заезда - 15:00, выезда - 12:00. При наличии возможности мы можем пойти навстречу и изменить время.</p>
+                    </div>
+                </div>
+
+                <div class="faq__item">
+                    <button class="faq__question" aria-expanded="false">
+                        <span data-i18n="faq.deposit">Зачем нужен залог?</span>
+                        <svg class="faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="faq__answer" hidden>
+                        <p data-i18n="faq.depositAnswer">Залог гарантирует сохранность имущества. Он возвращается полностью при выезде, если нет повреждений или нарушений правил.</p>
+                    </div>
+                </div>
+
+                <div class="faq__item">
+                    <button class="faq__question" aria-expanded="false">
+                        <span data-i18n="faq.cost">Сколько стоят Ваши услуги?</span>
+                        <svg class="faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="faq__answer" hidden>
+                        <p data-i18n="faq.costAnswer">Наши услуги по подбору дома бесплатны для клиентов. Вы оплачиваете только аренду дома и дополнительные услуги по желанию.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta" data-cta>
+        <div class="cta__bg">
+            <img src="assets/images/cta-bg.jpg" alt="" aria-hidden="true" data-preserve="true">
+            <div class="cta__overlay"></div>
+        </div>
+
+        <div class="container cta__container">
+            <h2 class="cta__title" data-i18n="cta.title">Хотите сдать дом?</h2>
+            <p class="cta__subtitle" data-i18n="cta.subtitle">Оставьте заявку и мы свяжемся с вами для уточнения деталей</p>
+            <button class="btn btn--primary btn--large" data-i18n="cta.button">Оставить заявку</button>
+        </div>
+    </section>
+</main>
+
+<footer class="footer" data-footer>
+    <div class="container">
+        <div class="footer__top">
+            <div class="footer__brand">
+                <a href="index.html" class="footer__logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                        <path d="M20 5L5 17.5V35H15V25H25V35H35V17.5L20 5Z" fill="#FF6B35"/>
+                    </svg>
+                    <span>DOMIKTUT.RU</span>
+                </a>
+
+                <div class="footer__location">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                        <path d="M10 2C6.13 2 3 5.13 3 9c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
+                    </svg>
+                    <span data-i18n="footer.location">Казань</span>
+                </div>
+
+                <div class="footer__buttons">
+                    <button class="btn btn--outline" data-i18n="footer.legalInfo">Информация для юр. лиц</button>
+                    <button class="btn btn--outline" data-i18n="footer.serviceRequest">Заявка на выездное обслуживание</button>
+                    <button class="btn btn--primary" data-i18n="footer.selectionRequest">Заявка на подбор</button>
+                </div>
+
+                <div class="footer__links">
+                    <a href="#cooperation" data-i18n="footer.cooperation">Сотрудничество</a>
+                    <a href="#faq" data-i18n="footer.faq">Частые вопросы</a>
+                </div>
+
+                <a href="tel:88435286548" class="footer__phone" data-i18n="header.phone">8 (843) 528-65-48</a>
+
+                <div class="footer__socials">
+                    <a href="#" class="footer__social" aria-label="YouTube">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="footer__social" aria-label="Instagram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="footer__social" aria-label="WhatsApp">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="footer__social" aria-label="VK">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.05-1.717-1.033-1.033-1.49-1.17-1.744-1.17-.356 0-.458.102-.458.593v1.575c0 .424-.135.678-1.253.678-1.846 0-3.896-1.12-5.335-3.202C4.624 10.857 4 8.673 4 8.232c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.779.678.864 2.491 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.727c-.068-1.187-.695-1.287-.695-1.71 0-.203.17-.407.44-.407h2.744c.373 0 .508.203.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.254-1.406 2.151-3.573 2.151-3.573.119-.254.322-.491.762-.491h1.744c.525 0 .644.27.525.643-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .779.186.254.796.779 1.203 1.253.745.847 1.32 1.558 1.473 2.05.17.475-.085.72-.576.72z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="footer__social" aria-label="Telegram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer__catalog">
+                <h3 class="footer__title" data-i18n="footer.catalog">Каталог</h3>
+                <ul class="footer__list">
+                    <li><a href="#" data-i18n="category.pool">С бассейном</a></li>
+                    <li><a href="#" data-i18n="category.family">Семейные и уютные</a></li>
+                    <li><a href="#" data-i18n="category.hits">Хиты продаж</a></li>
+                    <li><a href="#" data-i18n="category.wedding">Под свадьбы и корпоративы</a></li>
+                    <li><a href="#" data-i18n="category.banya">С русской баней на дровах</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer__bottom">
+            <p><a href="#" data-i18n="footer.privacy">Политика конфиденциальности</a></p>
+            <p><a href="#" data-i18n="footer.consent">Согласие на обработку персональных данных</a></p>
+        </div>
+    </div>
+</footer>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

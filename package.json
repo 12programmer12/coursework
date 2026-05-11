@@ -1,0 +1,21 @@
+{
+  "name": "coursework",
+  "version": "1.0.0",
+  "description": "DOMIKTUT - Аренда коттеджей и домов в Казани",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "json-server --watch data/db.json --port 3000",
+    "frontend": "serve . -l 5500",
+    "dev": "node scripts/dev.js",
+    "start": "serve . -l 5500"
+  },
+  "private": true,
+  "devDependencies": {
+    "json-server": "^0.17.4",
+    "serve": "^14.2.1",
+    "cross-env": "^7.0.3",
+    "concurrently": "^8.2.2"
+  }
+}

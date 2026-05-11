@@ -1,0 +1,469 @@
+﻿{
+  "houses": [
+    {
+      "id": 1,
+      "name": "Новая сосновка",
+      "name_i18n": {
+        "ru": "Новая сосновка",
+        "be": "Новая сасноўка",
+        "en": "Novaya Sosnovka"
+      },
+      "description_i18n": {
+        "ru": "Просторный коттедж для семейного отдыха с бассейном и баней",
+        "be": "Прасторны катэдж для сямейнага адпачынку з басейнам і баняй",
+        "en": "Spacious cottage for family vacations with pool and sauna"
+      },
+      "location_i18n": {
+        "ru": "Рублево-Успенское шоссе, 24 км от МКАД",
+        "be": "Рублёва-Успенскае шаша, 24 км ад МКАД",
+        "en": "Rublyovo-Uspenskoye Highway, 24 km from MKAD"
+      },
+      "features_i18n": {
+        "ru": ["Бассейн", "Баня", "Настольный теннис", "Сауна", "Барбекю"],
+        "be": ["Басейн", "Баня", "Настольны тэніс", "Саўна", "Барбекю"],
+        "en": ["Pool", "Sauna", "Table tennis", "Sauna", "BBQ"]
+      },
+      "category": "family",
+      "price": 10000,
+      "guests": 30,
+      "bedrooms": 5,
+      "bathrooms": 3,
+      "area": 350,
+      "rating": 4.8,
+      "reviews": 24,
+      "location": "Рублево-Успенское шоссе, 24 км от МКАД",
+      "features": ["Бассейн", "Баня", "Настольный теннис", "Сауна", "Барбекю"],
+      "images": ["assets/images/houses/house-1-1.jpg", "assets/images/houses/house-1-2.jpg", "assets/images/houses/house-1-3.jpg"],
+      "isHit": true
+    },
+    {
+      "id": 2,
+      "name": "Салмачи 1",
+      "name_i18n": {
+        "ru": "Салмачи 1",
+        "be": "Салмачы 1",
+        "en": "Salmachi 1"
+      },
+      "description_i18n": {
+        "ru": "Уютный дом с подогреваемым бассейном",
+        "be": "Утульны дом з падгрэваемым басейнам",
+        "en": "Cozy house with heated pool"
+      },
+      "location_i18n": {
+        "ru": "Деревня Салмачи, 15 км от Казани",
+        "be": "Вёска Салмачы, 15 км ад Казані",
+        "en": "Salmachi Village, 15 km from Kazan"
+      },
+      "features_i18n": {
+        "ru": ["Бассейн", "Баня", "Настольный теннис", "Сауна", "Бильярд"],
+        "be": ["Басейн", "Баня", "Настольны тэніс", "Саўна", "Більярд"],
+        "en": ["Pool", "Sauna", "Table tennis", "Sauna", "Billiards"]
+      },
+      "category": "pool",
+      "price": 10000,
+      "guests": 9,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "area": 200,
+      "rating": 4.9,
+      "reviews": 18,
+      "location": "Деревня Салмачи, 15 км от Казани",
+      "features": ["Бассейн", "Баня", "Настольный теннис", "Сауна", "Бильярд"],
+      "images": ["assets/images/houses/house-2-1.jpg", "assets/images/houses/house-2-2.jpg"],
+      "isHit": false
+    },
+    {
+      "id": 3,
+      "name": "Новая сосновка Premium",
+      "name_i18n": {
+        "ru": "Новая сосновка Premium",
+        "be": "Новая сасноўка Premium",
+        "en": "Novaya Sosnovka Premium"
+      },
+      "description_i18n": {
+        "ru": "Премиальный коттедж для больших компаний",
+        "be": "Прэміум катэдж для вялікіх кампаній",
+        "en": "Premium cottage for large groups"
+      },
+      "location_i18n": {
+        "ru": "Зеленодольский район, 30 км от Казани",
+        "be": "Зелянодольскі раён, 30 км ад Казані",
+        "en": "Zelenodolsky District, 30 km from Kazan"
+      },
+      "features_i18n": {
+        "ru": ["Бассейн", "Баня", "Настольный теннис", "Сауна", "Караоке"],
+        "be": ["Басейн", "Баня", "Настольны тэніс", "Саўна", "Караоке"],
+        "en": ["Pool", "Sauna", "Table tennis", "Sauna", "Karaoke"]
+      },
+      "category": "hits",
+      "price": 12000,
+      "guests": 30,
+      "bedrooms": 6,
+      "bathrooms": 4,
+      "area": 400,
+      "rating": 4.7,
+      "reviews": 32,
+      "location": "Зеленодольский район, 30 км от Казани",
+      "features": ["Бассейн", "Баня", "Настольный теннис", "Сауна", "Караоке"],
+      "images": ["assets/images/houses/house-3-1.jpg", "assets/images/houses/house-3-2.jpg"],
+      "isHit": true
+    },
+    {
+      "id": 4,
+      "name": "Семейный очаг",
+      "name_i18n": {
+        "ru": "Семейный очаг",
+        "be": "Сямейны ачаг",
+        "en": "Family Hearth"
+      },
+      "description_i18n": {
+        "ru": "Идеальный дом для семейного отдыха",
+        "be": "Ідэальны дом для сямейнага адпачынку",
+        "en": "Perfect home for family vacations"
+      },
+      "location_i18n": {
+        "ru": "Высокогорский район, 20 км от Казани",
+        "be": "Высакагорскі раён, 20 км ад Казані",
+        "en": "Vysokogorsky District, 20 km from Kazan"
+      },
+      "features_i18n": {
+        "ru": ["Баня", "Бассейн", "Настольный теннис", "Сауна"],
+        "be": ["Баня", "Басейн", "Настольны тэніс", "Саўна"],
+        "en": ["Sauna", "Pool", "Table tennis", "Sauna"]
+      },
+      "category": "family",
+      "price": 10000,
+      "guests": 30,
+      "bedrooms": 5,
+      "bathrooms": 3,
+      "area": 280,
+      "rating": 4.6,
+      "reviews": 15,
+      "location": "Высокогорский район, 20 км от Казани",
+      "features": ["Баня", "Бассейн", "Настольный теннис", "Сауна"],
+      "images": ["assets/images/houses/house-4-1.jpg"],
+      "isHit": false
+    },
+    {
+      "id": 5,
+      "name": "Лесная сказка",
+      "name_i18n": {
+        "ru": "Лесная сказка",
+        "be": "Лясная казка",
+        "en": "Forest Fairy Tale"
+      },
+      "description_i18n": {
+        "ru": "Уютный дом в сосновом бору",
+        "be": "Утульны дом у сасновым боры",
+        "en": "Cozy house in a pine forest"
+      },
+      "location_i18n": {
+        "ru": "Лаишевский район, 25 км от Казани",
+        "be": "Лаішаўскі раён, 25 км ад Казані",
+        "en": "Laishevsky District, 25 km from Kazan"
+      },
+      "features_i18n": {
+        "ru": ["Баня", "Бассейн", "Настольный теннис", "Сауна"],
+        "be": ["Баня", "Басейн", "Настольны тэніс", "Саўна"],
+        "en": ["Sauna", "Pool", "Table tennis", "Sauna"]
+      },
+      "category": "family",
+      "price": 8500,
+      "guests": 14,
+      "bedrooms": 4,
+      "bathrooms": 2,
+      "area": 220,
+      "rating": 4.8,
+      "reviews": 21,
+      "location": "Лаишевский район, 25 км от Казани",
+      "features": ["Баня", "Бассейн", "Настольный теннис", "Сауна"],
+      "images": ["assets/images/houses/house-5-1.jpg"],
+      "isHit": false
+    },
+    {
+      "id": 6,
+      "name": "Озерный дом",
+      "name_i18n": {
+        "ru": "Озерный дом",
+        "be": "Возерны дом",
+        "en": "Lakeside House"
+      },
+      "description_i18n": {
+        "ru": "Дом на берегу озера с собственным пляжем",
+        "be": "Дом на беразе возера з уласным пляжам",
+        "en": "House on the lake shore with private beach"
+      },
+      "location_i18n": {
+        "ru": "На берегу озера, 40 км от Казани",
+        "be": "На беразе возера, 40 км ад Казані",
+        "en": "On the lake shore, 40 km from Kazan"
+      },
+      "features_i18n": {
+        "ru": ["Баня", "Бассейн", "Настольный теннис", "Сауна"],
+        "be": ["Баня", "Басейн", "Настольны тэніс", "Саўна"],
+        "en": ["Sauna", "Pool", "Table tennis", "Sauna"]
+      },
+      "category": "family",
+      "price": 4000,
+      "guests": 8,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "area": 150,
+      "rating": 4.5,
+      "reviews": 12,
+      "location": "На берегу озера, 40 км от Казани",
+      "features": ["Баня", "Бассейн", "Настольный теннис", "Сауна"],
+      "images": ["assets/images/houses/house-6-1.jpg"],
+      "isHit": false
+    },
+    {
+      "id": 7,
+      "name": "Усадьба Волжская",
+      "name_i18n": {
+        "ru": "Усадьба Волжская",
+        "be": "Сядзіба Волжская",
+        "en": "Volzhskaya Estate"
+      },
+      "description_i18n": {
+        "ru": "Элегантная усадьба с видом на Волгу и русской баней",
+        "be": "Элегантная сядзіба з відам на Волгу і рускай баняй",
+        "en": "Elegant estate with Volga view and Russian banya"
+      },
+      "location_i18n": {
+        "ru": "Набережная Волги, 18 км от Казани",
+        "be": "Набярэжная Волгі, 18 км ад Казані",
+        "en": "Volga Embankment, 18 km from Kazan"
+      },
+      "features_i18n": {
+        "ru": ["Русская баня", "Вид на реку", "Камин", "Терраса", "Парковка"],
+        "be": ["Руская баня", "Від на раку", "Камін", "Тэраса", "Паркоўка"],
+        "en": ["Russian banya", "River view", "Fireplace", "Terrace", "Parking"]
+      },
+      "category": "banya",
+      "price": 15000,
+      "guests": 20,
+      "bedrooms": 7,
+      "bathrooms": 4,
+      "area": 450,
+      "rating": 4.9,
+      "reviews": 41,
+      "location": "Набережная Волги, 18 км от Казани",
+      "features": ["Русская баня", "Вид на реку", "Камин", "Терраса", "Парковка"],
+      "images": ["assets/images/houses/house-7-1.jpg", "assets/images/houses/house-7-2.jpg"],
+      "isHit": true
+    },
+    {
+      "id": 8,
+      "name": "Коттедж Раифский",
+      "name_i18n": {
+        "ru": "Коттедж Раифский",
+        "be": "Катэдж Раіфскі",
+        "en": "Raifsky Cottage"
+      },
+      "description_i18n": {
+        "ru": "Современный коттедж рядом с Раифским монастырём",
+        "be": "Сучасны катэдж каля Раіфскага манастыра",
+        "en": "Modern cottage near Raifa Monastery"
+      },
+      "location_i18n": {
+        "ru": "Раифа, 28 км от Казани",
+        "be": "Раіфа, 28 км ад Казані",
+        "en": "Raifa, 28 km from Kazan"
+      },
+      "features_i18n": {
+        "ru": ["Бассейн", "Баня", "Детская площадка", "Мангал", "Wi-Fi"],
+        "be": ["Басейн", "Баня", "Дзіцячая пляцоўка", "Мангал", "Wi-Fi"],
+        "en": ["Pool", "Sauna", "Playground", "Grill", "Wi-Fi"]
+      },
+      "category": "family",
+      "price": 9500,
+      "guests": 16,
+      "bedrooms": 5,
+      "bathrooms": 3,
+      "area": 300,
+      "rating": 4.7,
+      "reviews": 28,
+      "location": "Раифа, 28 км от Казани",
+      "features": ["Бассейн", "Баня", "Детская площадка", "Мангал", "Wi-Fi"],
+      "images": ["assets/images/houses/house-8-1.jpg"],
+      "isHit": false
+    },
+    {
+      "id": 9,
+      "name": "Дом у озера Лебяжье",
+      "name_i18n": {
+        "ru": "Дом у озера Лебяжье",
+        "be": "Дом каля возера Лебяжае",
+        "en": "House by Lebyazhye Lake"
+      },
+      "description_i18n": {
+        "ru": "Уютный дом с выходом к озеру и зоной для барбекю",
+        "be": "Утульны дом з выхадам да возера і зонай для барбекю",
+        "en": "Cozy house with lake access and BBQ area"
+      },
+      "location_i18n": {
+        "ru": "Озеро Лебяжье, 22 км от Казани",
+        "be": "Возера Лебяжае, 22 км ад Казані",
+        "en": "Lebyazhye Lake, 22 km from Kazan"
+      },
+      "features_i18n": {
+        "ru": ["Озеро", "Барбекю", "Рыбалка", "Беседка", "Парковка"],
+        "be": ["Возера", "Барбекю", "Рыбалка", "Альтанка", "Паркоўка"],
+        "en": ["Lake", "BBQ", "Fishing", "Gazebo", "Parking"]
+      },
+      "category": "pool",
+      "price": 7500,
+      "guests": 12,
+      "bedrooms": 4,
+      "bathrooms": 2,
+      "area": 240,
+      "rating": 4.6,
+      "reviews": 19,
+      "location": "Озеро Лебяжье, 22 км от Казани",
+      "features": ["Озеро", "Барбекю", "Рыбалка", "Беседка", "Парковка"],
+      "images": ["assets/images/houses/house-9-1.jpg", "assets/images/houses/house-9-2.jpg"],
+      "isHit": false
+    },
+    {
+      "id": 10,
+      "name": "Вилла Казанская",
+      "name_i18n": {
+        "ru": "Вилла Казанская",
+        "be": "Віла Казанская",
+        "en": "Kazan Villa"
+      },
+      "description_i18n": {
+        "ru": "Роскошная вилла для проведения свадеб и корпоративов",
+        "be": "Раскошная віла для правядзення вяселляў і карпаратыўных мерапрыемстваў",
+        "en": "Luxury villa for weddings and corporate events"
+      },
+      "location_i18n": {
+        "ru": "Пригород Казани, 12 км от центра",
+        "be": "Прыгарад Казані, 12 км ад цэнтра",
+        "en": "Kazan suburb, 12 km from center"
+      },
+      "features_i18n": {
+        "ru": ["Бассейн", "Банкетный зал", "Сцена", "Парковка", "Охрана"],
+        "be": ["Басейн", "Банкетная зала", "Сцэна", "Паркоўка", "Ахова"],
+        "en": ["Pool", "Banquet hall", "Stage", "Parking", "Security"]
+      },
+      "category": "wedding",
+      "price": 25000,
+      "guests": 50,
+      "bedrooms": 10,
+      "bathrooms": 6,
+      "area": 600,
+      "rating": 4.8,
+      "reviews": 35,
+      "location": "Пригород Казани, 12 км от центра",
+      "features": ["Бассейн", "Банкетный зал", "Сцена", "Парковка", "Охрана"],
+      "images": ["assets/images/houses/house-10-1.jpg", "assets/images/houses/house-10-2.jpg", "assets/images/houses/house-10-3.jpg"],
+      "isHit": true
+    },
+    {
+      "id": 11,
+      "name": "Дом с русской баней",
+      "name_i18n": {
+        "ru": "Дом с русской баней",
+        "be": "Дом з рускай баняй",
+        "en": "House with Russian Banya"
+      },
+      "description_i18n": {
+        "ru": "Традиционный дом с настоящей русской баней на дровах",
+        "be": "Традыцыйны дом з сапраўднай рускай баняй на дровах",
+        "en": "Traditional house with authentic wood-fired Russian banya"
+      },
+      "location_i18n": {
+        "ru": "Зеленодольский район, 35 км от Казани",
+        "be": "Зелянодольскі раён, 35 км ад Казані",
+        "en": "Zelenodolsky District, 35 km from Kazan"
+      },
+      "features_i18n": {
+        "ru": ["Баня на дровах", "Чан", "Рыбалка", "Лес", "Тишина"],
+        "be": ["Баня на дровах", "Чан", "Рыбалка", "Лес", "Цішыня"],
+        "en": ["Wood-fired sauna", "Hot tub", "Fishing", "Forest", "Quiet"]
+      },
+      "category": "banya",
+      "price": 6500,
+      "guests": 10,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "area": 180,
+      "rating": 4.9,
+      "reviews": 47,
+      "location": "Зеленодольский район, 35 км от Казани",
+      "features": ["Баня на дровах", "Чан", "Рыбалка", "Лес", "Тишина"],
+      "images": ["assets/images/houses/house-11-1.jpg"],
+      "isHit": true
+    },
+    {
+      "id": 12,
+      "name": "Эко-домик в лесу",
+      "name_i18n": {
+        "ru": "Эко-домик в лесу",
+        "be": "Эка-домік у лесе",
+        "en": "Eco-House in the Forest"
+      },
+      "description_i18n": {
+        "ru": "Уютный эко-дом из дерева в глубине соснового леса",
+        "be": "Утульны эка-дом з дрэва ў глыбіні сасновага лесу",
+        "en": "Cozy wooden eco-house deep in the pine forest"
+      },
+      "location_i18n": {
+        "ru": "Сосновый бор, 45 км от Казани",
+        "be": "Сасновы бор, 45 км ад Казані",
+        "en": "Pine forest, 45 km from Kazan"
+      },
+      "features_i18n": {
+        "ru": ["Эко-материалы", "Камин", "Гриль", "Лес", "Тишина"],
+        "be": ["Эка-матэрыялы", "Камін", "Грыль", "Лес", "Цішыня"],
+        "en": ["Eco materials", "Fireplace", "Grill", "Forest", "Quiet"]
+      },
+      "category": "family",
+      "price": 5500,
+      "guests": 6,
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "area": 120,
+      "rating": 4.7,
+      "reviews": 31,
+      "location": "Сосновый бор, 45 км от Казани",
+      "features": ["Эко-материалы", "Камин", "Гриль", "Лес", "Тишина"],
+      "images": ["assets/images/houses/house-12-1.jpg", "assets/images/houses/house-12-2.jpg"],
+      "isHit": false
+    }
+  ],
+  "categories": [
+    { "id": 1, "name": "С бассейном", "slug": "pool", "icon": "assets/icons/pool.svg", "name_i18n": { "ru": "С бассейном", "be": "З басейнам", "en": "With pool" }},
+    { "id": 2, "name": "Семейные и уютные", "slug": "family", "icon": "assets/icons/family.svg", "name_i18n": { "ru": "Семейные и уютные", "be": "Сямейныя і ўтульныя", "en": "Family and cozy" }},
+    { "id": 3, "name": "Хиты продаж", "slug": "hits", "icon": "assets/icons/hits.svg", "name_i18n": { "ru": "Хиты продаж", "be": "Хіты продажаў", "en": "Best sellers" }},
+    { "id": 4, "name": "Под свадьбы и корпоративы", "slug": "wedding", "icon": "assets/icons/wedding.svg", "name_i18n": { "ru": "Под свадьбы и корпоративы", "be": "Пад вяселлі і карпаратыўныя мерапрыемствы", "en": "For weddings and corporate events" }},
+    { "id": 5, "name": "С русской баней на дровах", "slug": "banya", "icon": "assets/icons/banya.svg", "name_i18n": { "ru": "С русской баней на дровах", "be": "З рускай баняй на дровах", "en": "With wood-fired Russian banya" }}
+  ],
+  "services": [
+    { "id": 1, "name": "Кейтеринг", "icon": "assets/icons/catering.svg", "description": "Организация питания любой сложности", "name_i18n": { "ru": "Кейтеринг", "be": "Кейтэрынг", "en": "Catering" }},
+    { "id": 2, "name": "Шоу программа", "icon": "assets/icons/show.svg", "description": "Развлекательные программы для гостей", "name_i18n": { "ru": "Шоу программа", "be": "Шоу праграма", "en": "Show program" }},
+    { "id": 3, "name": "Выездной повар", "icon": "assets/icons/chef.svg", "description": "Приготовление блюд на вашей кухне", "name_i18n": { "ru": "Выездной повар", "be": "Выязны кухар", "en": "Private chef" }},
+    { "id": 4, "name": "Фуршет", "icon": "assets/icons/buffet.svg", "description": "Организация фуршетов и банкетов", "name_i18n": { "ru": "Фуршет", "be": "Фуршэт", "en": "Buffet" }},
+    { "id": 5, "name": "Трансфер", "icon": "assets/icons/transfer.svg", "description": "Доставка гостей к месту отдыха", "name_i18n": { "ru": "Трансфер", "be": "Трансфер", "en": "Transfer" }},
+    { "id": 6, "name": "Мероприятия под ключ", "icon": "assets/icons/events.svg", "description": "Полная организация мероприятий", "name_i18n": { "ru": "Мероприятия под ключ", "be": "Мерапрыемствы пад ключ", "en": "Turnkey events" }}
+  ],
+  "users": [
+    { "id": 1, "email": "admin@domiktut.ru", "password": "$2a$10$...", "name": "Администратор", "phone": "+7 (843) 528-65-48", "role": "admin", "createdAt": "2024-01-01T00:00:00.000Z" },
+    { "id": 2, "email": "user@example.com", "password": "$2a$10$...", "name": "Иван Иванов", "phone": "+7 (999) 123-45-67", "role": "user", "createdAt": "2024-02-15T00:00:00.000Z" }
+  ],
+  "bookings": [
+    { "id": 1, "userId": 2, "houseId": 1, "checkIn": "2024-06-01", "checkOut": "2024-06-05", "guests": 12, "totalPrice": 40000, "status": "confirmed", "createdAt": "2024-05-01T10:00:00.000Z" }
+  ],
+  "favorites": [
+    { "id": 1, "userId": 2, "houseId": 1, "createdAt": "2024-05-01T10:00:00.000Z" },
+    { "id": 2, "userId": 2, "houseId": 3, "createdAt": "2024-05-02T10:00:00.000Z" }
+  ],
+  "reviews": [
+    { "id": 1, "houseId": 1, "userId": 2, "userName": "Иван Иванов", "rating": 5, "text": "Отличный дом для отдыха с семьей! Все понравилось, особенно бассейн.", "createdAt": "2024-04-15T00:00:00.000Z" },
+    { "id": 2, "houseId": 1, "userId": 3, "userName": "Мария Петрова", "rating": 4, "text": "Хороший дом, чистый и уютный. Рекомендую!", "createdAt": "2024-04-20T00:00:00.000Z" }
+  ],
+  "selection-requests": [
+    { "id": 1, "name": "Иван Иванов", "phone": "+7 (999) 123-45-67", "checkIn": "2024-06-01", "checkOut": "2024-06-05", "guests": 12, "budget": 50000, "requirements": "Бассейн, баня, недалеко от Казани", "createdAt": "2024-05-01T10:00:00.000Z" }
+  ]
+}
