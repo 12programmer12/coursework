@@ -1,7 +1,7 @@
 {
   "name": "coursework",
   "version": "1.0.0",
-  "description": "DOMIKTUT - Аренда коттеджей и домов в Казани",
+  "description": "DOMIKTUT - Аренда коттеджей и домов в Могилёве",
   "main": "index.js",
   "type": "module",
   "scripts": {

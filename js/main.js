@@ -192,7 +192,7 @@ function createHouseCard(house) {
         `).join('')}
       </div>
       <div class="catalog-card__price">
-        ${i18n.t('common.from')} ${house.price.toLocaleString(i18n.currentLang === 'ru' ? 'ru-RU' : i18n.currentLang === 'be' ? 'be-BY' : 'en-US')} ₽ 
+        ${i18n.t('common.from')} ${house.price.toLocaleString(i18n.currentLang === 'ru' ? 'ru-RU' : i18n.currentLang === 'be' ? 'be-BY' : 'en-US')} BYN 
         <span>${i18n.t('common.perNight')}</span>
       </div>
       <a href="pages/product.html?id=${house.id}" class="catalog-card__button" data-i18n="common.more">Подробнее</a>

@@ -24,7 +24,7 @@
         "en": ["Pool", "Sauna", "Table tennis", "Sauna", "BBQ"]
       },
       "category": "family",
-      "price": 10000,
+      "price": 300,
       "guests": 30,
       "bedrooms": 5,
       "bathrooms": 3,
@@ -50,9 +50,9 @@
         "en": "Cozy house with heated pool"
       },
       "location_i18n": {
-        "ru": "Деревня Салмачи, 15 км от Казани",
-        "be": "Вёска Салмачы, 15 км ад Казані",
-        "en": "Salmachi Village, 15 km from Kazan"
+        "ru": "Деревня Салмачи, 15 км от Могилёва",
+        "be": "Вёска Салмачы, 15 км ад Магилёву",
+        "en": "Salmachi Village, 15 km from Mogilev"
       },
       "features_i18n": {
         "ru": ["Бассейн", "Баня", "Настольный теннис", "Сауна", "Бильярд"],
@@ -60,14 +60,14 @@
         "en": ["Pool", "Sauna", "Table tennis", "Sauna", "Billiards"]
       },
       "category": "pool",
-      "price": 10000,
+      "price": 300,
       "guests": 9,
       "bedrooms": 3,
       "bathrooms": 2,
       "area": 200,
       "rating": 4.9,
       "reviews": 18,
-      "location": "Деревня Салмачи, 15 км от Казани",
+      "location": "Деревня Салмачи, 15 км от Могилёва",
       "features": ["Бассейн", "Баня", "Настольный теннис", "Сауна", "Бильярд"],
       "images": ["assets/images/houses/house-2-1.jpg", "assets/images/houses/house-2-2.jpg"],
       "isHit": false
@@ -86,9 +86,9 @@
         "en": "Premium cottage for large groups"
       },
       "location_i18n": {
-        "ru": "Зеленодольский район, 30 км от Казани",
-        "be": "Зелянодольскі раён, 30 км ад Казані",
-        "en": "Zelenodolsky District, 30 km from Kazan"
+        "ru": "Зеленодольский район, 30 км от Могилёва",
+        "be": "Зелянодольскі раён, 30 км ад Магилёву",
+        "en": "Zelenodolsky District, 30 km from Mogilev"
       },
       "features_i18n": {
         "ru": ["Бассейн", "Баня", "Настольный теннис", "Сауна", "Караоке"],
@@ -96,14 +96,14 @@
         "en": ["Pool", "Sauna", "Table tennis", "Sauna", "Karaoke"]
       },
       "category": "hits",
-      "price": 12000,
+      "price": 400,
       "guests": 30,
       "bedrooms": 6,
       "bathrooms": 4,
       "area": 400,
       "rating": 4.7,
       "reviews": 32,
-      "location": "Зеленодольский район, 30 км от Казани",
+      "location": "Зеленодольский район, 30 км от Могилёва",
       "features": ["Бассейн", "Баня", "Настольный теннис", "Сауна", "Караоке"],
       "images": ["assets/images/houses/house-3-1.jpg", "assets/images/houses/house-3-2.jpg"],
       "isHit": true
@@ -122,9 +122,9 @@
         "en": "Perfect home for family vacations"
       },
       "location_i18n": {
-        "ru": "Высокогорский район, 20 км от Казани",
-        "be": "Высакагорскі раён, 20 км ад Казані",
-        "en": "Vysokogorsky District, 20 km from Kazan"
+        "ru": "Высокогорский район, 20 км от Могилёва",
+        "be": "Высакагорскі раён, 20 км ад Магилёву",
+        "en": "Vysokogorsky District, 20 km from Mogilev"
       },
       "features_i18n": {
         "ru": ["Баня", "Бассейн", "Настольный теннис", "Сауна"],
@@ -132,14 +132,14 @@
         "en": ["Sauna", "Pool", "Table tennis", "Sauna"]
       },
       "category": "family",
-      "price": 10000,
+      "price": 250,
       "guests": 30,
       "bedrooms": 5,
       "bathrooms": 3,
       "area": 280,
       "rating": 4.6,
       "reviews": 15,
-      "location": "Высокогорский район, 20 км от Казани",
+      "location": "Высокогорский район, 20 км от Могилёва",
       "features": ["Баня", "Бассейн", "Настольный теннис", "Сауна"],
       "images": ["assets/images/houses/house-4-1.jpg"],
       "isHit": false
@@ -158,9 +158,9 @@
         "en": "Cozy house in a pine forest"
       },
       "location_i18n": {
-        "ru": "Лаишевский район, 25 км от Казани",
-        "be": "Лаішаўскі раён, 25 км ад Казані",
-        "en": "Laishevsky District, 25 km from Kazan"
+        "ru": "Лаишевский район, 25 км от Могилёва",
+        "be": "Лаішаўскі раён, 25 км ад Магилёву",
+        "en": "Laishevsky District, 25 km from Mogilev"
       },
       "features_i18n": {
         "ru": ["Баня", "Бассейн", "Настольный теннис", "Сауна"],
@@ -168,14 +168,14 @@
         "en": ["Sauna", "Pool", "Table tennis", "Sauna"]
       },
       "category": "family",
-      "price": 8500,
+      "price": 180,
       "guests": 14,
       "bedrooms": 4,
       "bathrooms": 2,
       "area": 220,
       "rating": 4.8,
       "reviews": 21,
-      "location": "Лаишевский район, 25 км от Казани",
+      "location": "Лаишевский район, 25 км от Могилёва",
       "features": ["Баня", "Бассейн", "Настольный теннис", "Сауна"],
       "images": ["assets/images/houses/house-5-1.jpg"],
       "isHit": false
@@ -194,9 +194,9 @@
         "en": "House on the lake shore with private beach"
       },
       "location_i18n": {
-        "ru": "На берегу озера, 40 км от Казани",
-        "be": "На беразе возера, 40 км ад Казані",
-        "en": "On the lake shore, 40 km from Kazan"
+        "ru": "На берегу озера, 40 км от Могилёва",
+        "be": "На беразе возера, 40 км ад Магилёву",
+        "en": "On the lake shore, 40 km from Mogilev"
       },
       "features_i18n": {
         "ru": ["Баня", "Бассейн", "Настольный теннис", "Сауна"],
@@ -204,14 +204,14 @@
         "en": ["Sauna", "Pool", "Table tennis", "Sauna"]
       },
       "category": "family",
-      "price": 4000,
+      "price": 100,
       "guests": 8,
       "bedrooms": 3,
       "bathrooms": 2,
       "area": 150,
       "rating": 4.5,
       "reviews": 12,
-      "location": "На берегу озера, 40 км от Казани",
+      "location": "На берегу озера, 40 км от Могилёва",
       "features": ["Баня", "Бассейн", "Настольный теннис", "Сауна"],
       "images": ["assets/images/houses/house-6-1.jpg"],
       "isHit": false
@@ -230,9 +230,9 @@
         "en": "Elegant estate with Volga view and Russian banya"
       },
       "location_i18n": {
-        "ru": "Набережная Волги, 18 км от Казани",
-        "be": "Набярэжная Волгі, 18 км ад Казані",
-        "en": "Volga Embankment, 18 km from Kazan"
+        "ru": "Набережная Волги, 18 км от Могилёва",
+        "be": "Набярэжная Волгі, 18 км ад Магилёву",
+        "en": "Volga Embankment, 18 km from Mogilev"
       },
       "features_i18n": {
         "ru": ["Русская баня", "Вид на реку", "Камин", "Терраса", "Парковка"],
@@ -240,14 +240,14 @@
         "en": ["Russian banya", "River view", "Fireplace", "Terrace", "Parking"]
       },
       "category": "banya",
-      "price": 15000,
+      "price": 450,
       "guests": 20,
       "bedrooms": 7,
       "bathrooms": 4,
       "area": 450,
       "rating": 4.9,
       "reviews": 41,
-      "location": "Набережная Волги, 18 км от Казани",
+      "location": "Набережная Волги, 18 км от Могилёва",
       "features": ["Русская баня", "Вид на реку", "Камин", "Терраса", "Парковка"],
       "images": ["assets/images/houses/house-7-1.jpg", "assets/images/houses/house-7-2.jpg"],
       "isHit": true
@@ -266,9 +266,9 @@
         "en": "Modern cottage near Raifa Monastery"
       },
       "location_i18n": {
-        "ru": "Раифа, 28 км от Казани",
-        "be": "Раіфа, 28 км ад Казані",
-        "en": "Raifa, 28 km from Kazan"
+        "ru": "Раифа, 28 км от Могилёва",
+        "be": "Раіфа, 28 км ад Магилёву",
+        "en": "Raifa, 28 km from Mogilev"
       },
       "features_i18n": {
         "ru": ["Бассейн", "Баня", "Детская площадка", "Мангал", "Wi-Fi"],
@@ -276,14 +276,14 @@
         "en": ["Pool", "Sauna", "Playground", "Grill", "Wi-Fi"]
       },
       "category": "family",
-      "price": 9500,
+      "price": 280,
       "guests": 16,
       "bedrooms": 5,
       "bathrooms": 3,
       "area": 300,
       "rating": 4.7,
       "reviews": 28,
-      "location": "Раифа, 28 км от Казани",
+      "location": "Раифа, 28 км от Могилёва",
       "features": ["Бассейн", "Баня", "Детская площадка", "Мангал", "Wi-Fi"],
       "images": ["assets/images/houses/house-8-1.jpg"],
       "isHit": false
@@ -302,9 +302,9 @@
         "en": "Cozy house with lake access and BBQ area"
       },
       "location_i18n": {
-        "ru": "Озеро Лебяжье, 22 км от Казани",
-        "be": "Возера Лебяжае, 22 км ад Казані",
-        "en": "Lebyazhye Lake, 22 km from Kazan"
+        "ru": "Озеро Лебяжье, 22 км от Могилёва",
+        "be": "Возера Лебяжае, 22 км ад Магилёву",
+        "en": "Lebyazhye Lake, 22 km from Mogilev"
       },
       "features_i18n": {
         "ru": ["Озеро", "Барбекю", "Рыбалка", "Беседка", "Парковка"],
@@ -312,14 +312,14 @@
         "en": ["Lake", "BBQ", "Fishing", "Gazebo", "Parking"]
       },
       "category": "pool",
-      "price": 7500,
+      "price": 200,
       "guests": 12,
       "bedrooms": 4,
       "bathrooms": 2,
       "area": 240,
       "rating": 4.6,
       "reviews": 19,
-      "location": "Озеро Лебяжье, 22 км от Казани",
+      "location": "Озеро Лебяжье, 22 км от Могилёва",
       "features": ["Озеро", "Барбекю", "Рыбалка", "Беседка", "Парковка"],
       "images": ["assets/images/houses/house-9-1.jpg", "assets/images/houses/house-9-2.jpg"],
       "isHit": false
@@ -338,9 +338,9 @@
         "en": "Luxury villa for weddings and corporate events"
       },
       "location_i18n": {
-        "ru": "Пригород Казани, 12 км от центра",
-        "be": "Прыгарад Казані, 12 км ад цэнтра",
-        "en": "Kazan suburb, 12 km from center"
+        "ru": "Пригород Могилёва, 12 км от центра",
+        "be": "Прыгарад Магилёву, 12 км ад цэнтра",
+        "en": "Mogilev suburb, 12 km from center"
       },
       "features_i18n": {
         "ru": ["Бассейн", "Банкетный зал", "Сцена", "Парковка", "Охрана"],
@@ -348,14 +348,14 @@
         "en": ["Pool", "Banquet hall", "Stage", "Parking", "Security"]
       },
       "category": "wedding",
-      "price": 25000,
+      "price": 700,
       "guests": 50,
       "bedrooms": 10,
       "bathrooms": 6,
       "area": 600,
       "rating": 4.8,
       "reviews": 35,
-      "location": "Пригород Казани, 12 км от центра",
+      "location": "Пригород Могилёва, 12 км от центра",
       "features": ["Бассейн", "Банкетный зал", "Сцена", "Парковка", "Охрана"],
       "images": ["assets/images/houses/house-10-1.jpg", "assets/images/houses/house-10-2.jpg", "assets/images/houses/house-10-3.jpg"],
       "isHit": true
@@ -374,9 +374,9 @@
         "en": "Traditional house with authentic wood-fired Russian banya"
       },
       "location_i18n": {
-        "ru": "Зеленодольский район, 35 км от Казани",
-        "be": "Зелянодольскі раён, 35 км ад Казані",
-        "en": "Zelenodolsky District, 35 km from Kazan"
+        "ru": "Зеленодольский район, 35 км от Могилёва",
+        "be": "Зелянодольскі раён, 35 км ад Магилёву",
+        "en": "Zelenodolsky District, 35 km from Mogilev"
       },
       "features_i18n": {
         "ru": ["Баня на дровах", "Чан", "Рыбалка", "Лес", "Тишина"],
@@ -384,14 +384,14 @@
         "en": ["Wood-fired sauna", "Hot tub", "Fishing", "Forest", "Quiet"]
       },
       "category": "banya",
-      "price": 6500,
+      "price": 200,
       "guests": 10,
       "bedrooms": 3,
       "bathrooms": 2,
       "area": 180,
       "rating": 4.9,
       "reviews": 47,
-      "location": "Зеленодольский район, 35 км от Казани",
+      "location": "Зеленодольский район, 35 км от Могилёва",
       "features": ["Баня на дровах", "Чан", "Рыбалка", "Лес", "Тишина"],
       "images": ["assets/images/houses/house-11-1.jpg"],
       "isHit": true
@@ -410,9 +410,9 @@
         "en": "Cozy wooden eco-house deep in the pine forest"
       },
       "location_i18n": {
-        "ru": "Сосновый бор, 45 км от Казани",
-        "be": "Сасновы бор, 45 км ад Казані",
-        "en": "Pine forest, 45 km from Kazan"
+        "ru": "Сосновый бор, 45 км от Могилёва",
+        "be": "Сасновы бор, 45 км ад Магилёву",
+        "en": "Pine forest, 45 km from Mogilev"
       },
       "features_i18n": {
         "ru": ["Эко-материалы", "Камин", "Гриль", "Лес", "Тишина"],
@@ -420,14 +420,14 @@
         "en": ["Eco materials", "Fireplace", "Grill", "Forest", "Quiet"]
       },
       "category": "family",
-      "price": 5500,
+      "price": 140,
       "guests": 6,
       "bedrooms": 2,
       "bathrooms": 1,
       "area": 120,
       "rating": 4.7,
       "reviews": 31,
-      "location": "Сосновый бор, 45 км от Казани",
+      "location": "Сосновый бор, 45 км от Могилёва",
       "features": ["Эко-материалы", "Камин", "Гриль", "Лес", "Тишина"],
       "images": ["assets/images/houses/house-12-1.jpg", "assets/images/houses/house-12-2.jpg"],
       "isHit": false
@@ -464,6 +464,6 @@
     { "id": 2, "houseId": 1, "userId": 3, "userName": "Мария Петрова", "rating": 4, "text": "Хороший дом, чистый и уютный. Рекомендую!", "createdAt": "2024-04-20T00:00:00.000Z" }
   ],
   "selection-requests": [
-    { "id": 1, "name": "Иван Иванов", "phone": "+7 (999) 123-45-67", "checkIn": "2024-06-01", "checkOut": "2024-06-05", "guests": 12, "budget": 50000, "requirements": "Бассейн, баня, недалеко от Казани", "createdAt": "2024-05-01T10:00:00.000Z" }
+    { "id": 1, "name": "Иван Иванов", "phone": "+7 (999) 123-45-67", "checkIn": "2024-06-01", "checkOut": "2024-06-05", "guests": 12, "budget": 50000, "requirements": "Бассейн, баня, недалеко от Могилёва", "createdAt": "2024-05-01T10:00:00.000Z" }
   ]
 }

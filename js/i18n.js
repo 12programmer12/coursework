@@ -15,7 +15,7 @@ const i18n = {
             'header.search': 'Поиск по названию',
             'header.phone': '8 (843) 528-65-48',
 
-            'hero.title': 'Аренда коттеджей и домов в Казани',
+            'hero.title': 'Аренда коттеджей и домов в Могилёве',
             'hero.subtitle': 'Найдите идеальный вариант сами или предоставьте это нам',
             'hero.checkin': 'Заезд',
             'hero.checkout': 'Выезд',
@@ -99,7 +99,7 @@ const i18n = {
             'catalog.hit': 'Хит',
             'catalog.addToFavorites': 'Добавить в избранное',
             'hero.priceRange': 'Цена за сутки',
-            'footer.location': 'Казань',
+            'footer.location': 'Могилёв',
             'category.wedding': 'Под свадьбы и корпоративы',
             'category.banya': 'С русской баней на дровах',
             'settings.language': 'Язык',
@@ -124,7 +124,7 @@ const i18n = {
             'header.search': 'Пошук па назве',
             'header.phone': '8 (843) 528-65-48',
 
-            'hero.title': 'Арэнда катэджаў і дамоў у Казані',
+            'hero.title': 'Арэнда катэджаў і дамоў у Магилёву',
             'hero.subtitle': 'Знайдзіце ідэальны варыянт самі або даручыце гэта нам',
             'hero.checkin': 'Заезд',
             'hero.checkout': 'Выезд',
@@ -208,7 +208,7 @@ const i18n = {
             'common.bathrooms': 'санвузлоў',
             'catalog.hit': 'Хіт',
             'hero.priceRange': 'Кошт за суткі',
-            'footer.location': 'Казань',
+            'footer.location': 'Магилёў',
             'category.wedding': 'Пад вяселлі і карпаратыўныя мерапрыемствы',
             'category.banya': 'З рускай баняй на дровах',
             'settings.language': 'Мова',
@@ -233,7 +233,7 @@ const i18n = {
             'header.search': 'Search by name',
             'header.phone': '8 (843) 528-65-48',
 
-            'hero.title': 'Cottage and House Rental in Kazan',
+            'hero.title': 'Cottage and House Rental in Mogilev',
             'hero.subtitle': 'Find the perfect option yourself or let us do it for you',
             'hero.checkin': 'Check-in',
             'hero.checkout': 'Check-out',
@@ -315,7 +315,7 @@ const i18n = {
             'common.bathrooms': 'bathrooms',
             'catalog.hit': 'Hit',
             'hero.priceRange': 'Price per night',
-            'footer.location': 'Kazan',
+            'footer.location': 'Mogilev',
             'category.wedding': 'For weddings and corporate events',
             'category.banya': 'With wood-fired Russian banya',
             'settings.language': 'Language',
@@ -413,7 +413,7 @@ const i18n = {
                 );
                 const fromText = this.t('common.from');
                 const perNightText = this.t('common.perNight');
-                priceEl.innerHTML = `${fromText} ${formattedPrice} ₽ <span>${perNightText}</span>`;
+                priceEl.innerHTML = `${fromText} ${formattedPrice} BYN <span>${perNightText}</span>`;
             }
 
             const moreBtn = card.querySelector('.catalog-card__button');
