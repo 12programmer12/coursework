@@ -24,22 +24,27 @@
     },
 
     async getHouses(filters = {}) {
-        let query = '/houses';
         const params = new URLSearchParams();
 
-        if (filters.category) params.append('category', filters.category);
-        if (filters.minPrice) params.append('price_gte', filters.minPrice);
-        if (filters.maxPrice) params.append('price_lte', filters.maxPrice);
-        if (filters.guests) params.append('guests_gte', filters.guests);
-        if (filters.search) params.append('name_like', filters.search);
-        if (filters.sort) params.append('_sort', filters.sort);
-        if (filters.order) params.append('_order', filters.order);
+        if (filters.name_like) params.append('name_like', filters.name_like);
+        if (filters.price_gte) params.append('price_gte', filters.price_gte);
+        if (filters.price_lte) params.append('price_lte', filters.price_lte);
+        if (filters.guests_gte) params.append('guests_gte', filters.guests_gte);
+        if (filters.bedrooms_gte) params.append('bedrooms_gte', filters.bedrooms_gte);
+        if (filters._sort) params.append('_sort', filters._sort);
+        if (filters._order) params.append('_order', filters._order);
 
-        if (params.toString()) {
-            query += `?${params.toString()}`;
+        const queryString = params.toString();
+        const url = `${this.baseURL}/houses${queryString ? '?' + queryString : ''}`;
+
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return await response.json();
+        } catch (error) {
+            console.error('API Error:', error);
+            return [];
         }
-
-        return this.fetch(query);
     },
 
     async getHouseById(id) {

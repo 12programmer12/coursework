@@ -111,6 +111,50 @@ const i18n = {
             'accessibility.normal': 'Обычная',
             'accessibility.contrast': 'Контраст',
             'accessibility.large': 'Крупный текст',
+            'meta.catalog.description': 'Каталог коттеджей и домов в Казани. Фильтрация, сортировка, поиск.',
+            'meta.catalog.title': 'Каталог - DOMIKTUT',
+
+            'breadcrumbs.home': 'Главная',
+
+            'catalog.pageTitle': 'Каталог домов и коттеджей',
+            'catalog.searchPlaceholder': 'Поиск по названию или местоположению...',
+            'catalog.generateSelection': 'Сгенерировать подборку',
+            'catalog.filters': 'Фильтры',
+            'catalog.reset': 'Сбросить',
+            'catalog.resetAllFilters': 'Сбросить все фильтры',
+            'catalog.found': 'Найдено:',
+            'catalog.objects': 'объектов',
+            'catalog.sortBy': 'Сортировка:',
+            'catalog.empty.title': 'Ничего не найдено',
+            'catalog.empty.text': 'Попробуйте изменить параметры фильтрации или поиска',
+
+            'filter.price': 'Цена',
+            'filter.guests': 'Количество гостей',
+            'filter.category': 'Категория',
+            'filter.bedrooms': 'Спальни',
+            'filter.selections': 'Подборки',
+            'filter.apply': 'Применить',
+
+            'sort.rating.desc': 'По рейтингу (убывание)',
+            'sort.rating.asc': 'По рейтингу (возрастание)',
+            'sort.price.asc': 'По цене (возрастание)',
+            'sort.price.desc': 'По цене (убывание)',
+            'sort.reviews.desc': 'По отзывам',
+            'sort.name.asc': 'По названию (А-Я)',
+
+            'form.name': 'Имя *',
+            'form.namePlaceholder': 'Введите ваше имя',
+            'form.phone': 'Телефон *',
+            'form.phonePlaceholder': '+375 (__) ___-__-__',
+            'form.budget': 'Бюджет',
+            'form.budgetPlaceholder': 'Максимальный бюджет',
+            'form.requirements': 'Критерии к коттеджу',
+            'form.requirementsPlaceholder': 'Опишите ваши пожелания (бассейн, баня, удалённость и т.д.)',
+            'form.submit': 'Отправить заявку',
+
+            'modal.selection.title': 'Заявка на подбор',
+            'modal.success.title': 'Ваша заявка отправлена!',
+            'modal.success.text': 'В течение 15 минут с вами свяжется специалист, поможет подобрать идеальный вариант и проконсультирует по всем вопросам',
         },
 
         be: {
@@ -220,6 +264,50 @@ const i18n = {
             'accessibility.normal': 'Звычайная',
             'accessibility.contrast': 'Кантраст',
             'accessibility.large': 'Буйны тэкст',
+            'meta.catalog.description': 'Каталог катэджаў і дамоў у Казані. Фільтрацыя, сартаванне, пошук.',
+            'meta.catalog.title': 'Каталог - DOMIKTUT',
+
+            'breadcrumbs.home': 'Галоўная',
+
+            'catalog.pageTitle': 'Каталог дамоў і катэджаў',
+            'catalog.searchPlaceholder': 'Пошук па назве або месцазнаходжанні...',
+            'catalog.generateSelection': 'Сгенераваць падборку',
+            'catalog.filters': 'Фільтры',
+            'catalog.reset': 'Скінуць',
+            'catalog.resetAllFilters': 'Скінуць усе фільтры',
+            'catalog.found': 'Знойдзена:',
+            'catalog.objects': 'аб\'ектаў',
+            'catalog.sortBy': 'Сартаванне:',
+            'catalog.empty.title': 'Нічога не знойдзена',
+            'catalog.empty.text': 'Паспрабуйце змяніць параметры фільтрацыі або пошуку',
+
+            'filter.price': 'Кошт',
+            'filter.guests': 'Колькасць гасцей',
+            'filter.category': 'Катэгорыя',
+            'filter.bedrooms': 'Спальні',
+            'filter.selections': 'Падборкі',
+            'filter.apply': 'Ужыць',
+
+            'sort.rating.desc': 'Па рэйтынгу (змяншэнне)',
+            'sort.rating.asc': 'Па рэйтынгу (узрастанне)',
+            'sort.price.asc': 'Па цане (узрастанне)',
+            'sort.price.desc': 'Па цане (змяншэнне)',
+            'sort.reviews.desc': 'Па водгуках',
+            'sort.name.asc': 'Па назве (А-Я)',
+
+            'form.name': 'Імя *',
+            'form.namePlaceholder': 'Увядзіце ваша імя',
+            'form.phone': 'Тэлефон *',
+            'form.phonePlaceholder': '+375 (__) ___-__-__',
+            'form.budget': 'Бюджэт',
+            'form.budgetPlaceholder': 'Максімальны бюджэт',
+            'form.requirements': 'Крытэрыі да катэджа',
+            'form.requirementsPlaceholder': 'Апішыце вашы пажаданні (басейн, баня, адлегласць і г.д.)',
+            'form.submit': 'Адправіць заяўку',
+
+            'modal.selection.title': 'Заяўка на падбор',
+            'modal.success.title': 'Ваша заяўка адпраўлена!',
+            'modal.success.text': 'На працягу 15 хвілін з вамі сувяжацца спецыяліст, дапаможа падабраць ідэальны варыянт і пракансультуе па ўсіх пытаннях',
         },
 
         en: {
@@ -327,6 +415,50 @@ const i18n = {
             'accessibility.normal': 'Normal',
             'accessibility.contrast': 'High contrast',
             'accessibility.large': 'Large text',
+
+            'meta.catalog.description': 'Catalog of cottages and houses in Kazan. Filtering, sorting, search.',
+            'meta.catalog.title': 'Catalog - DOMIKTUT',
+
+            'breadcrumbs.home': 'Home',
+
+            'catalog.pageTitle': 'Catalog of Houses and Cottages',
+            'catalog.searchPlaceholder': 'Search by name or location...',
+            'catalog.generateSelection': 'Generate Selection',
+            'catalog.filters': 'Filters',
+            'catalog.reset': 'Reset',
+            'catalog.resetAllFilters': 'Reset All Filters',
+            'catalog.found': 'Found:',
+            'catalog.objects': 'objects',
+            'catalog.sortBy': 'Sort by:',
+            'catalog.empty.title': 'Nothing Found',
+            'catalog.empty.text': 'Try changing the filter or search parameters',
+
+            'filter.price': 'Price',
+            'filter.guests': 'Number of Guests',
+            'filter.category': 'Category',
+            'filter.bedrooms': 'Bedrooms',
+            'filter.selections': 'Selections',
+            'filter.apply': 'Apply',
+
+            'sort.rating.desc': 'By Rating (Descending)',
+            'sort.rating.asc': 'By Rating (Ascending)',
+            'sort.price.asc': 'By Price (Ascending)',
+            'sort.price.desc': 'By Price (Descending)',
+            'sort.reviews.desc': 'By Reviews',
+            'sort.name.asc': 'By Name (A-Z)',
+
+            'form.name': 'Name *',
+            'form.namePlaceholder': 'Enter your name',
+            'form.phone': 'Phone *',
+            'form.phonePlaceholder': '+375 (__) ___-__-__',
+            'form.budget': 'Budget',
+            'form.budgetPlaceholder': 'Maximum budget',
+            'form.requirements': 'House Criteria',
+            'form.requirementsPlaceholder': 'Describe your wishes (pool, sauna, distance, etc.)',
+            'form.submit': 'Submit Request',
+            'modal.selection.title': 'Selection Request',
+            'modal.success.title': 'Your Request Has Been Sent!',
+            'modal.success.text': 'Within 15 minutes a specialist will contact you, help you find the perfect option and advise you on all issues',
         }
     },
 
@@ -382,6 +514,62 @@ const i18n = {
             const house = this.housesCache.find(h => h.id === houseId);
 
             if (!house) return;
+
+            const titleEl = card.querySelector('[data-house-name]');
+            if (titleEl) {
+                titleEl.textContent = house.name_i18n?.[this.currentLang] || house.name;
+            }
+
+            const featuresContainer = card.querySelector('.catalog-card__features');
+            if (featuresContainer && house.features_i18n) {
+                const featureEls = featuresContainer.querySelectorAll('[data-house-feature]');
+                const translatedFeatures = house.features_i18n[this.currentLang] || house.features;
+
+                featureEls.forEach((featureEl, idx) => {
+                    if (idx >= 2 && translatedFeatures[idx - 2]) {
+                        const svgIcon = featureEl.querySelector('svg');
+                        featureEl.innerHTML = '';
+                        if (svgIcon) {
+                            featureEl.appendChild(svgIcon.cloneNode(true));
+                        }
+                        featureEl.appendChild(document.createTextNode(translatedFeatures[idx - 2]));
+                    }
+                });
+            }
+
+            const priceEl = card.querySelector('.catalog-card__price');
+            if (priceEl) {
+                const formattedPrice = house.price.toLocaleString(
+                    this.currentLang === 'ru' ? 'ru-RU' :
+                        this.currentLang === 'be' ? 'be-BY' : 'en-US'
+                );
+                const fromText = this.t('common.from');
+                const perNightText = this.t('common.perNight');
+                priceEl.innerHTML = `${fromText} ${formattedPrice} BYN <span>${perNightText}</span>`;
+            }
+
+            const moreBtn = card.querySelector('.catalog-card__button');
+            if (moreBtn) {
+                moreBtn.textContent = this.t('common.more');
+            }
+
+            const hitBadge = card.querySelector('.catalog-card__badge');
+            if (hitBadge) {
+                hitBadge.textContent = this.t('catalog.hit');
+            }
+
+            const guestsEl = card.querySelector('.catalog-card__guests');
+            if (guestsEl) {
+                guestsEl.textContent = `${this.t('common.guests')} ${house.guests}`;
+            }
+        });
+    },
+    translateCardsWithHouses(houses) {
+        document.querySelectorAll('[data-house-card]').forEach((card, index) => {
+            const house = houses[index];
+            if (!house) return;
+
+            const houseId = parseInt(card.getAttribute('data-house-id'));
 
             const titleEl = card.querySelector('[data-house-name]');
             if (titleEl) {

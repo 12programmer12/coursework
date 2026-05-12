@@ -3,27 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" data-i18n="meta.description" content="Аренда коттеджей и домов в Могилёве. Большой выбор, честные цены, бесплатный подбор.">
-    <meta name="keywords" content="аренда дома, коттедж Казань, снять дом посуточно">
-
-    <title data-i18n="meta.title">DOMIKTUT - Аренда коттеджей и домов в Могилёве</title>
+    <meta name="description" data-i18n="meta.catalog.description" content="Каталог коттеджей и домов в Казани. Фильтрация, сортировка, поиск.">
+    <title data-i18n="meta.catalog.title">Каталог - DOMIKTUT</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/catalog.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/adaptive.css">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/catalog.css">
+    <link rel="stylesheet" href="../css/adaptive.css">
 
-    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
-
+    <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
     <meta name="theme-color" content="#FF6B35">
 </head>
 <body>
@@ -36,18 +31,18 @@
 
 <header class="header" data-header>
     <div class="container header__container">
-        <a href="index.html" class="header__logo" aria-label="DOMIKTUT - на главную">
-            <svg class="header__logo-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <a href="../index.html" class="header__logo" aria-label="DOMIKTUT - на главную">
+            <svg class="header__logo-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
                 <path d="M20 5L5 17.5V35H15V25H25V35H35V17.5L20 5Z" fill="#FF6B35"/>
             </svg>
             <span class="header__logo-text">DOMIKTUT.RU</span>
         </a>
 
         <nav class="header__nav" role="navigation" aria-label="Главная навигация">
-            <a href="pages/catalog.html" class="header__link" data-i18n="header.catalog">Каталог</a>
-            <a href="pages/about.html" class="header__link" data-i18n="header.about">О компании</a>
-            <a href="pages/contacts.html" class="header__link" data-i18n="header.contacts">Контакты</a>
-            <a href="pages/catalog.html#cooperation" class="header__link" data-i18n="footer.cooperation">Сотрудничество</a>
+            <a href="catalog.html" class="header__link header__link--active" data-i18n="header.catalog">Каталог</a>
+            <a href="about.html" class="header__link" data-i18n="header.about">О компании</a>
+            <a href="contacts.html" class="header__link" data-i18n="header.contacts">Контакты</a>
+            <a href="#cooperation" class="header__link" data-i18n="footer.cooperation">Сотрудничество</a>
             <a href="#faq" class="header__link" data-i18n="footer.faq">Частые вопросы</a>
         </nav>
 
@@ -56,9 +51,9 @@
                 <svg class="header__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                     <path d="M10 2C6.13 2 3 5.13 3 9c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
                 </svg>
-                <span class="header__location-text" data-i18n="footer.location">Могилёв</span>
+                <span class="header__location-text" data-i18n="footer.location">Казань</span>
                 <svg class="header__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                    <path d="M2.5 4.5L6 8l3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2.5 4.5L6 8l3.5-3.5" stroke="currentColor" stroke-width="1.5"/>
                 </svg>
             </div>
 
@@ -74,7 +69,7 @@
 
             <button class="header__favorites" aria-label="Избранное">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                    <path d="M10 2.5l1.903 3.854a1 1 0 00.754.547l4.243.616-3.07 3.003a1 1 0 00-.288.884l.724 4.226L10 13.5l-3.766 1.98.724-4.226a1 1 0 00-.288-.884l-3.07-3.003 4.243-.616a1 1 0 00.754-.547L10 2.5z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    <path d="M10 2.5l1.903 3.854a1 1 0 00.754.547l4.243.616-3.07 3.003a1 1 0 00-.288.884l.724 4.226L10 13.5l-3.766 1.98.724-4.226a1 1 0 00-.288-.884l-3.07-3.003 4.243-.616a1 1 0 00.754-.547L10 2.5z" stroke="currentColor" stroke-width="1.5"/>
                 </svg>
             </button>
 
@@ -85,8 +80,8 @@
                     </svg>
                 </button>
                 <div class="header__user-dropdown" hidden>
-                    <a href="pages/login.html" class="header__dropdown-link" data-i18n="header.login">Войти</a>
-                    <a href="pages/register.html" class="header__dropdown-link" data-i18n="header.register">Регистрация</a>
+                    <a href="login.html" class="header__dropdown-link" data-i18n="header.login">Войти</a>
+                    <a href="register.html" class="header__dropdown-link" data-i18n="header.register">Регистрация</a>
                 </div>
             </div>
 
@@ -100,12 +95,11 @@
                     <div class="settings__group">
                         <div class="settings__label" data-i18n="settings.language">Язык</div>
                         <div class="settings__buttons">
-                            <button class="settings__btn active" data-lang="ru" aria-label="Русский">RU</button>
-                            <button class="settings__btn" data-lang="be" aria-label="Беларуская">BY</button>
-                            <button class="settings__btn" data-lang="en" aria-label="English">EN</button>
+                            <button class="settings__btn active" data-lang="ru">RU</button>
+                            <button class="settings__btn" data-lang="be">BY</button>
+                            <button class="settings__btn" data-lang="en">EN</button>
                         </div>
                     </div>
-
                     <div class="settings__group">
                         <div class="settings__label" data-i18n="settings.theme">Тема</div>
                         <div class="settings__buttons">
@@ -113,7 +107,6 @@
                             <button class="settings__btn" data-theme-toggle="dark" data-i18n="theme.dark">Тёмная</button>
                         </div>
                     </div>
-
                     <div class="settings__group">
                         <div class="settings__label" data-i18n="settings.accessibility">Доступность</div>
                         <div class="settings__buttons">
@@ -122,7 +115,6 @@
                             <button class="settings__btn" data-accessibility-toggle="large-text" data-i18n="accessibility.large">Крупный</button>
                         </div>
                     </div>
-
                     <button class="settings__reset" data-i18n="settings.reset">Сбросить настройки</button>
                 </div>
             </div>
@@ -138,9 +130,9 @@
 
 <div class="mobile-menu" data-mobile-menu hidden>
     <nav class="mobile-menu__nav">
-        <a href="pages/catalog.html" class="mobile-menu__link" data-i18n="header.catalog">Каталог</a>
-        <a href="pages/about.html" class="mobile-menu__link" data-i18n="header.about">О компании</a>
-        <a href="pages/contacts.html" class="mobile-menu__link" data-i18n="header.contacts">Контакты</a>
+        <a href="catalog.html" class="mobile-menu__link mobile-menu__link--active" data-i18n="header.catalog">Каталог</a>
+        <a href="about.html" class="mobile-menu__link" data-i18n="header.about">О компании</a>
+        <a href="contacts.html" class="mobile-menu__link" data-i18n="header.contacts">Контакты</a>
         <a href="#faq" class="mobile-menu__link" data-i18n="footer.faq">Частые вопросы</a>
     </nav>
     <div class="mobile-menu__footer">
@@ -149,101 +141,222 @@
 </div>
 
 <main id="main-content">
-    <section class="hero" data-hero>
-        <div class="hero__bg">
-            <img src="assets/images/hero-bg.jpg" alt="" aria-hidden="true" data-preserve="true">
-            <div class="hero__overlay"></div>
+    <div class="breadcrumbs">
+        <div class="container">
+            <nav class="breadcrumbs__nav" aria-label="Breadcrumb">
+                <a href="../index.html" data-i18n="breadcrumbs.home">Главная</a>
+                <span class="breadcrumbs__separator">/</span>
+                <span class="breadcrumbs__current" data-i18n="header.catalog">Каталог</span>
+            </nav>
         </div>
+    </div>
 
-        <div class="container hero__container">
-            <h1 class="hero__title" data-i18n="hero.title">Аренда коттеджей и домов в Могилёве</h1>
-            <p class="hero__subtitle" data-i18n="hero.subtitle">Найдите идеальный вариант сами или предоставьте это нам</p>
-
-            <div class="hero__search-form">
-                <div class="search-form__row">
-                    <div class="search-form__group">
-                        <label class="search-form__label" data-i18n="hero.checkin">Заезд</label>
-                        <input type="date" class="search-form__input" data-i18n-placeholder="hero.checkin" aria-label="Дата заезда">
+    <section class="catalog-header">
+        <div class="container">
+            <div class="catalog-header__top">
+                <h1 class="catalog-header__title" data-i18n="catalog.pageTitle">Каталог домов и коттеджей</h1>
+                <div class="catalog-header__controls">
+                    <div class="catalog-search">
+                        <input type="text" class="catalog-search__input" id="catalogSearch" data-i18n-placeholder="catalog.searchPlaceholder" placeholder="Поиск по названию или местоположению...">
+                        <svg class="catalog-search__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                            <path d="M9 2a7 7 0 105.196 11.804l3.5 3.5a1 1 0 001.414-1.414l-3.5-3.5A7 7 0 009 2zm0 2a5 5 0 110 10A5 5 0 019 4z" fill="currentColor"/>
+                        </svg>
                     </div>
 
-                    <div class="search-form__group">
-                        <label class="search-form__label" data-i18n="hero.checkout">Выезд</label>
-                        <input type="date" class="search-form__input" data-i18n-placeholder="hero.checkout" aria-label="Дата выезда">
-                    </div>
+                    <button class="btn btn--primary" data-i18n="catalog.generateSelection" data-modal-open="selection-modal">Сгенерировать подборку</button>
 
-                    <div class="search-form__group">
-                        <label class="search-form__label" data-i18n="hero.guests">Количество человек</label>
-                        <input type="number" class="search-form__input" min="1" max="50" value="12" data-i18n-placeholder="hero.guests" aria-label="Количество гостей">
-                    </div>
+                    <button class="catalog-header__filter-toggle" data-mobile-filter-toggle aria-label="Фильтры">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M3 4h18M3 12h12M3 20h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span data-i18n="catalog.filters">Фильтры</span>
+                        <span class="catalog-header__filter-count" id="activeFiltersCount" hidden>0</span>
+                    </button>
+                </div>
+            </div>
 
-                    <div class="search-form__group search-form__group--price">
-                        <label class="search-form__label" data-i18n="hero.priceRange">Цена за сутки</label>
-                        <div class="search-form__price-range">
-                            <input type="number" class="search-form__price-from" min="0" value="200" aria-label="Цена от">
-                            <span data-i18n="common.to">до</span>
-                            <input type="number" class="search-form__price-to" max="2000" value="1000" aria-label="Цена до">
+            <div class="catalog-filters" id="catalogFilters">
+                <div class="filter-dropdown" data-filter="price">
+                    <button class="filter-dropdown__toggle" aria-expanded="false">
+                        <span data-i18n="filter.price">Цена</span>
+                        <svg class="filter-dropdown__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5"/>
+                        </svg>
+                    </button>
+                    <div class="filter-dropdown__content" hidden>
+                        <div class="filter-dropdown__price-range">
+                            <div class="filter-dropdown__price-inputs">
+                                <input type="number" class="filter-dropdown__price-from" id="priceFrom" min="0" placeholder="0" aria-label="Цена от">
+                                <span>—</span>
+                                <input type="number" class="filter-dropdown__price-to" id="priceTo" min="0" placeholder="2000" aria-label="Цена до">
+                            </div>
+                            <div class="filter-dropdown__price-slider">
+                                <input type="range" class="filter-dropdown__range-from" id="priceRangeFrom" min="0" max="30000" value="0" step="500">
+                                <input type="range" class="filter-dropdown__range-to" id="priceRangeTo" min="0" max="30000" value="30000" step="500">
+                            </div>
+                        </div>
+                        <div class="filter-dropdown__actions">
+                            <button class="filter-dropdown__reset" data-i18n="catalog.reset">Сбросить</button>
+                            <button class="filter-dropdown__apply" data-i18n="filter.apply">Применить</button>
                         </div>
                     </div>
+                </div>
 
-                    <button class="search-form__btn" data-i18n="hero.find">Найти</button>
+                <div class="filter-dropdown" data-filter="guests">
+                    <button class="filter-dropdown__toggle" aria-expanded="false">
+                        <span data-i18n="filter.guests">Количество гостей</span>
+                        <svg class="filter-dropdown__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5"/>
+                        </svg>
+                    </button>
+                    <div class="filter-dropdown__content" hidden>
+                        <div class="filter-dropdown__guests">
+                            <button class="filter-dropdown__guest-btn" data-guests="6">до 6</button>
+                            <button class="filter-dropdown__guest-btn" data-guests="12">до 12</button>
+                            <button class="filter-dropdown__guest-btn" data-guests="20">до 20</button>
+                            <button class="filter-dropdown__guest-btn" data-guests="30">до 30</button>
+                            <button class="filter-dropdown__guest-btn" data-guests="50">до 50</button>
+                        </div>
+                        <div class="filter-dropdown__actions">
+                            <button class="filter-dropdown__reset" data-i18n="catalog.reset">Сбросить</button>
+                            <button class="filter-dropdown__apply" data-i18n="filter.apply">Применить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-dropdown" data-filter="category">
+                    <button class="filter-dropdown__toggle" aria-expanded="false">
+                        <span data-i18n="filter.category">Категория</span>
+                        <svg class="filter-dropdown__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5"/>
+                        </svg>
+                    </button>
+                    <div class="filter-dropdown__content" hidden>
+                        <div class="filter-dropdown__categories">
+                            <label class="filter-dropdown__checkbox">
+                                <input type="checkbox" value="pool" data-category-filter>
+                                <span data-i18n="category.pool">С бассейном</span>
+                            </label>
+                            <label class="filter-dropdown__checkbox">
+                                <input type="checkbox" value="family" data-category-filter>
+                                <span data-i18n="category.family">Семейные и уютные</span>
+                            </label>
+                            <label class="filter-dropdown__checkbox">
+                                <input type="checkbox" value="hits" data-category-filter>
+                                <span data-i18n="category.hits">Хиты продаж</span>
+                            </label>
+                            <label class="filter-dropdown__checkbox">
+                                <input type="checkbox" value="wedding" data-category-filter>
+                                <span data-i18n="category.wedding">Под свадьбы и корпоративы</span>
+                            </label>
+                            <label class="filter-dropdown__checkbox">
+                                <input type="checkbox" value="banya" data-category-filter>
+                                <span data-i18n="category.banya">С русской баней на дровах</span>
+                            </label>
+                        </div>
+                        <div class="filter-dropdown__actions">
+                            <button class="filter-dropdown__reset" data-i18n="catalog.reset">Сбросить</button>
+                            <button class="filter-dropdown__apply" data-i18n="filter.apply">Применить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-dropdown" data-filter="bedrooms">
+                    <button class="filter-dropdown__toggle" aria-expanded="false">
+                        <span data-i18n="filter.bedrooms">Спальни</span>
+                        <svg class="filter-dropdown__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5"/>
+                        </svg>
+                    </button>
+                    <div class="filter-dropdown__content" hidden>
+                        <div class="filter-dropdown__guests">
+                            <button class="filter-dropdown__guest-btn" data-bedrooms="2">2+</button>
+                            <button class="filter-dropdown__guest-btn" data-bedrooms="3">3+</button>
+                            <button class="filter-dropdown__guest-btn" data-bedrooms="4">4+</button>
+                            <button class="filter-dropdown__guest-btn" data-bedrooms="5">5+</button>
+                            <button class="filter-dropdown__guest-btn" data-bedrooms="6">6+</button>
+                        </div>
+                        <div class="filter-dropdown__actions">
+                            <button class="filter-dropdown__reset" data-i18n="catalog.reset">Сбросить</button>
+                            <button class="filter-dropdown__apply" data-i18n="filter.apply">Применить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-dropdown" data-filter="selections">
+                    <button class="filter-dropdown__toggle" aria-expanded="false">
+                        <span data-i18n="filter.selections">Подборки</span>
+                        <svg class="filter-dropdown__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5"/>
+                        </svg>
+                    </button>
+                    <div class="filter-dropdown__content" hidden>
+                        <div class="filter-dropdown__selections">
+                            <button class="filter-dropdown__selection-btn" data-selection="pool" data-i18n="category.pool">С бассейном</button>
+                            <button class="filter-dropdown__selection-btn" data-selection="family" data-i18n="category.family">Семейные и уютные</button>
+                            <button class="filter-dropdown__selection-btn" data-selection="hits" data-i18n="category.hits">Хиты продаж</button>
+                            <button class="filter-dropdown__selection-btn" data-selection="wedding" data-i18n="category.wedding">Под свадьбы и корпоративы</button>
+                            <button class="filter-dropdown__selection-btn" data-selection="banya" data-i18n="category.banya">С русской баней на дровах</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="filter-dropdown__reset-all" id="resetAllFilters" data-i18n="catalog.resetAllFilters" hidden>
+                    Сбросить все фильтры
+                </button>
+            </div>
+
+            <div class="catalog-active-filters" id="activeFilters" hidden></div>
+
+            <div class="catalog-results-header">
+                <div class="catalog-results-count">
+                    <span data-i18n="catalog.found">Найдено:</span>
+                    <span id="resultsCount">0</span>
+                    <span data-i18n="catalog.objects">объектов</span>
+                </div>
+
+                <div class="catalog-sort">
+                    <label class="catalog-sort__label" data-i18n="catalog.sortBy">Сортировка:</label>
+                    <select class="catalog-sort__select" id="sortSelect" data-i18n-aria="catalog.sortBy">
+                        <option value="rating-desc" data-i18n="sort.rating.desc">По рейтингу (убывание)</option>
+                        <option value="rating-asc" data-i18n="sort.rating.asc">По рейтингу (возрастание)</option>
+                        <option value="price-asc" data-i18n="sort.price.asc">По цене (возрастание)</option>
+                        <option value="price-desc" data-i18n="sort.price.desc">По цене (убывание)</option>
+                        <option value="reviews-desc" data-i18n="sort.reviews.desc">По отзывам</option>
+                        <option value="name-asc" data-i18n="sort.name.asc">По названию (А-Я)</option>
+                    </select>
                 </div>
             </div>
         </div>
-
-        <button class="hero__show-header" data-i18n="hero.showHeader">Показать шапку</button>
     </section>
 
-    <section class="about" data-about>
+    <section class="catalog-content">
         <div class="container">
-            <h2 class="section-title" data-i18n="about.title">О нас</h2>
-
-            <div class="about__grid">
-                <div class="about__item">
-                    <div class="about__icon">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                            <path d="M8 8h24v24H8V8zm4 4v16h16V12H12z" fill="#FF6B35"/>
-                            <path d="M14 18h12M14 22h8" stroke="#FF6B35" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
+            <div class="catalog-grid" id="catalogGrid">
+                <div class="catalog-card" data-skeleton>
+                    <div class="catalog-card__image"></div>
+                    <div class="catalog-card__content">
+                        <div class="catalog-card__title"></div>
+                        <div class="catalog-card__features"></div>
+                        <div class="catalog-card__price"></div>
                     </div>
-                    <p class="about__text" data-i18n="about.legal">Работаем с юридическими и физическими лицами</p>
                 </div>
-
-                <div class="about__item">
-                    <div class="about__icon">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                            <circle cx="20" cy="15" r="6" fill="#FF6B35"/>
-                            <path d="M10 35c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="#FF6B35" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
+                <div class="catalog-card" data-skeleton>
+                    <div class="catalog-card__image"></div>
+                    <div class="catalog-card__content">
+                        <div class="catalog-card__title"></div>
+                        <div class="catalog-card__features"></div>
+                        <div class="catalog-card__price"></div>
                     </div>
-                    <p class="about__text" data-i18n="about.consultation">Бесплатный подбор, честные консультации и открытость к сотрудничеству</p>
                 </div>
-
-                <div class="about__item">
-                    <div class="about__icon">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                            <path d="M20 5l3 9h9l-7 6 3 9-8-6-8 6 3-9-7-6h9l3-9z" fill="#FF6B35"/>
-                        </svg>
+                <div class="catalog-card" data-skeleton>
+                    <div class="catalog-card__image"></div>
+                    <div class="catalog-card__content">
+                        <div class="catalog-card__title"></div>
+                        <div class="catalog-card__features"></div>
+                        <div class="catalog-card__price"></div>
                     </div>
-                    <p class="about__text" data-i18n="about.experience">Работаем с 2014 года. Консультируем 30-80 человек в сутки, заселяем от 3 до 5 компаний в день. Помогли более 21 000 клиентам</p>
                 </div>
-
-                <div class="about__item">
-                    <div class="about__icon">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                            <path d="M20 5l4.5 9.5L35 16l-7.5 7 2 10.5L20 28l-9.5 5.5 2-10.5L5 16l10.5-1.5L20 5z" stroke="#FF6B35" stroke-width="2" fill="none"/>
-                        </svg>
-                    </div>
-                    <p class="about__text" data-i18n="about.rating">Средний рейтинг компании 4,5 из 5 (Avito, Google, Отзовик)</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="catalog-preview" data-catalog-preview>
-        <div class="container">
-            <h2 class="section-title" data-i18n="catalog.title">Популярное в каталоге</h2>
-
-            <div class="catalog-grid" data-catalog-grid>
                 <div class="catalog-card" data-skeleton>
                     <div class="catalog-card__image"></div>
                     <div class="catalog-card__content">
@@ -254,200 +367,29 @@
                 </div>
             </div>
 
-            <div class="catalog-preview__actions">
-                <a href="pages/catalog.html" class="btn btn--primary" data-i18n="catalog.showAll">Перейти в каталог</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="services" data-services>
-        <div class="container">
-            <h2 class="section-title" data-i18n="services.title">Можем организовать для Вас</h2>
-
-            <div class="services__grid">
-                <div class="services__item">
-                    <div class="services__icon">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                            <path d="M20 5L5 15v5h30v-5L20 5z" fill="#FF6B35"/>
-                            <rect x="5" y="20" width="30" height="15" rx="2" fill="#FF6B35"/>
-                        </svg>
-                    </div>
-                    <span class="services__name" data-i18n="services.catering">Кейтеринг</span>
-                </div>
-
-                <div class="services__item">
-                    <div class="services__icon">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                            <circle cx="20" cy="20" r="8" fill="#FF6B35"/>
-                            <path d="M12 12l4 4M28 12l-4 4M12 28l4-4M28 28l-4-4" stroke="#FF6B35" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <span class="services__name" data-i18n="services.show">Шоу программа</span>
-                </div>
-
-                <div class="services__item">
-                    <div class="services__icon">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                            <path d="M20 8c-4 0-7 3-7 7v3H10v14h20V18h-3v-3c0-4-3-7-7-7z" fill="#FF6B35"/>
-                        </svg>
-                    </div>
-                    <span class="services__name" data-i18n="services.chef">Выездной повар</span>
-                </div>
-
-                <div class="services__item">
-                    <div class="services__icon">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                            <path d="M10 25h20M15 25V15a5 5 0 0110 0v10" stroke="#FF6B35" stroke-width="2"/>
-                            <circle cx="20" cy="10" r="3" fill="#FF6B35"/>
-                        </svg>
-                    </div>
-                    <span class="services__name" data-i18n="services.buffet">Фуршет</span>
-                </div>
-
-                <div class="services__item">
-                    <div class="services__icon">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                            <rect x="8" y="12" width="24" height="16" rx="2" fill="#FF6B35"/>
-                            <circle cx="14" cy="30" r="2" fill="#FF6B35"/>
-                            <circle cx="26" cy="30" r="2" fill="#FF6B35"/>
-                        </svg>
-                    </div>
-                    <span class="services__name" data-i18n="services.transfer">Трансфер</span>
-                </div>
-
-                <div class="services__item">
-                    <div class="services__icon">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                            <path d="M8 28l4-12h16l4 12H8z" fill="#FF6B35"/>
-                            <circle cx="14" cy="30" r="3" fill="#FF6B35"/>
-                            <circle cx="26" cy="30" r="3" fill="#FF6B35"/>
-                            <path d="M12 16l4-8h8l4 8" stroke="#FF6B35" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <span class="services__name" data-i18n="services.events">Мероприятия под ключ</span>
-                </div>
+            <div class="catalog-pagination" id="catalogPagination" hidden>
+                <button class="pagination__btn pagination__btn--prev" id="prevPage" disabled aria-label="Предыдущая страница">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                        <path d="M12 4l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <div class="pagination__pages" id="paginationPages"></div>
+                <button class="pagination__btn pagination__btn--next" id="nextPage" disabled aria-label="Следующая страница">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                        <path d="M8 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
             </div>
 
-            <div class="services__actions">
-                <button class="btn btn--primary" data-i18n="services.learnMore">Узнать подробнее</button>
+            <div class="empty-state" id="emptyState" hidden>
+                <svg class="empty-state__icon" width="80" height="80" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                    <circle cx="40" cy="40" r="38" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/>
+                    <path d="M25 40l10 10 20-20" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h3 class="empty-state__title" data-i18n="catalog.empty.title">Ничего не найдено</h3>
+                <p class="empty-state__text" data-i18n="catalog.empty.text">Попробуйте изменить параметры фильтрации или поиска</p>
+                <button class="btn btn--primary" id="resetFiltersBtn" data-i18n="catalog.resetAllFilters">Сбросить все фильтры</button>
             </div>
-        </div>
-    </section>
-
-    <section class="faq" id="faq" data-faq>
-        <div class="container">
-            <h2 class="section-title" data-i18n="faq.title">Частые вопросы</h2>
-
-            <div class="faq__list" data-accordion>
-                <div class="faq__item">
-                    <button class="faq__question" aria-expanded="false">
-                        <span data-i18n="faq.booking">Как происходит бронирование?</span>
-                        <svg class="faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </button>
-                    <div class="faq__answer" hidden>
-                        <p data-i18n="faq.bookingAnswer">После выбора дома вы оставляете заявку, мы связываемся с вами для подтверждения дат и деталей. Вносится предоплата 30-50% от стоимости аренды.</p>
-                    </div>
-                </div>
-
-                <div class="faq__item">
-                    <button class="faq__question" aria-expanded="false">
-                        <span data-i18n="faq.prepayment">Какая сумма предоплаты нужна?</span>
-                        <svg class="faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </button>
-                    <div class="faq__answer" hidden>
-                        <p data-i18n="faq.prepaymentAnswer">Стандарт предоплаты 50% от суммы аренды, если сумма аренды большая, то можно уменьшить предоплату до 30%.</p>
-                    </div>
-                </div>
-
-                <div class="faq__item">
-                    <button class="faq__question" aria-expanded="false">
-                        <span data-i18n="faq.split">Можно ли разбить предоплату на несколько частей?</span>
-                        <svg class="faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </button>
-                    <div class="faq__answer" hidden>
-                        <p data-i18n="faq.splitAnswer">Да, мы понимаем, что не всегда удобно вносить всю сумму сразу. Обсудите с нами удобный график платежей.</p>
-                    </div>
-                </div>
-
-                <div class="faq__item">
-                    <button class="faq__question" aria-expanded="false">
-                        <span data-i18n="faq.legal">Как работаете с юр. лицами?</span>
-                        <svg class="faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </button>
-                    <div class="faq__answer" hidden>
-                        <p data-i18n="faq.legalAnswer">Работаем по договору с предоставлением всех закрывающих документов. Возможна оплата по безналичному расчету с НДС и без НДС.</p>
-                    </div>
-                </div>
-
-                <div class="faq__item">
-                    <button class="faq__question" aria-expanded="false">
-                        <span data-i18n="faq.viewing">Можно ли приехать на просмотр?</span>
-                        <svg class="faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </button>
-                    <div class="faq__answer" hidden>
-                        <p data-i18n="faq.viewingAnswer">Конечно! Мы организуем просмотр любого дома в удобное для вас время. Просто свяжитесь с нами заранее.</p>
-                    </div>
-                </div>
-
-                <div class="faq__item">
-                    <button class="faq__question" aria-expanded="false">
-                        <span data-i18n="faq.time">Какое время заезда и выезда в дом и есть ли возможность сдвинуть заезд или выезд?</span>
-                        <svg class="faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </button>
-                    <div class="faq__answer" hidden>
-                        <p data-i18n="faq.timeAnswer">Стандартное время заезда - 15:00, выезда - 12:00. При наличии возможности мы можем пойти навстречу и изменить время.</p>
-                    </div>
-                </div>
-
-                <div class="faq__item">
-                    <button class="faq__question" aria-expanded="false">
-                        <span data-i18n="faq.deposit">Зачем нужен залог?</span>
-                        <svg class="faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </button>
-                    <div class="faq__answer" hidden>
-                        <p data-i18n="faq.depositAnswer">Залог гарантирует сохранность имущества. Он возвращается полностью при выезде, если нет повреждений или нарушений правил.</p>
-                    </div>
-                </div>
-
-                <div class="faq__item">
-                    <button class="faq__question" aria-expanded="false">
-                        <span data-i18n="faq.cost">Сколько стоят Ваши услуги?</span>
-                        <svg class="faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </button>
-                    <div class="faq__answer" hidden>
-                        <p data-i18n="faq.costAnswer">Наши услуги по подбору дома бесплатны для клиентов. Вы оплачиваете только аренду дома и дополнительные услуги по желанию.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta" data-cta>
-        <div class="cta__bg">
-            <img src="assets/images/cta-bg.jpg" alt="" aria-hidden="true" data-preserve="true">
-            <div class="cta__overlay"></div>
-        </div>
-
-        <div class="container cta__container">
-            <h2 class="cta__title" data-i18n="cta.title">Хотите сдать дом?</h2>
-            <p class="cta__subtitle" data-i18n="cta.subtitle">Оставьте заявку и мы свяжемся с вами для уточнения деталей</p>
-            <button class="btn btn--primary btn--large" data-i18n="cta.button">Оставить заявку</button>
         </div>
     </section>
 </main>
@@ -456,7 +398,7 @@
     <div class="container">
         <div class="footer__top">
             <div class="footer__brand">
-                <a href="index.html" class="footer__logo">
+                <a href="../index.html" class="footer__logo">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
                         <path d="M20 5L5 17.5V35H15V25H25V35H35V17.5L20 5Z" fill="#FF6B35"/>
                     </svg>
@@ -467,13 +409,13 @@
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                         <path d="M10 2C6.13 2 3 5.13 3 9c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
                     </svg>
-                    <span data-i18n="footer.location">Могилёв</span>
+                    <span data-i18n="footer.location">Казань</span>
                 </div>
 
                 <div class="footer__buttons">
                     <button class="btn btn--outline" data-i18n="footer.legalInfo">Информация для юр. лиц</button>
                     <button class="btn btn--outline" data-i18n="footer.serviceRequest">Заявка на выездное обслуживание</button>
-                    <button class="btn btn--primary" data-i18n="footer.selectionRequest" data-modal-open="selection-modal">Заявка на подбор</button>
+                    <button class="btn btn--primary" data-modal-open="selection-modal" data-i18n="footer.selectionRequest">Заявка на подбор</button>
                 </div>
 
                 <div class="footer__links">
@@ -678,6 +620,7 @@
     </div>
 </div>
 
-<script type="module" src="js/main.js"></script>
+<script type="module" src="../js/main.js"></script>
+<script type="module" src="../js/catalog.js"></script>
 </body>
 </html>

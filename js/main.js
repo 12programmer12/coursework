@@ -121,6 +121,7 @@ function createHouseCard(house) {
 
     const houseName = house.name_i18n?.[i18n.currentLang] || house.name;
     const houseDesc = house.description_i18n?.[i18n.currentLang] || house.description || '';
+    const imagePath = fixImagePath(house.images?.[0] || 'assets/images/placeholder.jpg');
 
     const featuresTranslations = {
         'Баня': { ru: 'Баня', be: 'Баня', en: 'Sauna' },
@@ -158,7 +159,7 @@ function createHouseCard(house) {
 
     card.innerHTML = `
     <div class="catalog-card__image">
-      <img src="${house.images?.[0] || 'assets/images/placeholder.jpg'}" alt="${houseName}" loading="lazy">
+      <img src="${imagePath}" alt="${houseName}" loading="lazy">
       ${house.isHit ? '<span class="catalog-card__badge" data-i18n="catalog.hit">Хит</span>' : ''}
       <button class="catalog-card__favorite ${isFavorite ? 'active' : ''}" 
               data-favorite="${house.id}"
@@ -281,6 +282,15 @@ async function toggleFavorite(houseId, btn) {
 function isHouseFavorite(houseId) {
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
     return favorites.includes(houseId);
+}
+
+function fixImagePath(path) {
+    if (window.location.pathname.includes('/pages/')) {
+        if (!path.startsWith('../') && !path.startsWith('http://') && !path.startsWith('https://')) {
+            return '../' + path;
+        }
+    }
+    return path;
 }
 
 function initForms() {
@@ -534,7 +544,6 @@ document.querySelector('[data-i18n="settings.reset"]')?.addEventListener('click'
 });
 
 function loadSavedSettings() {
-    // Загружаем язык
     const savedLang = localStorage.getItem('language') || 'ru';
     document.querySelectorAll('[data-lang]').forEach(b => b.classList.remove('active'));
     document.querySelector(`[data-lang="${savedLang}"]`)?.classList.add('active');
@@ -551,6 +560,105 @@ function loadSavedSettings() {
 }
 
 loadSavedSettings();
+
+const ModalManager = {
+    init() {
+        this.bindEvents();
+    },
+
+    open(modalId) {
+        const modal = document.querySelector(`[data-modal="${modalId}"]`);
+        if (!modal) return;
+
+        modal.classList.add('active');
+        modal.hidden = false;
+        document.body.classList.add('modal-open');
+
+        const firstInput = modal.querySelector('input, textarea, button:not([data-modal-close])');
+        if (firstInput) {
+            setTimeout(() => firstInput.focus(), 300);
+        }
+
+        this.trapFocus(modal);
+    },
+
+    close(modal) {
+        if (!modal) {
+            modal = document.querySelector('.modal.active');
+        }
+        if (!modal) return;
+
+        modal.classList.remove('active');
+        setTimeout(() => {
+            modal.hidden = true;
+        }, 250);
+        document.body.classList.remove('modal-open');
+    },
+
+    closeAll() {
+        document.querySelectorAll('.modal.active').forEach(modal => {
+            this.close(modal);
+        });
+    },
+
+    trapFocus(modal) {
+        const focusableElements = modal.querySelectorAll(
+            'button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"]):not([disabled])'
+        );
+
+        const firstFocusable = focusableElements[0];
+        const lastFocusable = focusableElements[focusableElements.length - 1];
+
+        modal.addEventListener('keydown', (e) => {
+            if (e.key !== 'Tab') return;
+
+            if (e.shiftKey) {
+                if (document.activeElement === firstFocusable) {
+                    lastFocusable.focus();
+                    e.preventDefault();
+                }
+            } else {
+                if (document.activeElement === lastFocusable) {
+                    firstFocusable.focus();
+                    e.preventDefault();
+                }
+            }
+        });
+    },
+
+    bindEvents() {
+        document.querySelectorAll('[data-modal-open]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const modalId = btn.getAttribute('data-modal-open');
+                this.open(modalId);
+            });
+        });
+
+        document.querySelectorAll('[data-modal-close]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                this.close();
+            });
+        });
+
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    this.close(modal);
+                }
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.closeAll();
+            }
+        });
+    }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    ModalManager.init();
+});
 
 export {
     showNotification,
