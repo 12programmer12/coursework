@@ -148,14 +148,6 @@
         return this.fetch(`/users?email=${encodeURIComponent(email)}`);
     },
 
-    async getProperties(filters = {}) {
-        const params = new URLSearchParams();
-        if (filters.landlordId) params.append('landlordId', filters.landlordId);
-        if (filters.status) params.append('status', filters.status);
-        const query = params.toString();
-        return this.fetch(`/properties${query ? '?' + query : ''}`);
-    },
-
     async createProperty(propertyData) {
         return this.fetch('/properties', {
             method: 'POST',
@@ -239,6 +231,36 @@
             console.error('API deleteHouse error:', error);
             throw error;
         }
+    },
+
+    async getProperties(filters = {}) {
+        const params = new URLSearchParams();
+        if (filters.landlordId) params.append('landlordId', filters.landlordId);
+        if (filters.houseId) params.append('houseId', filters.houseId);
+        if (filters.status) params.append('status', filters.status);
+
+        const query = params.toString();
+        return this.fetch(`/properties${query ? '?' + query : ''}`);
+    },
+
+    async createPropertyLink(propertyData) {
+        return this.fetch('/properties', {
+            method: 'POST',
+            body: JSON.stringify(propertyData)
+        });
+    },
+
+    async deletePropertyLink(id) {
+        return this.fetch(`/properties/${id}`, {
+            method: 'DELETE'
+        });
+    },
+
+    async updatePropertyLink(id, propertyData) {
+        return this.fetch(`/properties/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(propertyData)
+        });
     }
 };
 

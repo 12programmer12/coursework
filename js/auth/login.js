@@ -1,8 +1,35 @@
 ﻿import API from '../api.js';
 import i18n from '../i18n.js';
+import ThemeManager from '../theme.js';
+
+function loadSavedTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    document.querySelectorAll('[data-theme-toggle]').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-theme-toggle') === savedTheme);
+    });
+}
+
+function applyTranslations() {
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        element.textContent = i18n.t(key);
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+        const key = element.getAttribute('data-i18n-placeholder');
+        element.placeholder = i18n.t(key);
+    });
+}
 
 const Login = {
     init() {
+        i18n.init();
+        ThemeManager.init();
+        loadSavedTheme();
+        applyTranslations();
+
         this.bindEvents();
     },
 

@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html lang="ru" data-theme="light" data-accessibility="normal">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="landlord.meta.title">Кабинет арендодателя - DOMIKTUT</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/landlord.css">
+    <link rel="stylesheet" href="../css/adaptive.css">
+
+    <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+    <meta name="theme-color" content="#FF6B35">
+</head>
+<body>
+
+<header class="header header--admin" data-header>
+    <div class="container header__container">
+        <a href="../index.html" class="header__logo">
+            <svg class="header__logo-icon" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <path d="M20 5L5 17.5V35H15V25H25V35H35V17.5L20 5Z" fill="#FF6B35"/>
+            </svg>
+            <span class="header__logo-text">DOMIKTUT.RU</span>
+        </a>
+        <div class="header__actions">
+            <div class="header__admin-badge">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M3 10a7 7 0 1114 0 7 7 0 01-14 0zm7-5a5 5 0 00-5 5c0 2.76 2.24 5 5 5s5-2.24 5-5-2.24-5-5-5z" fill="currentColor"/>
+                    <path d="M10 8a2 2 0 100 4 2 2 0 000-4z" fill="currentColor"/>
+                </svg>
+                <span data-i18n="landlord.role">Арендодатель</span>
+            </div>
+            <button class="btn btn--outline btn--sm" id="logoutBtn" data-i18n="common.logout">Выйти</button>
+        </div>
+    </div>
+</header>
+
+<main id="main-content">
+    <div class="landlord-container">
+        <aside class="landlord-sidebar">
+            <nav class="landlord-nav">
+                <button class="landlord-nav__item active" data-tab="properties">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 2L3 8v10h5v-6h4v6h5V8l-7-6z" fill="currentColor"/>
+                    </svg>
+                    <span data-i18n="landlord.properties">Мои объекты</span>
+                    <span class="landlord-badge" id="propertyCount">0</span>
+                </button>
+                <button class="landlord-nav__item" data-tab="bookings">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm0 2h8v2H6V4zm0 4h8v2H6V8zm0 4h8v2H6v-2z" fill="currentColor"/>
+                    </svg>
+                    <span data-i18n="landlord.bookings">Бронирования</span>
+                </button>
+                <button class="landlord-nav__item" data-tab="settings">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 2a4 4 0 100 8 4 4 0 000-8zm0 10c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5z" fill="currentColor"/>
+                    </svg>
+                    <span data-i18n="landlord.settings">Настройки</span>
+                </button>
+            </nav>
+        </aside>
+
+        <div class="landlord-content">
+            <div class="landlord-panel active" id="propertiesPanel">
+                <div class="landlord-panel__header">
+                    <h1 class="landlord-panel__title" data-i18n="landlord.propertiesTitle">Управление объектами</h1>
+                    <button class="btn btn--primary" data-open-modal="addPropertyModal">
+                        <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M10 5v10M5 10h10" stroke="currentColor" stroke-width="2"/></svg>
+                        <span data-i18n="landlord.addProperty">Добавить объект</span>
+                    </button>
+                </div>
+                <div class="properties-grid" id="propertiesList">
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                </div>
+            </div>
+
+            <div class="landlord-panel" id="bookingsPanel">
+                <div class="landlord-panel__header">
+                    <h1 class="landlord-panel__title" data-i18n="landlord.bookingsTitle">Бронирования моих объектов</h1>
+                </div>
+                <div class="bookings-list" id="landlordBookingsList">
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                </div>
+            </div>
+
+            <div class="landlord-panel" id="reviewsPanel">
+                <div class="landlord-panel__header">
+                    <h1 class="landlord-panel__title" data-i18n="landlord.reviewsTitle">Отзывы гостей</h1>
+                </div>
+                <div class="reviews-list" id="reviewsList">
+                    <div class="skeleton-card"></div>
+                </div>
+            </div>
+
+            <div class="landlord-panel" id="settingsPanel">
+                <div class="landlord-panel__header">
+                    <h1 class="landlord-panel__title" data-i18n="landlord.settingsTitle">Настройки профиля</h1>
+                </div>
+                <form id="landlordSettingsForm" class="settings-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="landlordFirstName" data-i18n="auth.register.firstName">Имя</label>
+                            <input type="text" id="landlordFirstName" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="landlordLastName" data-i18n="auth.register.lastName">Фамилия</label>
+                            <input type="text" id="landlordLastName" class="form-input">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="landlordEmail" data-i18n="auth.register.email">Email</label>
+                        <input type="email" id="landlordEmail" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="landlordPhone" data-i18n="auth.register.phone">Телефон</label>
+                        <input type="tel" id="landlordPhone" class="form-input">
+                    </div>
+                    <button type="submit" class="btn btn--primary" data-i18n="profile.settings.save">Сохранить изменения</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="modal" data-modal="addPropertyModal" hidden>
+    <div class="modal__content modal__content--large">
+        <div class="modal__header">
+            <h3 class="modal__title" data-i18n="landlord.modalTitle">Добавить / Редактировать объект</h3>
+            <button class="modal__close" data-modal-close aria-label="Закрыть">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2"/>
+                </svg>
+            </button>
+        </div>
+        <div class="modal__body">
+            <form id="propertyForm" class="edit-form">
+                <input type="hidden" id="propId" name="id">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="propName" data-i18n="admin.houseName">Название</label>
+                        <input type="text" id="propName" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="propPrice" data-i18n="admin.price">Цена (BYN)</label>
+                        <input type="number" id="propPrice" class="form-input" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="propDescription" data-i18n="admin.description">Описание</label>
+                    <textarea id="propDescription" class="form-input" rows="3"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="propGuests" data-i18n="admin.guests">Гостей</label>
+                        <input type="number" id="propGuests" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="propBedrooms" data-i18n="admin.bedrooms">Спален</label>
+                        <input type="number" id="propBedrooms" class="form-input">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="propBathrooms" data-i18n="landlord.bathrooms">Санузлов</label>
+                        <input type="number" id="propBathrooms" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="propArea" data-i18n="landlord.area">Площадь (м²)</label>
+                        <input type="number" id="propArea" class="form-input">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="propImages" data-i18n="landlord.images">Ссылки на фото (через запятую)</label>
+                    <input type="text" id="propImages" class="form-input" placeholder="assets/images/house-1.jpg, assets/images/house-2.jpg">
+                </div>
+
+                <div class="modal__footer">
+                    <button type="button" class="btn btn--outline" data-modal-close data-i18n="common.cancel">Отмена</button>
+                    <button type="submit" class="btn btn--primary" data-i18n="landlord.saveProperty">Сохранить объект</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer class="footer" data-footer>
+    <div class="container">
+        <p>&copy; 2026 DOMIKTUT. <span data-i18n="footer.allRights">Все права защищены.</span></p>
+    </div>
+</footer>
+
+<script type="module" src="../js/landlord.js"></script>
+</body>
+</html>

@@ -87,6 +87,12 @@ const Admin = {
             });
         });
 
+        document.getElementById('logoutBtn')?.addEventListener('click', () => {
+            localStorage.removeItem('currentUser');
+            sessionStorage.removeItem('currentUser');
+            window.location.href = '../index.html';
+        });
+
         document.addEventListener('click', async (e) => {
             const target = e.target;
 

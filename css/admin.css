@@ -686,3 +686,19 @@
         width: 100%;
     }
 }
+
+.header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+@media (max-width: 480px) {
+    .header__admin-badge span {
+        display: none;
+    }
+    #logoutBtn {
+        padding: var(--spacing-xs);
+        min-width: auto;
+    }
+}
