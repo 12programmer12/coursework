@@ -168,6 +168,77 @@
             method: 'PATCH',
             body: JSON.stringify(propertyData)
         });
+    },
+
+    async getBookings() {
+        try {
+            const response = await fetch(`${this.baseURL}/bookings`);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return await response.json();
+        } catch (error) {
+            console.error('API getBookings error:', error);
+            return [];
+        }
+    },
+
+    async updateBooking(id, bookingData) {
+        try {
+            const response = await fetch(`${this.baseURL}/bookings/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(bookingData)
+            });
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return await response.json();
+        } catch (error) {
+            console.error('API updateBooking error:', error);
+            throw error;
+        }
+    },
+
+    async deleteBooking(id) {
+        try {
+            const response = await fetch(`${this.baseURL}/bookings/${id}`, {
+                method: 'DELETE'
+            });
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return true;
+        } catch (error) {
+            console.error('API deleteBooking error:', error);
+            throw error;
+        }
+    },
+
+    async updateHouse(id, houseData) {
+        try {
+            const response = await fetch(`${this.baseURL}/houses/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(houseData)
+            });
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return await response.json();
+        } catch (error) {
+            console.error('API updateHouse error:', error);
+            throw error;
+        }
+    },
+
+    async deleteHouse(id) {
+        try {
+            const response = await fetch(`${this.baseURL}/houses/${id}`, {
+                method: 'DELETE'
+            });
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return true;
+        } catch (error) {
+            console.error('API deleteHouse error:', error);
+            throw error;
+        }
     }
 };
 
