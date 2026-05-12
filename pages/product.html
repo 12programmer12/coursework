@@ -1,0 +1,373 @@
+﻿<!DOCTYPE html>
+<html lang="ru" data-theme="light" data-accessibility="normal">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" data-i18n="meta.product.description" content="Детали дома - DOMIKTUT">
+    <title data-i18n="meta.product.title">Дом - DOMIKTUT</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/product.css">
+    <link rel="stylesheet" href="../css/adaptive.css">
+
+    <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+    <meta name="theme-color" content="#FF6B35">
+</head>
+<body>
+<div class="preloader" data-preloader>
+    <div class="preloader__spinner"></div>
+    <div class="preloader__text" data-i18n="common.loading">Загрузка...</div>
+</div>
+
+<header class="header" data-header>
+    <div class="container header__container">
+        <a href="../index.html" class="header__logo">
+            <svg class="header__logo-icon" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <path d="M20 5L5 17.5V35H15V25H25V35H35V17.5L20 5Z" fill="#FF6B35"/>
+            </svg>
+            <span class="header__logo-text">DOMIKTUT.RU</span>
+        </a>
+
+        <nav class="header__nav">
+            <a href="catalog.html" class="header__link" data-i18n="header.catalog">Каталог</a>
+            <a href="about.html" class="header__link" data-i18n="header.about">О компании</a>
+            <a href="contacts.html" class="header__link" data-i18n="header.contacts">Контакты</a>
+        </nav>
+
+        <div class="header__right">
+            <div class="header__location">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 2C6.13 2 3 5.13 3 9c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
+                </svg>
+                <span data-i18n="footer.location">Могилёв</span>
+            </div>
+            <a href="tel:88435286548" class="header__phone" data-i18n="header.phone">8 (843) 528-65-48</a>
+            <button class="header__favorites" aria-label="Избранное">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 2.5l1.903 3.854a1 1 0 00.754.547l4.243.616-3.07 3.003a1 1 0 00-.288.884l.724 4.226L10 13.5l-3.766 1.98.724-4.226a1 1 0 00-.288-.884l-3.07-3.003 4.243-.616a1 1 0 00.754-.547L10 2.5z" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+            </button>
+            <button class="header__user-btn" data-user-menu aria-label="Личный кабинет">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 2a4 4 0 100 8 4 4 0 000-8zm0 10c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5z" fill="currentColor"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main id="main-content">
+    <section class="product" data-product>
+        <div class="container">
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <a href="../index.html" data-i18n="breadcrumbs.home">Главная</a>
+                <span>/</span>
+                <a href="catalog.html" data-i18n="header.catalog">Каталог</a>
+                <span>/</span>
+                <span class="breadcrumbs__current" id="breadcrumbsName">Дом</span>
+            </nav>
+
+            <h1 class="product__title" id="productName">Название дома</h1>
+            <p class="product__location" id="productLocation">
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 2C6.13 2 3 5.13 3 9c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
+                </svg>
+                <span id="locationText">Местоположение</span>
+            </p>
+
+            <div class="product__gallery" id="productGallery">
+                <div class="gallery__main">
+                    <img src="" alt="" id="mainImage" class="gallery__main-image">
+                    <button class="gallery__arrow gallery__arrow--left" aria-label="Предыдущее фото">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <button class="gallery__arrow gallery__arrow--right" aria-label="Следующее фото">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="gallery__thumbs" id="galleryThumbs"></div>
+            </div>
+
+            <div class="product__content">
+                <div class="product__left">
+                    <div class="product__features" id="productFeatures">
+                        <div class="feature">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M10 2a4 4 0 100 8 4 4 0 000-8zm0 10c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5z" fill="currentColor"/>
+                            </svg>
+                            <span id="featureGuests">до 30 человек</span>
+                        </div>
+                        <div class="feature">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M8 1L1 6v9h6v-6h2v6h6V6L8 1z" fill="currentColor"/>
+                            </svg>
+                            <span id="featureBedrooms">5 спален</span>
+                        </div>
+                        <div class="feature">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M8 1L1 6v9h6v-6h2v6h6V6L8 1z" fill="currentColor"/>
+                            </svg>
+                            <span id="featureBathrooms">3 санузла</span>
+                        </div>
+                        <div class="feature">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M4 4h12v12H4V4z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <span id="featureArea">350 м²</span>
+                        </div>
+                    </div>
+
+                    <div class="product__section">
+                        <h2 class="product__section-title" data-i18n="product.description">Описание</h2>
+                        <p class="product__text" id="productDescription">Описание дома</p>
+                    </div>
+
+                    <div class="product__section">
+                        <h2 class="product__section-title" data-i18n="product.amenities">Удобства</h2>
+                        <div class="amenities__list" id="productAmenities"></div>
+                    </div>
+
+                    <div class="product__section">
+                        <h2 class="product__section-title" data-i18n="product.additionalServices">Дополнительные услуги</h2>
+                        <div class="services__list" id="additionalServices"></div>
+                    </div>
+
+                    <div class="product__section">
+                        <h2 class="product__section-title" data-i18n="product.checkInOut">Время заезда и выезда</h2>
+                        <div class="checkinout">
+                            <div class="checkinout__item">
+                                <span class="checkinout__label" data-i18n="product.checkIn">Заезд</span>
+                                <span class="checkinout__time">15:00</span>
+                            </div>
+                            <div class="checkinout__item">
+                                <span class="checkinout__label" data-i18n="product.checkOut">Выезд</span>
+                                <span class="checkinout__time">12:00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product__section">
+                        <h2 class="product__section-title" data-i18n="product.importantInfo">Важная информация</h2>
+                        <p class="product__text" id="importantInfo" data-i18n="product.importantInfoText">
+                            Наши апартаменты отличаются большим удобством и функциональностью жилого пространства. В них с комфортом могут разместиться до трех человек. Большие панорамные окна и отделка из натуральных материалов отражают концепцию всего дома в стиле лофт.
+                        </p>
+                    </div>
+
+                    <div class="product__section">
+                        <h2 class="product__section-title" data-i18n="product.location">Расположение на карте</h2>
+                        <div class="product__map" id="productMap"></div>
+                    </div>
+
+                    <div class="product__section">
+                        <h2 class="product__section-title" data-i18n="product.reviews">Отзывы</h2>
+                        <div class="reviews__list" id="productReviews"></div>
+                    </div>
+                </div>
+
+                <div class="product__right">
+                    <div class="booking-card">
+                        <h3 class="booking-card__title" data-i18n="product.cost">Стоимость</h3>
+
+                        <div class="booking-card__prices" id="bookingPrices">
+                            <div class="price-row">
+                                <span data-i18n="product.weekday">Будни</span>
+                                <span class="price-value" id="priceWeekday">8000 <span data-i18n="common.currency">BYN</span></span>
+                            </div>
+                            <div class="price-row">
+                                <span data-i18n="product.friday">Пятница</span>
+                                <span class="price-value" id="priceFriday">10000 <span data-i18n="common.currency">BYN</span></span>
+                            </div>
+                            <div class="price-row">
+                                <span data-i18n="product.saturday">Суббота</span>
+                                <span class="price-value" id="priceSaturday">12000 <span data-i18n="common.currency">BYN</span></span>
+                            </div>
+                            <div class="price-row">
+                                <span data-i18n="product.sunday">Воскресенье</span>
+                                <span class="price-value" id="priceSunday">12000 <span data-i18n="common.currency">BYN</span></span>
+                            </div>
+                        </div>
+
+                        <div class="booking-card__deposit">
+                            <span data-i18n="product.deposit">Залог</span>
+                            <span class="deposit-value" id="depositAmount">2000 <span data-i18n="common.currency">BYN</span></span>
+                        </div>
+
+                        <div class="booking-card__full-price">
+                            <span data-i18n="product.fullPrice">Полные выходные (ПТ-ВС)</span>
+                            <span class="full-price-value" id="fullWeekendPrice">12000 <span data-i18n="common.currency">BYN</span></span>
+                        </div>
+
+                        <div class="booking-card__holiday">
+                            <span data-i18n="product.holiday">Новый год (2 дня)</span>
+                            <span class="holiday-value" id="newYearPrice"> <span data-i18n="common.from">от</span> 800 <span data-i18n="common.currency">BYN</span></span>
+                        </div>
+
+                        <div class="booking-card__holiday">
+                            <span data-i18n="product.holidayMajor">Выходные праздники (сутки)</span>
+                            <span class="holiday-value" id="holidayPrice"> <span data-i18n="common.from">от</span> 500 <span data-i18n="common.currency">BYN</span></span>
+                        </div>
+
+                        <button class="btn btn--primary btn--full" data-modal-open="booking-modal" data-i18n="product.book">Забронировать</button>
+
+                        <div class="booking-card__contacts">
+                            <button class="btn btn--outline btn--full" data-i18n="product.write">Написать</button>
+                            <button class="btn btn--outline btn--full" data-i18n="product.call">Позвонить</button>
+                        </div>
+
+                        <button class="btn btn--outline btn--full" data-i18n="product.additionalService">Выездное обслуживание</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer" data-footer>
+    <div class="container">
+        <div class="footer__top">
+            <div class="footer__brand">
+                <a href="../index.html" class="footer__logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <path d="M20 5L5 17.5V35H15V25H25V35H35V17.5L20 5Z" fill="#FF6B35"/>
+                    </svg>
+                    <span>DOMIKTUT.RU</span>
+                </a>
+                <div class="footer__location">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 2C6.13 2 3 5.13 3 9c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
+                    </svg>
+                    <span data-i18n="footer.location">Могилёв</span>
+                </div>
+                <a href="tel:88435286548" class="footer__phone" data-i18n="header.phone">8 (843) 528-65-48</a>
+            </div>
+            <div class="footer__catalog">
+                <h3 class="footer__title" data-i18n="footer.catalog">Каталог</h3>
+                <ul class="footer__list">
+                    <li><a href="#" data-i18n="category.pool">С бассейном</a></li>
+                    <li><a href="#" data-i18n="category.family">Семейные и уютные</a></li>
+                    <li><a href="#" data-i18n="category.hits">Хиты продаж</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div class="modal" data-modal="booking-modal" hidden>
+    <div class="modal__content">
+        <div class="modal__header">
+            <div class="modal__header-content">
+                <h3 class="modal__title" data-i18n="modal.booking.title">Забронировать дом</h3>
+                <p class="modal__subtitle" data-i18n="modal.booking.subtitle">Заполните форму и мы свяжемся с вами</p>
+            </div>
+            <button class="modal__close" data-modal-close aria-label="Закрыть">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="modal__body">
+            <form id="bookingForm" class="booking-form" novalidate>
+                <div class="form-section">
+                    <h4 class="form-section__title" data-i18n="booking.contactInfo">Контактная информация</h4>
+
+                    <div class="form-group">
+                        <label for="bookingName" class="form-label">
+                            <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                                <path d="M10 2a4 4 0 100 8 4 4 0 000-8zm0 10c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5z" fill="currentColor"/>
+                            </svg>
+                            <span data-i18n="form.name">Имя *</span>
+                        </label>
+                        <input type="text" id="bookingName" name="name" required data-i18n-placeholder="form.namePlaceholder" placeholder="Введите ваше имя" class="form-input" autocomplete="name">
+                        <span class="form-error" data-error="bookingName"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bookingPhone" class="form-label">
+                            <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <span data-i18n="form.phone">Телефон *</span>
+                        </label>
+                        <input type="tel" id="bookingPhone" name="phone" required data-i18n-placeholder="form.phonePlaceholder" placeholder="+375 (__) ___-__-__" class="form-input" autocomplete="tel" maxlength="19">
+                        <span class="form-help" data-i18n="booking.phoneFormat">Формат: +375 (29) 123-45-67</span>
+                        <span class="form-error" data-error="bookingPhone"></span>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h4 class="form-section__title" data-i18n="booking.dates">Даты проживания</h4>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bookingCheckin" class="form-label">
+                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                                    <path d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 4a1 1 0 011 1v1a1 1 0 11-2 0V7a1 1 0 011-1zm6 0a1 1 0 011 1v1a1 1 0 11-2 0V7a1 1 0 011-1z" fill="currentColor"/>
+                                </svg>
+                                <span data-i18n="hero.checkin">Заезд</span>
+                            </label>
+                            <input type="date" id="bookingCheckin" name="checkIn" required class="form-input">
+                            <span class="form-error" data-error="bookingCheckin"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bookingCheckout" class="form-label">
+                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                                    <path d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 4a1 1 0 011 1v1a1 1 0 11-2 0V7a1 1 0 011-1zm6 0a1 1 0 011 1v1a1 1 0 11-2 0V7a1 1 0 011-1z" fill="currentColor"/>
+                                </svg>
+                                <span data-i18n="hero.checkout">Выезд</span>
+                            </label>
+                            <input type="date" id="bookingCheckout" name="checkOut" required class="form-input">
+                            <span class="form-error" data-error="bookingCheckout"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bookingGuests" class="form-label">
+                            <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" fill="currentColor"/>
+                            </svg>
+                            <span data-i18n="hero.guests">Количество человек</span>
+                        </label>
+                        <input type="number" id="bookingGuests" name="guests" min="1" max="50" value="2" class="form-input">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h4 class="form-section__title" data-i18n="booking.additional">Дополнительно</h4>
+
+                    <div class="form-group">
+                        <label for="bookingComment" class="form-label">
+                            <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                                <path d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" fill="currentColor"/>
+                            </svg>
+                            <span data-i18n="booking.comment">Комментарий</span>
+                        </label>
+                        <textarea id="bookingComment" name="comment" rows="3" data-i18n-placeholder="booking.commentPlaceholder" placeholder="Ваши пожелания (необязательно)" class="form-input form-input--textarea"></textarea>
+                    </div>
+                </div>
+
+                <div class="modal__footer">
+                    <button type="button" class="btn btn--outline" data-modal-close data-i18n="common.cancel">Отмена</button>
+                    <button type="submit" class="btn btn--primary" id="bookingSubmit" data-i18n="form.submit">Отправить заявку</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="../js/product.js"></script>
+</body>
+</html>

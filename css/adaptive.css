@@ -61,9 +61,7 @@
         display: none;
     }
 
-    .header__favorites,
-    .header__user-btn,
-    .header__settings-btn {
+    .header__favorites {
         display: none;
     }
 
@@ -217,6 +215,12 @@
         left: var(--spacing-sm);
         right: var(--spacing-sm);
         max-width: none;
+    }
+}
+
+@media (max-width: 400px) {
+    .header__logo-text {
+        display: none;
     }
 }
 

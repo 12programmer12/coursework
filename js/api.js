@@ -48,7 +48,24 @@
     },
 
     async getHouseById(id) {
-        return this.fetch(`/houses/${id}`);
+        try {
+            const url = `${this.baseURL}/houses/${id}`;
+
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                if (response.status === 404) {
+                    console.warn('⚠️ House not found (404)');
+                    return null;
+                }
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error('❌ Error in getHouseById:', error);
+            throw error;
+        }
     },
 
     async getCategories() {
