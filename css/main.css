@@ -409,6 +409,12 @@
     }
 }
 
+.preloader.hidden {
+    display: none !important;
+    opacity: 0;
+    visibility: hidden;
+}
+
 .modal {
     position: fixed;
     top: 0;

@@ -103,6 +103,54 @@
         return this.fetch(`/favorites/${id}`, {
             method: 'DELETE'
         });
+    },
+
+    async getUsers() {
+        return this.fetch('/users');
+    },
+
+    async getUserById(id) {
+        return this.fetch(`/users/${id}`);
+    },
+
+    async createUser(userData) {
+        return this.fetch('/users', {
+            method: 'POST',
+            body: JSON.stringify(userData)
+        });
+    },
+
+    async updateUser(id, userData) {
+        return this.fetch(`/users/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(userData)
+        });
+    },
+
+    async getUserByEmail(email) {
+        return this.fetch(`/users?email=${encodeURIComponent(email)}`);
+    },
+
+    async getProperties(filters = {}) {
+        const params = new URLSearchParams();
+        if (filters.landlordId) params.append('landlordId', filters.landlordId);
+        if (filters.status) params.append('status', filters.status);
+        const query = params.toString();
+        return this.fetch(`/properties${query ? '?' + query : ''}`);
+    },
+
+    async createProperty(propertyData) {
+        return this.fetch('/properties', {
+            method: 'POST',
+            body: JSON.stringify(propertyData)
+        });
+    },
+
+    async updateProperty(id, propertyData) {
+        return this.fetch(`/properties/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(propertyData)
+        });
     }
 };
 

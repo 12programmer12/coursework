@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html lang="ru" data-theme="light" data-accessibility="normal">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" data-i18n="meta.register.description" content="Регистрация на DOMIKTUT - аренда коттеджей в Могилёве">
+    <title data-i18n="meta.register.title">Регистрация - DOMIKTUT</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/catalog.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="../css/adaptive.css">
+
+    <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+    <meta name="theme-color" content="#FF6B35">
+</head>
+<body>
+
+<header class="header header--auth" data-header>
+    <div class="container header__container">
+        <a href="../index.html" class="header__logo">
+            <svg class="header__logo-icon" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <path d="M20 5L5 17.5V35H15V25H25V35H35V17.5L20 5Z" fill="#FF6B35"/>
+            </svg>
+            <span class="header__logo-text">DOMIKTUT.RU</span>
+        </a>
+        <a href="login.html" class="btn btn--outline btn--sm" data-i18n="auth.alreadyHaveAccount">Уже есть аккаунт?</a>
+    </div>
+</header>
+
+<main id="main-content">
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-card">
+                <div class="auth-card__header">
+                    <h1 class="auth-card__title" data-i18n="auth.register.title">Создать аккаунт</h1>
+                    <p class="auth-card__subtitle" data-i18n="auth.register.subtitle">Заполните форму для регистрации</p>
+                </div>
+
+                <form id="registerForm" class="auth-form" novalidate>
+                    <div class="form-section">
+                        <h3 class="form-section__title" data-i18n="auth.register.personalInfo">Личная информация</h3>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName" data-i18n="auth.register.firstName">Имя *</label>
+                                <input type="text" id="firstName" name="firstName" required
+                                       data-i18n-placeholder="auth.register.firstNamePlaceholder"
+                                       placeholder="Введите имя"
+                                       pattern="^[А-Яа-яA-Za-zЁё]{2,}$"
+                                       autocomplete="given-name">
+                                <span class="form-error" data-error="firstName"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName" data-i18n="auth.register.lastName">Фамилия *</label>
+                                <input type="text" id="lastName" name="lastName" required
+                                       data-i18n-placeholder="auth.register.lastNamePlaceholder"
+                                       placeholder="Введите фамилию"
+                                       pattern="^[А-Яа-яA-Za-zЁё]{2,}$"
+                                       autocomplete="family-name">
+                                <span class="form-error" data-error="lastName"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="patronymic" data-i18n="auth.register.patronymic">Отчество</label>
+                            <input type="text" id="patronymic" name="patronymic"
+                                   data-i18n-placeholder="auth.register.patronymicPlaceholder"
+                                   placeholder="Введите отчество (необязательно)"
+                                   pattern="^[А-Яа-яA-Za-zЁё]{2,}$"
+                                   autocomplete="additional-name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="birthDate" data-i18n="auth.register.birthDate">Дата рождения *</label>
+                            <input type="date" id="birthDate" name="birthDate" required
+                                   data-i18n-placeholder="auth.register.birthDatePlaceholder"
+                                   max="">
+                            <span class="form-help" data-i18n="auth.register.ageRequirement">Минимальный возраст: 16 лет</span>
+                            <span class="form-error" data-error="birthDate"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3 class="form-section__title" data-i18n="auth.register.contactInfo">Контактные данные</h3>
+
+                        <div class="form-group">
+                            <label for="phone" data-i18n="auth.register.phone">Телефон *</label>
+                            <input type="tel" id="phone" name="phone" required
+                                   data-i18n-placeholder="auth.register.phonePlaceholder"
+                                   placeholder="+375 (__) ___-__-__"
+                                   pattern="^\+375\s?\(?(29|33|25|44)\)?\s?\d{3}-?\d{2}-?\d{2}$"
+                                   autocomplete="tel"
+                                   maxlength="19">
+                            <span class="form-help" data-i18n="auth.register.phoneFormat">Формат: +375 (29) 123-45-67</span>
+                            <span class="form-error" data-error="phone"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" data-i18n="auth.register.email">Email *</label>
+                            <input type="email" id="email" name="email" required
+                                   data-i18n-placeholder="auth.register.emailPlaceholder"
+                                   placeholder="example@email.com"
+                                   pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+                                   autocomplete="email">
+                            <span class="form-error" data-error="email"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3 class="form-section__title" data-i18n="auth.register.security">Безопасность аккаунта</h3>
+
+                        <div class="form-group">
+                            <label data-i18n="auth.register.passwordMethod">Способ создания пароля *</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="passwordMethod" value="manual" checked>
+                                    <span data-i18n="auth.register.passwordManual">Ввести самостоятельно</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="passwordMethod" value="auto">
+                                    <span data-i18n="auth.register.passwordAuto">Сгенерировать автоматически</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div id="manualPasswordFields">
+                            <div class="form-group">
+                                <label for="password" data-i18n="auth.register.password">Пароль *</label>
+                                <div class="password-input-wrapper">
+                                    <input type="password" id="password" name="password" required
+                                           data-i18n-placeholder="auth.register.passwordPlaceholder"
+                                           placeholder="Мин. 8 символов"
+                                           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$"
+                                           autocomplete="new-password">
+                                    <button type="button" class="password-toggle" aria-label="Показать пароль">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                            <path d="M10 4C5 4 2.731 7.113 1.464 9.5a1 1 0 000 .999C2.731 12.887 5 16 10 16s7.269-3.113 8.536-5.5a1 1 0 000-.999C17.269 7.113 15 4 10 4zm0 7a2 2 0 110-4 2 2 0 010 4z" fill="currentColor"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="password-requirements">
+                                    <span class="requirement" data-requirement="length">✓ 8-20 символов</span>
+                                    <span class="requirement" data-requirement="uppercase">✓ Заглавная буква</span>
+                                    <span class="requirement" data-requirement="lowercase">✓ Строчная буква</span>
+                                    <span class="requirement" data-requirement="number">✓ Цифра</span>
+                                    <span class="requirement" data-requirement="special">✓ Спецсимвол</span>
+                                </div>
+                                <span class="form-error" data-error="password"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="passwordConfirm" data-i18n="auth.register.passwordConfirm">Повторите пароль *</label>
+                                <input type="password" id="passwordConfirm" name="passwordConfirm" required
+                                       data-i18n-placeholder="auth.register.passwordConfirmPlaceholder"
+                                       placeholder="Повторите пароль"
+                                       autocomplete="new-password">
+                                <span class="form-error" data-error="passwordConfirm"></span>
+                            </div>
+                        </div>
+
+                        <div id="autoPasswordFields" hidden>
+                            <div class="form-group">
+                                <label data-i18n="auth.register.autoPassword">Сгенерированный пароль</label>
+                                <div class="password-generated">
+                                    <input type="text" id="autoPassword" readonly
+                                           class="password-generated__input"
+                                           value="">
+                                    <button type="button" class="btn btn--outline btn--sm" id="regeneratePassword"
+                                            data-i18n="auth.register.regenerate">Сгенерировать новый</button>
+                                    <button type="button" class="btn btn--outline btn--sm" id="copyPassword"
+                                            data-i18n="auth.register.copy">Копировать</button>
+                                </div>
+                                <span class="form-help" data-i18n="auth.register.autoPasswordHelp">Сохраните пароль в надёжном месте</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3 class="form-section__title" data-i18n="auth.register.nickname">Никнейм</h3>
+
+                        <div class="form-group">
+                            <label for="nickname" data-i18n="auth.register.nicknameLabel">Ваш никнейм *</label>
+                            <div class="nickname-wrapper">
+                                <input type="text" id="nickname" name="nickname" required
+                                       data-i18n-placeholder="auth.register.nicknamePlaceholder"
+                                       placeholder="nickname"
+                                       pattern="^[a-zA-Z0-9_]{3,20}$"
+                                       autocomplete="username">
+                                <button type="button" class="btn btn--outline btn--sm" id="generateNickname"
+                                        data-i18n="auth.register.generateNickname">Сгенерировать</button>
+                            </div>
+                            <span class="form-help" data-i18n="auth.register.nicknameFormat">3-20 символов: буквы, цифры, _</span>
+                            <span class="form-error" data-error="nickname"></span>
+                            <span class="form-help nickname-attempts" id="nicknameAttempts" hidden>
+                                    <span data-i18n="auth.register.nicknameAttempts">Попыток генерации:</span> <span id="attemptsCount">0</span>/5
+                                </span>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3 class="form-section__title" data-i18n="auth.register.role">Тип аккаунта</h3>
+
+                        <div class="radio-group">
+                            <label class="radio-option radio-option--card">
+                                <input type="radio" name="role" value="renter" checked>
+                                <div class="radio-card">
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                        <path d="M16 4a6 6 0 00-6 6v2H6a2 2 0 00-2 2v12a2 2 0 002 2h20a2 2 0 002-2V14a2 2 0 00-2-2h-4v-2a6 6 0 00-6-6z" stroke="currentColor" stroke-width="2"/>
+                                        <path d="M12 20h8M12 24h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                    <div>
+                                        <strong data-i18n="auth.register.role.renter">Съёмщик</strong>
+                                        <p data-i18n="auth.register.role.renterDesc">Поиск и бронирование жилья</p>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="radio-option radio-option--card">
+                                <input type="radio" name="role" value="landlord">
+                                <div class="radio-card">
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                        <path d="M4 12l12-8 12 8v14a2 2 0 01-2 2H6a2 2 0 01-2-2V12z" stroke="currentColor" stroke-width="2"/>
+                                        <path d="M12 20h8M14 14v4M18 14v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                    <div>
+                                        <strong data-i18n="auth.register.role.landlord">Арендодатель</strong>
+                                        <p data-i18n="auth.register.role.landlordDesc">Размещение объектов недвижимости</p>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <label class="checkbox-option">
+                            <input type="checkbox" id="agreement" name="agreement" required>
+                            <span>
+                                    <span data-i18n="auth.register.agreementPrefix">Я принимаю</span>
+                                    <a href="#" data-i18n="auth.register.agreementLink">Соглашение пользователя</a>
+                                    <span data-i18n="auth.register.agreementSuffix">и даю согласие на обработку персональных данных</span>
+                                </span>
+                        </label>
+                        <span class="form-error" data-error="agreement"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn--primary btn--lg btn--full" id="registerSubmit" disabled
+                            data-i18n="auth.register.submit">Зарегистрироваться</button>
+                </form>
+
+                <p class="auth-card__footer">
+                    <span data-i18n="auth.register.haveAccount">Уже есть аккаунт?</span>
+                    <a href="login.html" data-i18n="auth.register.login">Войти</a>
+                </p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer footer--auth" data-footer>
+    <div class="container">
+        <p>&copy; 2026 DOMIKTUT. <span data-i18n="footer.allRights">Все права защищены.</span></p>
+    </div>
+</footer>
+
+<div class="modal" data-modal="register-success" hidden>
+    <div class="modal__content modal__content--success">
+        <div class="modal__header">
+            <h3 class="modal__title" data-i18n="auth.register.successTitle">Регистрация успешна!</h3>
+            <button class="modal__close" data-modal-close aria-label="Закрыть">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="2"/>
+                </svg>
+            </button>
+        </div>
+        <div class="modal__body">
+            <div class="success-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+            </div>
+            <p data-i18n="auth.register.successText">Добро пожаловать, <strong id="successUsername"></strong>! Теперь вы можете бронировать жильё и сохранять избранное.</p>
+            <div class="modal__footer modal__footer--center">
+                <button class="btn btn--primary" id="goToCatalog" data-i18n="auth.register.goToCatalog">Перейти в каталог</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="../js/auth/register.js"></script>
+</body>
+</html>

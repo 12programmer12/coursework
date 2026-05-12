@@ -656,6 +656,35 @@ const ModalManager = {
     }
 };
 
+function getLoginPath() {
+    const currentPath = window.location.pathname;
+
+    if (currentPath.includes('/pages/')) {
+        return 'login.html';
+    } else {
+        return 'pages/login.html';
+    }
+}
+
+const userBtn = document.querySelector('[data-user-menu]');
+if (userBtn) {
+    userBtn.addEventListener('click', () => {
+        const currentUser = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
+
+        window.location.href = getLoginPath();
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const preloader = document.querySelector('[data-preloader]');
+    if (preloader) {
+        setTimeout(() => {
+            preloader.classList.add('hidden');
+            preloader.style.display = 'none';
+        }, 500);
+    }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     ModalManager.init();
 });

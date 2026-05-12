@@ -870,21 +870,102 @@
   "users": [
     {
       "id": 1,
-      "email": "admin@domiktut.ru",
-      "password": "$2a$10$...",
-      "name": "Администратор",
-      "phone": "+7 (843) 528-65-48",
+      "firstName": "Админ",
+      "lastName": "Админов",
+      "email": "admin@domiktut.by",
+      "phone": "+375291234567",
+      "password": "Admin@123",
       "role": "admin",
-      "createdAt": "2024-01-01T00:00:00.000Z"
+      "nickname": "admin_domik",
+      "birthDate": "1990-01-01",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "favorites": [],
+      "bookings": [],
+      "properties": []
     },
     {
       "id": 2,
-      "email": "user@example.com",
-      "password": "$2a$10$...",
-      "name": "Иван Иванов",
-      "phone": "+7 (999) 123-45-67",
-      "role": "user",
-      "createdAt": "2024-02-15T00:00:00.000Z"
+      "firstName": "Иван",
+      "lastName": "Иванов",
+      "email": "ivan@example.by",
+      "phone": "+375297654321",
+      "password": "User@123",
+      "role": "renter",
+      "nickname": "ivan_renter",
+      "birthDate": "1995-05-15",
+      "createdAt": "2024-02-01T00:00:00.000Z",
+      "favorites": [
+        1,
+        3
+      ],
+      "bookings": [],
+      "properties": []
+    },
+    {
+      "id": 3,
+      "firstName": "Мария",
+      "lastName": "Петрова",
+      "email": "maria@example.by",
+      "phone": "+375331112233",
+      "password": "Landlord@123",
+      "role": "landlord",
+      "nickname": "maria_homes",
+      "birthDate": "1988-11-20",
+      "createdAt": "2024-02-15T00:00:00.000Z",
+      "favorites": [],
+      "bookings": [],
+      "properties": [
+        1,
+        2
+      ]
+    },
+    {
+      "firstName": "Julius",
+      "lastName": "Novochrono",
+      "patronymic": null,
+      "birthDate": "2006-11-16",
+      "phone": "375444444444",
+      "email": "juliusnovo@gmail.com",
+      "nickname": "JuliusNovo",
+      "role": "renter",
+      "password": "@QrSpAMaV!j1",
+      "createdAt": "2026-05-12T11:31:46.709Z",
+      "id": 4
+    },
+    {
+      "firstName": "Saprano",
+      "lastName": "Violiny",
+      "patronymic": null,
+      "birthDate": "1983-09-23",
+      "phone": "375296781811",
+      "email": "sapranovioliny@gmail.com",
+      "nickname": "SapVoi",
+      "role": "landlord",
+      "password": "A$a1@Be@m1LC",
+      "createdAt": "2026-05-12T11:35:15.138Z",
+      "id": 5
+    },
+    {
+      "firstName": "Gazan",
+      "lastName": "Piochiny",
+      "patronymic": "Zanbeke-Dakur-Umat",
+      "birthDate": "1975-08-27",
+      "phone": "375254444444",
+      "email": "gapizadaum@mail.com",
+      "nickname": "GaPiochy",
+      "role": "renter",
+      "password": "EaaNAf@6gB1w",
+      "createdAt": "2026-05-12T11:38:26.385Z",
+      "id": 6
+    }
+  ],
+  "properties": [
+    {
+      "id": 1,
+      "landlordId": 3,
+      "name": "Дом у озера",
+      "status": "approved",
+      "createdAt": "2024-03-01T00:00:00.000Z"
     }
   ],
   "bookings": [
@@ -923,7 +1004,5 @@
       "createdAt": "2024-04-15T00:00:00.000Z"
     }
   ],
-  "selection-requests": [
-
-  ]
+  "selection-requests": []
 }
