@@ -301,15 +301,10 @@ const Register = {
     async handleSubmit(e) {
         e.preventDefault();
 
-        const passwordMethod = document.querySelector('input[name="passwordMethod"]:checked')?.value;
-
         let isValid = true;
         document.querySelectorAll('.auth-form [required]').forEach(input => {
+            const passwordMethod = document.querySelector('input[name="passwordMethod"]:checked')?.value;
             if (passwordMethod === 'auto' && input.name === 'passwordConfirm') {
-                return;
-            }
-            if (passwordMethod === 'auto' &&
-                (input.id === 'password' || input.id === 'passwordConfirm')) {
                 return;
             }
             if (!this.validateField(input)) isValid = false;
@@ -317,22 +312,15 @@ const Register = {
 
         if (!isValid) return;
 
-        if (passwordMethod === 'auto') {
-            const autoPassword = document.getElementById('autoPassword')?.value;
-            if (!autoPassword || autoPassword.length < 8) {
-                alert(i18n.t('validation.required'));
-                return;
-            }
-        }
-
         const submitBtn = document.getElementById('registerSubmit');
         submitBtn.disabled = true;
         submitBtn.textContent = i18n.t('common.loading');
 
         try {
             const formData = new FormData(e.target);
+            const passwordMethod = formData.get('passwordMethod');
 
-            const data = {
+            const userData = {
                 firstName: formData.get('firstName'),
                 lastName: formData.get('lastName'),
                 patronymic: formData.get('patronymic') || null,
@@ -344,27 +332,29 @@ const Register = {
                 password: passwordMethod === 'auto'
                     ? document.getElementById('autoPassword').value
                     : formData.get('password'),
-                createdAt: new Date().toISOString()
-            };
-
-            await API.createUser(data);
-
-            const user = {
-                id: Date.now(),
-                ...data,
-                role: data.role,
+                createdAt: new Date().toISOString(),
                 favorites: [],
                 bookings: []
             };
+
+            console.log('📤 Creating user via API:', userData);
+
+            const createdUser = await API.createUser(userData);
+            console.log('✅ User created with ID:', createdUser.id);
+
+            const user = {
+                id: createdUser.id,
+                ...createdUser
+            };
             localStorage.setItem('currentUser', JSON.stringify(user));
 
-            document.getElementById('successUsername').textContent = data.firstName;
+            document.getElementById('successUsername').textContent = createdUser.firstName;
             const modal = document.querySelector('[data-modal="register-success"]');
             modal.classList.add('active');
             modal.hidden = false;
 
         } catch (error) {
-            console.error('Registration error:', error);
+            console.error('❌ Registration error:', error);
             alert(i18n.t('common.error') + ': ' + error.message);
         } finally {
             submitBtn.disabled = false;

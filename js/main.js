@@ -258,40 +258,43 @@ function initFilters() {
     });
 }
 
-function initFavorites() {
-    document.addEventListener('click', async (e) => {
-        if (e.target.closest('[data-favorite]')) {
-            const btn = e.target.closest('[data-favorite]');
-            const houseId = parseInt(btn.getAttribute('data-favorite'));
-
-            await toggleFavorite(houseId, btn);
-        }
-    });
-}
-
 async function toggleFavorite(houseId, btn) {
     const isFavorite = btn.classList.contains('active');
+    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
     try {
         if (isFavorite) {
-            await API.removeFromFavorites(houseId);
+            favorites = favorites.filter(id => id !== houseId);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
             btn.classList.remove('active');
+
+            const svg = btn.querySelector('svg path');
+            if (svg) svg.setAttribute('fill', 'none');
+
             showNotification('Удалено из избранного', 'success');
         } else {
-            await API.addToFavorites({ houseId });
+            if (!favorites.includes(houseId)) {
+                favorites.push(houseId);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
             btn.classList.add('active');
+
+            const svg = btn.querySelector('svg path');
+            if (svg) svg.setAttribute('fill', 'currentColor');
+
             showNotification('Добавлено в избранное', 'success');
         }
+
+        if (window.location.pathname.includes('profile.html')) {
+            window.dispatchEvent(new CustomEvent('favoritesChanged'));
+        }
+
     } catch (error) {
         console.error('Favorite error:', error);
         showNotification('Ошибка при работе с избранным', 'error');
     }
 }
 
-function isHouseFavorite(houseId) {
-    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-    return favorites.includes(houseId);
-}
 
 function fixImagePath(path) {
     if (window.location.pathname.includes('/pages/')) {
@@ -367,18 +370,19 @@ async function handleContactForm(e) {
 }
 
 function showNotification(message, type = 'info') {
+    const oldNotifications = document.querySelectorAll('.notification');
+    oldNotifications.forEach(n => n.remove());
+
     const notification = document.createElement('div');
     notification.className = `notification notification--${type}`;
     notification.innerHTML = `
-    <div class="notification__message">${message}</div>
-  `;
+        <div class="notification__message">${message}</div>
+    `;
 
     document.body.appendChild(notification);
 
     setTimeout(() => {
-        notification.style.opacity = '0';
-        notification.style.transform = 'translateX(100%)';
-
+        notification.classList.add('hiding');
         setTimeout(() => {
             notification.remove();
         }, 300);
@@ -665,23 +669,36 @@ const ModalManager = {
     }
 };
 
-function getLoginPath() {
+function getPagePath(pageName) {
     const currentPath = window.location.pathname;
 
     if (currentPath.includes('/pages/')) {
-        return 'login.html';
-    } else {
-        return 'pages/login.html';
+        return `${pageName}.html`;
     }
+    return `pages/${pageName}.html`;
 }
 
 const userBtn = document.querySelector('[data-user-menu]');
 if (userBtn) {
     userBtn.addEventListener('click', () => {
-        const currentUser = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
+        const storedUser = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
+        const currentUser = storedUser ? JSON.parse(storedUser) : null;
 
-        window.location.href = getLoginPath();
+        if (!currentUser) {
+            window.location.href = getPagePath('login');
+        } else {
+            const roleRoutes = {
+                'renter': getPagePath('profile'),
+                'landlord': getPagePath('landlord-profile'), // Заглушка для будущего
+                'admin': getPagePath('admin')
+            };
+            window.location.href = roleRoutes[currentUser.role] || getPagePath('profile');
+        }
     });
+}
+
+function isHouseFavorite(houseId) {
+    return getFavorites().includes(houseId);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -698,9 +715,88 @@ document.addEventListener('DOMContentLoaded', () => {
     ModalManager.init();
 });
 
+function initFavorites() {
+    document.addEventListener('click', async (e) => {
+        const favoriteBtn = e.target.closest('[data-favorite]');
+        if (!favoriteBtn) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const houseId = parseInt(favoriteBtn.getAttribute('data-favorite'));
+        if (!houseId || isNaN(houseId)) return;
+
+        await handleFavoriteClick(houseId, favoriteBtn);
+    });
+
+    updateFavoriteButtons();
+}
+
+async function handleFavoriteClick(houseId, btn) {
+    const favorites = getFavorites();
+    const isFavorite = favorites.includes(houseId);
+
+    try {
+        if (isFavorite) {
+            const newFavorites = favorites.filter(id => id !== houseId);
+            localStorage.setItem('favorites', JSON.stringify(newFavorites));
+
+            btn.classList.remove('active');
+            const svg = btn.querySelector('svg path');
+            if (svg) svg.setAttribute('fill', 'none');
+
+            showNotification(i18n.t('common.removedFromFavorites') || 'Удалено из избранного', 'success');
+
+            if (window.location.pathname.includes('profile.html')) {
+                window.dispatchEvent(new CustomEvent('favoritesChanged'));
+            }
+        } else {
+            const newFavorites = [...favorites, houseId];
+            localStorage.setItem('favorites', JSON.stringify(newFavorites));
+
+            btn.classList.add('active');
+            const svg = btn.querySelector('svg path');
+            if (svg) svg.setAttribute('fill', 'currentColor');
+
+            showNotification(i18n.t('common.addedToFavorites') || 'Добавлено в избранное', 'success');
+        }
+    } catch (error) {
+        console.error('Favorite error:', error);
+        showNotification(i18n.t('common.error') || 'Ошибка', 'error');
+    }
+}
+
+function getFavorites() {
+    try {
+        return JSON.parse(localStorage.getItem('favorites') || '[]');
+    } catch (e) {
+        console.error('Error parsing favorites:', e);
+        return [];
+    }
+}
+
+function updateFavoriteButtons() {
+    const favorites = getFavorites();
+
+    document.querySelectorAll('[data-favorite]').forEach(btn => {
+        const houseId = parseInt(btn.getAttribute('data-favorite'));
+        const isFavorite = favorites.includes(houseId);
+
+        btn.classList.toggle('active', isFavorite);
+
+        const svg = btn.querySelector('svg path');
+        if (svg) {
+            svg.setAttribute('fill', isFavorite ? 'currentColor' : 'none');
+        }
+    });
+}
+
 export {
     showNotification,
     createHouseCard,
     loadCatalog,
-    fixImagePath
+    fixImagePath,
+    initFavorites,
+    getFavorites,
+    updateFavoriteButtons
 };

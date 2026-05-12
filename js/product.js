@@ -288,9 +288,39 @@ const Product = {
         return errors;
     },
 
+    getLoginPath() {
+        return window.location.pathname.includes('/pages/')
+            ? 'login.html'
+            : 'pages/login.html';
+    },
+
+    calculateTotalPrice(checkIn, checkOut, basePrice) {
+        if (!checkIn || !checkOut) return basePrice;
+
+        const start = new Date(checkIn);
+        const end = new Date(checkOut);
+        const nights = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+
+        if (nights <= 0) return basePrice;
+
+        let total = 0;
+        let current = new Date(start);
+
+        while (current < end) {
+            const day = current.getDay();
+            const isWeekend = day === 5 || day === 6 || day === 0;
+            total += isWeekend ? basePrice * 1.5 : basePrice;
+            current.setDate(current.getDate() + 1);
+        }
+
+        return Math.round(total);
+    },
+
     async handleBooking(form) {
         const submitBtn = form.querySelector('#bookingSubmit');
         const originalText = submitBtn.textContent;
+
+        console.log('🚀 Starting booking process...');
         submitBtn.disabled = true;
         submitBtn.textContent = i18n.t('common.loading');
 
@@ -298,22 +328,43 @@ const Product = {
         form.querySelectorAll('.form-group').forEach(el => el.classList.remove('form-group--error'));
 
         try {
+            const storedUser = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
+            const currentUser = storedUser ? JSON.parse(storedUser) : null;
+
+            if (!currentUser || !currentUser.id) {
+                alert(i18n.t('booking.authRequired') || 'Для бронирования необходимо войти в аккаунт');
+                window.location.href = this.getLoginPath();
+                return;
+            }
+
+            console.log('👤 Booking for user:', currentUser.id);
+
             const formData = new FormData(form);
             const data = {
+                userId: currentUser.id,
+                userFirstName: currentUser.firstName,
+                userLastName: currentUser.lastName,
+                userPhone: currentUser.phone,
+                userEmail: currentUser.email,
+
                 houseId: this.houseId,
                 houseName: this.house.name_i18n?.[i18n.currentLang] || this.house.name,
                 name: formData.get('name'),
                 phone: formData.get('phone').replace(/\D/g, ''),
                 checkIn: formData.get('checkIn'),
                 checkOut: formData.get('checkOut'),
-                guests: formData.get('guests'),
+                guests: parseInt(formData.get('guests')) || 2,
                 comment: formData.get('comment') || '',
                 status: 'pending',
-                createdAt: new Date().toISOString()
+                createdAt: new Date().toISOString(),
+                totalPrice: this.calculateTotalPrice(formData.get('checkIn'), formData.get('checkOut'), this.house.price)
             };
+
+            console.log('📦 Booking data:', data);
 
             const errors = this.validateBookingForm(data);
             if (errors.length > 0) {
+                console.error('❌ Validation errors:', errors);
                 errors.forEach(error => {
                     const errorEl = form.querySelector(`[data-error="${error.field}"]`);
                     if (errorEl) {
@@ -325,7 +376,9 @@ const Product = {
                 throw new Error('Validation failed');
             }
 
+            console.log('✅ Validation passed, sending to API...');
             await API.createBooking(data);
+            console.log('✅ Booking created successfully');
 
             const modal = document.querySelector('[data-modal="booking-modal"]');
             modal.classList.remove('active');
@@ -337,7 +390,7 @@ const Product = {
             form.reset();
 
         } catch (error) {
-            console.error('Booking error:', error);
+            console.error('❌ Booking error:', error);
             if (error.message !== 'Validation failed') {
                 alert(i18n.t('common.error') + ': ' + error.message);
             }

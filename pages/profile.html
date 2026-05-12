@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="ru" data-theme="light" data-accessibility="normal">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="profile.meta.title">Личный кабинет - DOMIKTUT</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="../css/adaptive.css">
+
+    <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+    <meta name="theme-color" content="#FF6B35">
+</head>
+<body>
+<div class="preloader" data-preloader>
+    <div class="preloader__spinner"></div>
+    <div class="preloader__text" data-i18n="common.loading">Загрузка...</div>
+</div>
+
+<header class="header" data-header>
+    <div class="container header__container">
+        <a href="../index.html" class="header__logo">
+            <svg class="header__logo-icon" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <path d="M20 5L5 17.5V35H15V25H25V35H35V17.5L20 5Z" fill="#FF6B35"/>
+            </svg>
+            <span class="header__logo-text">DOMIKTUT.RU</span>
+        </a>
+        <nav class="header__nav">
+            <a href="catalog.html" class="header__link" data-i18n="header.catalog">Каталог</a>
+            <a href="about.html" class="header__link" data-i18n="header.about">О компании</a>
+            <a href="contacts.html" class="header__link" data-i18n="header.contacts">Контакты</a>
+        </nav>
+        <div class="header__right">
+            <a href="tel:88435286548" class="header__phone" data-i18n="header.phone">8 (843) 528-65-48</a>
+            <button class="header__user-btn" data-user-menu aria-label="Личный кабинет">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 2a4 4 0 100 8 4 4 0 000-8zm0 10c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5z" fill="currentColor"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main id="main-content">
+    <section class="profile" data-profile>
+        <div class="container">
+            <div class="profile__header">
+                <div class="profile__user-info">
+                    <div class="profile__avatar" id="profileAvatar">👤</div>
+                    <div>
+                        <h1 class="profile__title" id="profileName">Загрузка...</h1>
+                        <p class="profile__role" id="profileRole" data-i18n="profile.role.renter">Съёмщик</p>
+                    </div>
+                </div>
+                <button class="btn btn--outline" id="logoutBtn" data-i18n="profile.logout">Выйти</button>
+            </div>
+
+            <div class="profile__tabs">
+                <button class="profile__tab active" data-tab="bookings" data-i18n="profile.bookings">Бронирования</button>
+                <button class="profile__tab" data-tab="favorites" data-i18n="profile.favorites">Избранное</button>
+                <button class="profile__tab" data-tab="settings" data-i18n="profile.settings">Настройки</button>
+            </div>
+
+            <div class="profile__content">
+                <div class="profile__panel active" id="bookingsPanel">
+                    <div class="panel__header">
+                        <h2 class="panel__title" data-i18n="profile.bookings.title">История бронирований</h2>
+                    </div>
+                    <div class="panel__grid" id="bookingsList">
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                    </div>
+                </div>
+
+                <div class="profile__panel" id="favoritesPanel">
+                    <div class="panel__header">
+                        <h2 class="panel__title" data-i18n="profile.favorites.title">Сохранённые дома</h2>
+                    </div>
+                    <div class="panel__grid" id="favoritesList">
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                    </div>
+                </div>
+
+                <div class="profile__panel" id="settingsPanel">
+                    <div class="panel__header">
+                        <h2 class="panel__title" data-i18n="profile.settings.title">Настройки профиля</h2>
+                    </div>
+                    <form id="settingsForm" class="settings-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="settingsFirstName" data-i18n="auth.register.firstName">Имя</label>
+                                <input type="text" id="settingsFirstName" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="settingsLastName" data-i18n="auth.register.lastName">Фамилия</label>
+                                <input type="text" id="settingsLastName" class="form-input">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="settingsEmail" data-i18n="auth.register.email">Email</label>
+                            <input type="email" id="settingsEmail" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="settingsPhone" data-i18n="auth.register.phone">Телефон</label>
+                            <input type="tel" id="settingsPhone" class="form-input">
+                        </div>
+                        <button type="submit" class="btn btn--primary" data-i18n="profile.settings.save">Сохранить изменения</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer" data-footer>
+    <div class="container">
+        <p>&copy; 2026 DOMIKTUT. <span data-i18n="footer.allRights">Все права защищены.</span></p>
+    </div>
+</footer>
+
+<script type="module" src="../js/profile.js"></script>
+</body>
+</html>

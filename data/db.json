@@ -970,28 +970,23 @@
   ],
   "bookings": [
     {
-      "id": 1,
-      "userId": 2,
-      "houseId": 1,
-      "checkIn": "2024-06-01",
-      "checkOut": "2024-06-05",
-      "guests": 12,
-      "totalPrice": 40000,
-      "status": "confirmed",
-      "createdAt": "2024-05-01T10:00:00.000Z"
-    },
-    {
+      "userId": 6,
+      "userFirstName": "Gazan",
+      "userLastName": "Piochiny",
+      "userPhone": "375254444444",
+      "userEmail": "gapizadaum@mail.com",
       "houseId": 1,
       "houseName": "Novaya Sosnovka",
-      "name": "Julius",
-      "phone": "375444444444",
-      "checkIn": "2026-06-15",
-      "checkOut": "2026-06-19",
-      "guests": "2",
+      "name": "Gazan",
+      "phone": "375254444444",
+      "checkIn": "2026-05-12",
+      "checkOut": "2026-05-13",
+      "guests": 2,
       "comment": "",
       "status": "pending",
-      "createdAt": "2026-05-12T13:40:40.272Z",
-      "id": 2
+      "createdAt": "2026-05-12T16:31:13.783Z",
+      "totalPrice": 300,
+      "id": 1
     }
   ],
   "favorites": [
@@ -1004,6 +999,34 @@
     {
       "houseId": 1,
       "id": 3
+    },
+    {
+      "houseId": 7,
+      "id": 4
+    },
+    {
+      "houseId": 1,
+      "id": 5
+    },
+    {
+      "houseId": 2,
+      "id": 6
+    },
+    {
+      "houseId": 4,
+      "id": 7
+    },
+    {
+      "houseId": 1,
+      "id": 8
+    },
+    {
+      "houseId": 2,
+      "id": 9
+    },
+    {
+      "houseId": 3,
+      "id": 10
     }
   ],
   "reviews": [
