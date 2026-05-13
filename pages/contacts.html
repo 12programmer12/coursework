@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html lang="ru" data-theme="light" data-accessibility="normal">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" data-i18n="meta.contacts.description" content="Контакты DOMIKTUT - адрес, телефон и карта в Могилёве">
+    <title data-i18n="meta.contacts.title">Контакты - DOMIKTUT</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/contacts.css">
+    <link rel="stylesheet" href="../css/adaptive.css">
+
+    <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+    <meta name="theme-color" content="#FF6B35">
+</head>
+<body>
+
+<header class="header" data-header>
+    <div class="container header__container">
+        <a href="../index.html" class="header__logo">
+            <svg class="header__logo-icon" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <path d="M20 5L5 17.5V35H15V25H25V35H35V17.5L20 5Z" fill="#FF6B35"/>
+            </svg>
+            <span class="header__logo-text">DOMIKTUT.RU</span>
+        </a>
+
+        <nav class="header__nav">
+            <a href="catalog.html" class="header__link" data-i18n="header.catalog">Каталог</a>
+            <a href="about.html" class="header__link" data-i18n="header.about">О компании</a>
+            <a href="contacts.html" class="header__link header__link--active" data-i18n="header.contacts">Контакты</a>
+        </nav>
+
+        <div class="header__right">
+            <div class="header__location">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 2C6.13 2 3 5.13 3 9c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
+                </svg>
+                <span data-i18n="footer.location">Могилёв</span>
+            </div>
+            <a href="tel:88435286548" class="header__phone" data-i18n="header.phone">8 (843) 528-65-48</a>
+            <button class="header__favorites" aria-label="Избранное">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 2.5l1.903 3.854a1 1 0 00.754.547l4.243.616-3.07 3.003a1 1 0 00-.288.884l.724 4.226L10 13.5l-3.766 1.98.724-4.226a1 1 0 00-.288-.884l-3.07-3.003 4.243-.616a1 1 0 00.754-.547L10 2.5z" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+            </button>
+            <button class="header__user-btn" data-user-menu aria-label="Личный кабинет">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 2a4 4 0 100 8 4 4 0 000-8zm0 10c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5z" fill="currentColor"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main id="main-content">
+    <!-- Hero Section -->
+    <section class="contacts-hero">
+        <div class="contacts-hero__bg">
+            <img src="../assets/images/houses/house-2-1.jpg" alt="" class="contacts-hero__image">
+            <div class="contacts-hero__overlay"></div>
+        </div>
+        <div class="container contacts-hero__content">
+            <h1 class="contacts-hero__title" data-i18n="contacts.hero.title">Свяжитесь с нами</h1>
+            <p class="contacts-hero__subtitle" data-i18n="contacts.hero.subtitle">Мы всегда рады помочь вам с выбором идеального дома</p>
+        </div>
+    </section>
+
+    <!-- Contacts Info Section -->
+    <section class="contacts-section">
+        <div class="container">
+            <div class="contacts-grid">
+                <!-- Contact Cards -->
+                <div class="contacts-info">
+                    <h2 class="section-title" data-i18n="contacts.info.title">Наши контакты</h2>
+
+                    <div class="contact-card">
+                        <div class="contact-card__icon">
+                            <svg width="24" height="24" viewBox="0 0 20 20" fill="none">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="contact-card__content">
+                            <h3 data-i18n="contacts.info.phone">Телефон</h3>
+                            <a href="tel:+3758435286548" class="contact-card__link">+375 (843) 528-65-48</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-card__icon">
+                            <svg width="24" height="24" viewBox="0 0 20 20" fill="none">
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="contact-card__content">
+                            <h3 data-i18n="contacts.info.email">Email</h3>
+                            <a href="mailto:info@domiktut.by" class="contact-card__link">info@domiktut.by</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-card__icon">
+                            <svg width="24" height="24" viewBox="0 0 20 20" fill="none">
+                                <path d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="contact-card__content">
+                            <h3 data-i18n="contacts.info.address">Адрес</h3>
+                            <p>г. Могилёв, ул. Первомайская, д. 12, оф. 205</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-card__icon">
+                            <svg width="24" height="24" viewBox="0 0 20 20" fill="none">
+                                <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 12a1 1 0 01-1-1v-3a1 1 0 112 0v3a1 1 0 01-1 1zm0-8a1 1 0 110 2 1 1 0 010-2z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="contact-card__content">
+                            <h3 data-i18n="contacts.info.hours">Часы работы</h3>
+                            <p data-i18n="contacts.info.hoursText">Пн-Пт: 09:00 - 19:00<br>Сб-Вс: 10:00 - 16:00</p>
+                        </div>
+                    </div>
+
+                    <div class="contacts-socials">
+                        <h3 data-i18n="contacts.info.socials">Мы в соцсетях</h3>
+                        <div class="socials-links">
+                            <a href="#" class="social-link">Instagram</a>
+                            <a href="#" class="social-link">Telegram</a>
+                            <a href="#" class="social-link">VK</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map -->
+                <div class="contacts-map">
+                    <div class="map-wrapper">
+                        <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2410.143438676868!2d30.34495431579647!3d53.90070997975588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46d347576425c369%3A0xc4a0b5583999b7c6!2z0J3RgdC60L7QstCw0YDRgdC60LLQsA!5e0!3m2!1sru!2sby!4v1626000000000!5m2!1sru!2sby"
+                                width="100%"
+                                height="100%"
+                                style="border:0;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                data-i18n-aria="contacts.map.alt">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer" data-footer>
+    <div class="container">
+        <div class="footer__top">
+            <div class="footer__brand">
+                <a href="../index.html" class="footer__logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <path d="M20 5L5 17.5V35H15V25H25V35H35V17.5L20 5Z" fill="#FF6B35"/>
+                    </svg>
+                    <span>DOMIKTUT.RU</span>
+                </a>
+                <div class="footer__location">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 2C6.13 2 3 5.13 3 9c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
+                    </svg>
+                    <span data-i18n="footer.location">Могилёв</span>
+                </div>
+                <a href="tel:88435286548" class="footer__phone" data-i18n="header.phone">8 (843) 528-65-48</a>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>&copy; 2026 DOMIKTUT. <span data-i18n="footer.allRights">Все права защищены.</span></p>
+        </div>
+    </div>
+</footer>
+
+<script type="module" src="../js/contacts.js"></script>
+</body>
+</html>

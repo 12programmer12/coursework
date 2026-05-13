@@ -432,7 +432,33 @@ const i18n = {
 
             'about.location.title': 'Работаем в Могилёве и области',
             'about.location.text': 'Мы специализируемся на аренде коттеджей в Могилёве и Могилёвской области. Наши объекты расположены в живописных местах: у озёр, в лесу, вблизи достопримечательностей.',
-            'about.location.text2': 'Независимо от того, ищете ли вы уединённый домик в лесу или просторную виллу для большой компании — у нас найдётся идеальный вариант для вашего отдыха.'
+            'about.location.text2': 'Независимо от того, ищете ли вы уединённый домик в лесу или просторную виллу для большой компании — у нас найдётся идеальный вариант для вашего отдыха.',
+            'meta.contacts.title': 'Контакты - DOMIKTUT',
+            'meta.contacts.description': 'Контакты DOMIKTUT - адрес, телефон и карта в Могилёве',
+            'contacts.hero.title': 'Свяжитесь с нами',
+            'contacts.hero.subtitle': 'Мы всегда рады помочь вам с выбором идеального дома',
+
+            'contacts.info.title': 'Наши контакты',
+            'contacts.info.phone': 'Телефон',
+            'contacts.info.email': 'Email',
+            'contacts.info.address': 'Адрес',
+            'contacts.info.hours': 'Часы работы',
+            'contacts.info.hoursText': 'Пн-Пт: 09:00 - 19:00\nСб-Вс: 10:00 - 16:00',
+            'contacts.info.socials': 'Мы в соцсетях',
+
+            'contacts.map.alt': 'Карта расположения офиса DOMIKTUT в Могилёве',
+            'catalog.filtersTitle': 'Фильтры',
+
+            'settings.colorScheme': 'Цветовая схема',
+            'settings.fontSize': 'Размер шрифта',
+            'settings.images': 'Изображения',
+            'settings.showImages': 'Показывать изображения',
+            'colors.default': 'Стандарт',
+            'colors.warm': 'Тёплая',
+            'colors.cool': 'Холодная',
+            'fontSize.small': 'Маленький',
+            'fontSize.medium': 'Средний',
+            'fontSize.large': 'Большой',
         },
 
         be: {
@@ -472,7 +498,7 @@ const i18n = {
             'catalog.more': 'Падрабязней',
             'catalog.showAll': 'Перайсці ў каталог',
             'catalog.guests': 'да',
-
+            'catalog.filtersTitle': 'Фільтры',
             'services.title': 'Можам арганізаваць для Вас',
             'services.catering': 'Кейтэрынг',
             'services.show': 'Шоу праграма',
@@ -865,7 +891,32 @@ const i18n = {
 
             'about.location.title': 'Працуем у Магілёве і вобласці',
             'about.location.text': 'Мы спецыялізуемся на арэндзе катэджаў у Магілёве і Магілёўскай вобласці. Нашы аб\'екты размешчаны ў жывапісных месцах: каля азёр, у лесе, каля славутасцей.',
-            'about.location.text2': 'Незалежна ад таго, шукаеце ці вы адасоблены домік у лесе або прасторную вілу для вялікай кампаніі — у нас знойдзецца ідэальны варыянт для вашага адпачынку.'
+            'about.location.text2': 'Незалежна ад таго, шукаеце ці вы адасоблены домік у лесе або прасторную вілу для вялікай кампаніі — у нас знойдзецца ідэальны варыянт для вашага адпачынку.',
+            'meta.contacts.title': 'Кантакты - DOMIKTUT',
+            'meta.contacts.description': 'Кантакты DOMIKTUT - адрас, тэлефон і карта ў Магілёве',
+            'contacts.hero.title': 'Звяжыцеся з намі',
+            'contacts.hero.subtitle': 'Мы заўсёды рады дапамагчы вам з выбарам ідэальнага дома',
+
+            'contacts.info.title': 'Нашы кантакты',
+            'contacts.info.phone': 'Тэлефон',
+            'contacts.info.email': 'Email',
+            'contacts.info.address': 'Адрас',
+            'contacts.info.hours': 'Гадзіны працы',
+            'contacts.info.hoursText': 'Пн-Пт: 09:00 - 19:00\nСб-Нд: 10:00 - 16:00',
+            'contacts.info.socials': 'Мы ў сацсетках',
+
+            'contacts.map.alt': 'Карта размяшчэння офіса DOMIKTUT у Магілёве',
+
+            'settings.colorScheme': 'Каляровая схема',
+            'settings.fontSize': 'Памер шрыфта',
+            'settings.images': 'Выявы',
+            'settings.showImages': 'Паказваць выявы',
+            'colors.default': 'Стандарт',
+            'colors.warm': 'Цёплая',
+            'colors.cool': 'Халодная',
+            'fontSize.small': 'Маленькі',
+            'fontSize.medium': 'Сярэдні',
+            'fontSize.large': 'Вялікі',
         },
 
         en: {
@@ -979,7 +1030,7 @@ const i18n = {
             'meta.catalog.title': 'Catalog - DOMIKTUT',
 
             'breadcrumbs.home': 'Home',
-
+            'catalog.filtersTitle': 'Filters',
             'catalog.pageTitle': 'Catalog of Houses and Cottages',
             'catalog.searchPlaceholder': 'Search by name or location...',
             'catalog.generateSelection': 'Generate Selection',
@@ -1296,7 +1347,32 @@ const i18n = {
 
             'about.location.title': 'We work in Mogilev and the region',
             'about.location.text': 'We specialize in renting cottages in Mogilev and the Mogilev region. Our properties are located in picturesque places: near lakes, in the forest, near attractions.',
-            'about.location.text2': 'Whether you are looking for a secluded house in the forest or a spacious villa for a large company — we have the perfect option for your vacation.'
+            'about.location.text2': 'Whether you are looking for a secluded house in the forest or a spacious villa for a large company — we have the perfect option for your vacation.',
+            'meta.contacts.title': 'Contacts - DOMIKTUT',
+            'meta.contacts.description': 'DOMIKTUT Contacts - address, phone and map in Mogilev',
+            'contacts.hero.title': 'Contact Us',
+            'contacts.hero.subtitle': 'We are always happy to help you choose the perfect home',
+
+            'contacts.info.title': 'Our Contacts',
+            'contacts.info.phone': 'Phone',
+            'contacts.info.email': 'Email',
+            'contacts.info.address': 'Address',
+            'contacts.info.hours': 'Working Hours',
+            'contacts.info.hoursText': 'Mon-Fri: 09:00 - 19:00\nSat-Sun: 10:00 - 16:00',
+            'contacts.info.socials': 'Social Media',
+
+            'contacts.map.alt': 'Map of DOMIKTUT office location in Mogilev',
+
+            'settings.colorScheme': 'Color scheme',
+            'settings.fontSize': 'Font size',
+            'settings.images': 'Images',
+            'settings.showImages': 'Show images',
+            'colors.default': 'Default',
+            'colors.warm': 'Warm',
+            'colors.cool': 'Cool',
+            'fontSize.small': 'Small',
+            'fontSize.medium': 'Medium',
+            'fontSize.large': 'Large',
         }
     },
 
