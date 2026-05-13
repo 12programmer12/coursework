@@ -382,11 +382,7 @@ const Product = {
             await API.createBooking(data);
             console.log('✅ Booking created successfully');
 
-            const modal = document.querySelector('[data-modal="booking-modal"]');
-            modal.classList.remove('active');
-            setTimeout(() => {
-                modal.hidden = true;
-            }, 250);
+            this.closeModal();
 
             this.showSuccessMessage(data.name);
             form.reset();
