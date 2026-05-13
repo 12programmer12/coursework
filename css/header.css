@@ -369,3 +369,110 @@
     color: var(--color-primary);
     text-align: center;
 }
+
+.header__settings {
+    position: relative;
+}
+
+.header__settings-dropdown {
+    position: absolute;
+    top: calc(100% + var(--spacing-sm));
+    right: 0;
+    left: auto;
+    min-width: 320px;
+    max-width: 400px;
+    background: var(--bg-card);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-xl);
+    padding: var(--spacing-lg);
+    z-index: 1000;
+    border: 1px solid var(--border-color);
+}
+
+.settings__buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+    margin-top: var(--spacing-sm);
+}
+
+.settings__btn {
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.settings__btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.settings__btn.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--text-on-primary);
+}
+
+.settings__toggle-wrapper {
+    margin-top: var(--spacing-sm);
+}
+
+.settings__toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    cursor: pointer;
+    user-select: none;
+}
+
+.settings__toggle input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.settings__toggle-slider {
+    position: relative;
+    width: 48px;
+    height: 24px;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.settings__toggle-slider::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: var(--text-secondary);
+    border-radius: 50%;
+    transition: all var(--transition-fast);
+}
+
+.settings__toggle input:checked + .settings__toggle-slider {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.settings__toggle input:checked + .settings__toggle-slider::after {
+    left: 26px;
+    background: var(--text-on-primary);
+}
+
+.settings__toggle-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-primary);
+    font-weight: var(--font-weight-medium);
+}

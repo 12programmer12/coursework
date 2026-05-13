@@ -401,3 +401,106 @@ main {
 .notification.hiding {
     animation: slideOutRight 0.3s ease forwards;
 }
+
+.image-placeholder {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-secondary);
+    border: 2px dashed var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-lg);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    text-align: center;
+    min-height: 150px;
+    font-style: italic;
+}
+
+html[data-images="hidden"] img:not([data-preserve="true"]) {
+    display: none !important;
+}
+
+html[data-images="hidden"] .image-placeholder {
+    display: flex !important;
+}
+
+.settings__toggle-wrapper {
+    margin-top: var(--spacing-sm);
+}
+
+.settings__toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    cursor: pointer;
+    user-select: none;
+}
+
+.settings__toggle input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.settings__toggle-slider {
+    position: relative;
+    width: 48px;
+    height: 24px;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.settings__toggle-slider::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: var(--text-secondary);
+    border-radius: 50%;
+    transition: all var(--transition-fast);
+}
+
+.settings__toggle input:checked + .settings__toggle-slider {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.settings__toggle input:checked + .settings__toggle-slider::after {
+    left: 26px;
+    background: var(--text-on-primary);
+}
+
+.settings__toggle-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-primary);
+    font-weight: var(--font-weight-medium);
+}
+
+html[data-font-size="small"] {
+    font-size: 14px;
+}
+
+html[data-font-size="medium"] {
+    font-size: 16px;
+}
+
+html[data-font-size="large"] {
+    font-size: 18px;
+}
+
+html[data-color-scheme="warm"] {
+    --color-primary: #E07A5F;
+    --color-primary-hover: #C9694F;
+}
+
+html[data-color-scheme="cool"] {
+    --color-primary: #3D5A80;
+    --color-primary-hover: #2E4A6F;
+}

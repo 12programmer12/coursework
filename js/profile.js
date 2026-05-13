@@ -1,6 +1,7 @@
 ﻿import API from './api.js';
 import i18n from './i18n.js';
 import { fixImagePath, getFavorites, updateFavoriteButtons } from './main.js';
+import AccessibilityManager from "./accessibility.js";
 
 const Profile = {
     currentUser: null,
@@ -8,6 +9,7 @@ const Profile = {
     async init() {
         this.checkAuth();
         await this.loadUserData();
+        AccessibilityManager.init();
         this.bindEvents();
         this.switchTab('bookings');
         window.addEventListener('favoritesChanged', () => {

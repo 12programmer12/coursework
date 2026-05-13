@@ -115,11 +115,31 @@
                     </div>
 
                     <div class="settings__group">
-                        <div class="settings__label" data-i18n="settings.accessibility">Доступность</div>
+                        <div class="settings__label" data-i18n="settings.colorScheme">Цветовая схема</div>
                         <div class="settings__buttons">
-                            <button class="settings__btn active" data-accessibility-toggle="normal" data-i18n="accessibility.normal">Обычная</button>
-                            <button class="settings__btn" data-accessibility-toggle="high-contrast" data-i18n="accessibility.contrast">Контраст</button>
-                            <button class="settings__btn" data-accessibility-toggle="large-text" data-i18n="accessibility.large">Крупный</button>
+                            <button class="settings__btn active" data-color-scheme="default" data-i18n="colors.default">Стандарт</button>
+                            <button class="settings__btn" data-color-scheme="warm" data-i18n="colors.warm">Тёплая</button>
+                            <button class="settings__btn" data-color-scheme="cool" data-i18n="colors.cool">Холодная</button>
+                        </div>
+                    </div>
+
+                    <div class="settings__group">
+                        <div class="settings__label" data-i18n="settings.fontSize">Размер шрифта</div>
+                        <div class="settings__buttons">
+                            <button class="settings__btn" data-font-size="small" data-i18n="fontSize.small">Маленький</button>
+                            <button class="settings__btn active" data-font-size="medium" data-i18n="fontSize.medium">Средний</button>
+                            <button class="settings__btn" data-font-size="large" data-i18n="fontSize.large">Большой</button>
+                        </div>
+                    </div>
+
+                    <div class="settings__group">
+                        <div class="settings__label" data-i18n="settings.images">Изображения</div>
+                        <div class="settings__toggle-wrapper">
+                            <label class="settings__toggle">
+                                <input type="checkbox" id="toggleImages" checked>
+                                <span class="settings__toggle-slider"></span>
+                                <span class="settings__toggle-label" data-i18n="settings.showImages">Показывать изображения</span>
+                            </label>
                         </div>
                     </div>
 

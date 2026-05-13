@@ -293,6 +293,16 @@ const Catalog = {
             this.applyFilters();
         });
 
+        document.querySelector('[data-close-filters]')?.addEventListener('click', () => {
+            this.closeMobileFilters();
+        });
+
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('catalog-filters-overlay')) {
+                this.closeMobileFilters();
+            }
+        });
+
         document.querySelectorAll('.filter-dropdown__toggle').forEach(toggle => {
             toggle.addEventListener('click', (e) => {
                 const dropdown = toggle.closest('.filter-dropdown');
@@ -442,8 +452,43 @@ const Catalog = {
 
         document.querySelector('[data-mobile-filter-toggle]')?.addEventListener('click', () => {
             const filters = document.getElementById('catalogFilters');
-            filters.classList.toggle('mobile-active');
+            if (filters) {
+                filters.classList.toggle('mobile-active');
+
+                if (filters.classList.contains('mobile-active')) {
+                    let overlay = document.querySelector('.catalog-filters-overlay');
+                    if (!overlay) {
+                        overlay = document.createElement('div');
+                        overlay.className = 'catalog-filters-overlay';
+                        document.body.appendChild(overlay);
+                    }
+                    overlay.offsetHeight;
+                    overlay.classList.add('active');
+                } else {
+                    const overlay = document.querySelector('.catalog-filters-overlay');
+                    if (overlay) {
+                        overlay.classList.remove('active');
+                        setTimeout(() => overlay.remove(), 300);
+                    }
+                }
+            }
         });
+    },
+
+    closeMobileFilters() {
+        const filters = document.getElementById('catalogFilters');
+        const overlay = document.querySelector('.catalog-filters-overlay');
+
+        if (filters) {
+            filters.classList.remove('mobile-active');
+        }
+
+        if (overlay) {
+            overlay.classList.remove('active');
+            setTimeout(() => overlay.remove(), 300);
+        }
+
+        document.querySelector('[data-mobile-filter-toggle]')?.setAttribute('aria-expanded', 'false');
     }
 };
 

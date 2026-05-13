@@ -2,6 +2,7 @@
 import i18n from './i18n.js';
 
 import { fixImagePath } from './main.js';
+import AccessibilityManager from "./accessibility.js";
 
 const Product = {
     houseId: null,
@@ -11,6 +12,7 @@ const Product = {
     async init() {
         this.getHouseIdFromURL();
         await this.loadHouseData();
+        AccessibilityManager.init();
         this.bindEvents();
         this.initMap();
     },

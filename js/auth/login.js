@@ -1,6 +1,7 @@
 ﻿import API from '../api.js';
 import i18n from '../i18n.js';
 import ThemeManager from '../theme.js';
+import AccessibilityManager from "../accessibility.js";
 
 function loadSavedTheme() {
     const savedTheme = localStorage.getItem('theme') || 'light';
@@ -27,6 +28,7 @@ const Login = {
     init() {
         i18n.init();
         ThemeManager.init();
+        AccessibilityManager.init();
         loadSavedTheme();
         applyTranslations();
 

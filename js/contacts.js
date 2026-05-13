@@ -1,5 +1,6 @@
 ﻿import ThemeManager from './theme.js';
 import i18n from './i18n.js';
+import AccessibilityManager from "./accessibility.js";
 
 function getPagePath(pageName) {
     const currentPath = window.location.pathname;
@@ -33,6 +34,7 @@ function initProfileButton() {
 document.addEventListener('DOMContentLoaded', async () => {
     await i18n.init();
     ThemeManager.init();
+    AccessibilityManager.init();
     initProfileButton();
     applyTranslations();
 

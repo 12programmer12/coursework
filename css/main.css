@@ -492,3 +492,70 @@
     gap: var(--spacing-md);
     justify-content: flex-end;
 }
+
+html[data-font-size="large"] .hero__search-form {
+    padding: var(--spacing-lg);
+}
+
+html[data-font-size="large"] .search-form__row {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+}
+
+html[data-font-size="large"] .search-form__group--price {
+    grid-column: span 1;
+}
+
+html[data-font-size="large"] .search-form__price-range {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-sm);
+}
+
+html[data-font-size="large"] .search-form__label {
+    font-size: calc(var(--font-size-sm) * 1.1);
+}
+
+html[data-font-size="large"] .search-form__input,
+html[data-font-size="large"] .search-form__price-from,
+html[data-font-size="large"] .search-form__price-to {
+    padding: var(--spacing-md);
+    font-size: calc(var(--font-size-base) * 1.1);
+    min-height: 50px;
+}
+
+html[data-font-size="large"] .search-form__btn {
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: calc(var(--font-size-base) * 1.1);
+    min-height: 50px;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    html[data-font-size="large"] .hero__search-form {
+        padding: var(--spacing-md);
+    }
+
+    html[data-font-size="large"] .search-form__row {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 1200px) {
+    html[data-font-size="large"] .search-form__row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    html[data-font-size="large"] .search-form__group--price {
+        grid-column: span 2;
+    }
+
+    html[data-font-size="large"] .search-form__price-range {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    html[data-font-size="large"] .search-form__btn {
+        width: auto;
+    }
+}

@@ -1,6 +1,7 @@
 ﻿import API from './api.js';
 import i18n from './i18n.js';
 import ThemeManager from './theme.js';
+import AccessibilityManager from "./accessibility.js";
 
 function fixImagePath(path) {
     if (!path) return 'assets/images/placeholder.jpg';
@@ -40,6 +41,7 @@ const Admin = {
     async init() {
         await i18n.init();
         ThemeManager.init();
+        AccessibilityManager.init();
         loadSavedTheme();
         applyTranslations();
 
