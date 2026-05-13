@@ -403,6 +403,36 @@ const i18n = {
             'register.passwordNumber': 'Цифра',
             'register.passwordSpecial': 'Спецсимвол',
             'landlord.comment': 'Комментарий',
+            'meta.about.title': 'О нас - DOMIKTUT',
+            'meta.about.description': 'О компании DOMIKTUT - аренда коттеджей в Могилёве',
+            'about.hero.title': 'DOMIKTUT — ваш надёжный партнёр в аренде коттеджей',
+            'about.hero.subtitle': 'Более 10 лет помогаем людям находить идеальное место для отдыха в Могилёве и области',
+
+            'about.paragraph1': 'DOMIKTUT — это команда профессионалов, которые более 10 лет работают на рынке аренды загородной недвижимости в Могилёве и Могилёвской области.',
+            'about.paragraph2': 'Мы тщательно отбираем каждый объект, чтобы вы могли быть уверены в качестве и комфорте. Все дома проходят проверку: мы лично посещаем каждый коттедж, проверяем состояние помещений, наличие удобств и соответствие описанию.',
+            'about.paragraph3': 'Наша миссия — сделать ваш отдых максимально комфортным и незабываемым. Мы работаем как с частными клиентами, так и с корпоративными заказчиками, предлагая индивидуальные решения для любых задач.',
+
+            'about.stats.years': 'лет на рынке',
+            'about.stats.houses': 'домов в каталоге',
+            'about.stats.clients': 'довольных клиентов',
+            'about.stats.support': 'поддержка',
+
+            'about.gallery.title': 'Наши объекты',
+            'about.gallery.subtitle': 'Каждый дом — это уникальное место для вашего отдыха',
+
+            'about.values.title': 'Наши ценности',
+            'about.values.quality': 'Качество',
+            'about.values.qualityText': 'Тщательная проверка каждого объекта перед добавлением в каталог',
+            'about.values.reliability': 'Надёжность',
+            'about.values.reliabilityText': 'Гарантируем соответствие описания реальности и честные цены',
+            'about.values.comfort': 'Комфорт',
+            'about.values.comfortText': 'Создаём все условия для вашего идеального отдыха',
+            'about.values.speed': 'Оперативность',
+            'about.values.speedText': 'Быстрое бронирование и круглосуточная поддержка клиентов',
+
+            'about.location.title': 'Работаем в Могилёве и области',
+            'about.location.text': 'Мы специализируемся на аренде коттеджей в Могилёве и Могилёвской области. Наши объекты расположены в живописных местах: у озёр, в лесу, вблизи достопримечательностей.',
+            'about.location.text2': 'Независимо от того, ищете ли вы уединённый домик в лесу или просторную виллу для большой компании — у нас найдётся идеальный вариант для вашего отдыха.'
         },
 
         be: {
@@ -805,6 +835,37 @@ const i18n = {
             'register.passwordSpecial': 'Спецсімвал',
             'landlord.comment': 'Каментарый',
             'landlord.bookingHandled': 'Браніраванне апрацавана',
+            'meta.about.title': 'Пра нас - DOMIKTUT',
+            'meta.about.description': 'Пра кампанію DOMIKTUT - арэнда катэджаў у Магілёве',
+
+            'about.hero.title': 'DOMIKTUT — ваш надзейны партнёр у арэндзе катэджаў',
+            'about.hero.subtitle': 'Больш за 10 гадоў дапамагаем людзям знаходзіць ідэальнае месца для адпачынку ў Магілёве і вобласці',
+
+            'about.paragraph1': 'DOMIKTUT — гэта каманда прафесіяналаў, якія больш за 10 гадоў працуюць на рынку арэнды загараднай нерухомасці ў Магілёве і Магілёўскай вобласці.',
+            'about.paragraph2': 'Мы старанна адбіраем кожны аб\'ект, каб вы маглі быць упэўненыя ў якасці і камфорце. Усе дамы праходзяць праверку: мы асабіста наведваем кожны катэдж, правяраем стан памяшканняў, наяўнасць зручнасцей і адпаведнасць апісанню.',
+            'about.paragraph3': 'Наша місія — зрабіць ваш адпачынак максімальна камфортным і незабыўным. Мы працуем як з прыватнымі кліентамі, так і з карпаратыўнымі заказчыкамі, прапануючы індывідуальныя рашэнні для любых задач.',
+
+            'about.stats.years': 'гадоў на рынку',
+            'about.stats.houses': 'дамоў у каталогу',
+            'about.stats.clients': 'давольных кліентаў',
+            'about.stats.support': 'падтрымка',
+
+            'about.gallery.title': 'Нашы аб\'екты',
+            'about.gallery.subtitle': 'Кожны дом — гэта ўнікальнае месца для вашага адпачынку',
+
+            'about.values.title': 'Нашы каштоўнасці',
+            'about.values.quality': 'Якасць',
+            'about.values.qualityText': 'Старанная праверка кожнага аб\'екта перад даданнем у каталог',
+            'about.values.reliability': 'Надзейнасць',
+            'about.values.reliabilityText': 'Гарантуем адпаведнасць апісання рэальнасці і сумленныя цэны',
+            'about.values.comfort': 'Камфорт',
+            'about.values.comfortText': 'Ствараем усе ўмовы для вашага ідэальнага адпачынку',
+            'about.values.speed': 'Аператыўнасць',
+            'about.values.speedText': 'Хуткае браніраванне і ц круглосутачная падтрымка кліентаў',
+
+            'about.location.title': 'Працуем у Магілёве і вобласці',
+            'about.location.text': 'Мы спецыялізуемся на арэндзе катэджаў у Магілёве і Магілёўскай вобласці. Нашы аб\'екты размешчаны ў жывапісных месцах: каля азёр, у лесе, каля славутасцей.',
+            'about.location.text2': 'Незалежна ад таго, шукаеце ці вы адасоблены домік у лесе або прасторную вілу для вялікай кампаніі — у нас знойдзецца ідэальны варыянт для вашага адпачынку.'
         },
 
         en: {
@@ -1206,6 +1267,36 @@ const i18n = {
             'register.passwordSpecial': 'Special character',
             'landlord.comment': 'Comment',
             'landlord.bookingHandled': 'Booking handled',
+            'meta.about.title': 'About Us - DOMIKTUT',
+            'meta.about.description': 'About DOMIKTUT - cottage rental in Mogilev',
+
+            'about.hero.title': 'DOMIKTUT — your reliable partner in cottage rentals',
+            'about.hero.subtitle': 'For over 10 years we have been helping people find the perfect place to relax in Mogilev and the region',
+            'about.paragraph1': 'DOMIKTUT is a team of professionals who have been working in the suburban real estate rental market in Mogilev and the Mogilev region for over 10 years.',
+            'about.paragraph2': 'We carefully select each property so that you can be sure of quality and comfort. All houses are inspected: we personally visit each cottage, check the condition of the premises, the availability of amenities and compliance with the description.',
+            'about.paragraph3': 'Our mission is to make your vacation as comfortable and unforgettable as possible. We work with both private clients and corporate customers, offering individual solutions for any task.',
+
+            'about.stats.years': 'years in the market',
+            'about.stats.houses': 'houses in the catalog',
+            'about.stats.clients': 'satisfied clients',
+            'about.stats.support': 'support',
+
+            'about.gallery.title': 'Our properties',
+            'about.gallery.subtitle': 'Each house is a unique place for your vacation',
+
+            'about.values.title': 'Our values',
+            'about.values.quality': 'Quality',
+            'about.values.qualityText': 'Careful inspection of each property before adding to the catalog',
+            'about.values.reliability': 'Reliability',
+            'about.values.reliabilityText': 'We guarantee compliance of the description with reality and fair prices',
+            'about.values.comfort': 'Comfort',
+            'about.values.comfortText': 'We create all conditions for your ideal vacation',
+            'about.values.speed': 'Efficiency',
+            'about.values.speedText': 'Fast booking and 24/7 customer support',
+
+            'about.location.title': 'We work in Mogilev and the region',
+            'about.location.text': 'We specialize in renting cottages in Mogilev and the Mogilev region. Our properties are located in picturesque places: near lakes, in the forest, near attractions.',
+            'about.location.text2': 'Whether you are looking for a secluded house in the forest or a spacious villa for a large company — we have the perfect option for your vacation.'
         }
     },
 
