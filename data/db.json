@@ -18,29 +18,6 @@
         "be": "Рублёва-Успенскае шаша, 24 км ад МКАД",
         "en": "Rublyovo-Uspenskoye Highway, 24 km from MKAD"
       },
-      "features_i18n": {
-        "ru": [
-          "Бассейн",
-          "Баня",
-          "Настольный теннис",
-          "Сауна",
-          "Барбекю"
-        ],
-        "be": [
-          "Басейн",
-          "Баня",
-          "Настольны тэніс",
-          "Саўна",
-          "Барбекю"
-        ],
-        "en": [
-          "Pool",
-          "Sauna",
-          "Table tennis",
-          "Sauna",
-          "BBQ"
-        ]
-      },
       "category": "family",
       "price": 300,
       "guests": 30,
@@ -51,18 +28,17 @@
       "reviews": 3,
       "location": "Рублево-Успенское шоссе, 24 км от МКАД",
       "features": [
-        "Бассейн",
-        "Баня",
-        "Настольный теннис",
-        "Сауна",
-        "Барбекю"
+        "pool",
+        "banya",
+        "table-tennis",
+        "sauna",
+        "bbq"
       ],
       "images": [
         "assets/images/houses/house-1-1.jpg",
         "assets/images/houses/house-1-2.jpg",
         "assets/images/houses/house-1-3.jpg"
       ],
-      "isHit": true,
       "status": "approved",
       "description": "Просторный коттедж для семейного отдыха с бассейном и баней"
     },
@@ -84,29 +60,6 @@
         "be": "Вёска Салмачы, 15 км ад Магилёву",
         "en": "Salmachi Village, 15 km from Mogilev"
       },
-      "features_i18n": {
-        "ru": [
-          "Бассейн",
-          "Баня",
-          "Настольный теннис",
-          "Сауна",
-          "Бильярд"
-        ],
-        "be": [
-          "Басейн",
-          "Баня",
-          "Настольны тэніс",
-          "Саўна",
-          "Більярд"
-        ],
-        "en": [
-          "Pool",
-          "Sauna",
-          "Table tennis",
-          "Sauna",
-          "Billiards"
-        ]
-      },
       "category": "pool",
       "price": 300,
       "guests": 9,
@@ -117,17 +70,16 @@
       "reviews": 2,
       "location": "Деревня Салмачи, 15 км от Могилёва",
       "features": [
-        "Бассейн",
-        "Баня",
-        "Настольный теннис",
-        "Сауна",
-        "Бильярд"
+        "pool",
+        "banya",
+        "table-tennis",
+        "sauna",
+        "billiards"
       ],
       "images": [
         "assets/images/houses/house-2-1.jpg",
         "assets/images/houses/house-2-2.jpg"
       ],
-      "isHit": false,
       "status": "approved"
     },
     {
@@ -148,30 +100,7 @@
         "be": "Зелянодольскі раён, 30 км ад Магилёву",
         "en": "Zelenodolsky District, 30 km from Mogilev"
       },
-      "features_i18n": {
-        "ru": [
-          "Бассейн",
-          "Баня",
-          "Настольный теннис",
-          "Сауна",
-          "Караоке"
-        ],
-        "be": [
-          "Басейн",
-          "Баня",
-          "Настольны тэніс",
-          "Саўна",
-          "Караоке"
-        ],
-        "en": [
-          "Pool",
-          "Sauna",
-          "Table tennis",
-          "Sauna",
-          "Karaoke"
-        ]
-      },
-      "category": "hits",
+      "category": "pool",
       "price": 400,
       "guests": 30,
       "bedrooms": 6,
@@ -181,17 +110,16 @@
       "reviews": 3,
       "location": "Зеленодольский район, 30 км от Могилёва",
       "features": [
-        "Бассейн",
-        "Баня",
-        "Настольный теннис",
-        "Сауна",
-        "Караоке"
+        "pool",
+        "banya",
+        "table-tennis",
+        "sauna",
+        "karaoke"
       ],
       "images": [
         "assets/images/houses/house-3-1.jpg",
         "assets/images/houses/house-3-2.jpg"
       ],
-      "isHit": true,
       "status": "approved"
     },
     {
@@ -212,45 +140,24 @@
         "be": "Высакагорскі раён, 20 км ад Магилёву",
         "en": "Vysokogorsky District, 20 km from Mogilev"
       },
-      "features_i18n": {
-        "ru": [
-          "Баня",
-          "Бассейн",
-          "Настольный теннис",
-          "Сауна"
-        ],
-        "be": [
-          "Баня",
-          "Басейн",
-          "Настольны тэніс",
-          "Саўна"
-        ],
-        "en": [
-          "Sauna",
-          "Pool",
-          "Table tennis",
-          "Sauna"
-        ]
-      },
       "category": "family",
       "price": 250,
       "guests": 30,
       "bedrooms": 5,
       "bathrooms": 3,
       "area": 280,
-      "rating": 4.5,
-      "reviews": 2,
+      "rating": 4,
+      "reviews": 3,
       "location": "Высокогорский район, 20 км от Могилёва",
       "features": [
-        "Баня",
-        "Бассейн",
-        "Настольный теннис",
-        "Сауна"
+        "banya",
+        "pool",
+        "table-tennis",
+        "sauna"
       ],
       "images": [
         "assets/images/houses/house-4-1.jpg"
       ],
-      "isHit": false,
       "status": "approved"
     },
     {
@@ -271,26 +178,6 @@
         "be": "Лаішаўскі раён, 25 км ад Магилёву",
         "en": "Laishevsky District, 25 km from Mogilev"
       },
-      "features_i18n": {
-        "ru": [
-          "Баня",
-          "Бассейн",
-          "Настольный теннис",
-          "Сауна"
-        ],
-        "be": [
-          "Баня",
-          "Басейн",
-          "Настольны тэніс",
-          "Саўна"
-        ],
-        "en": [
-          "Sauna",
-          "Pool",
-          "Table tennis",
-          "Sauna"
-        ]
-      },
       "category": "family",
       "price": 180,
       "guests": 14,
@@ -301,15 +188,14 @@
       "reviews": 2,
       "location": "Лаишевский район, 25 км от Могилёва",
       "features": [
-        "Баня",
-        "Бассейн",
-        "Настольный теннис",
-        "Сауна"
+        "banya",
+        "pool",
+        "table-tennis",
+        "sauna"
       ],
       "images": [
         "assets/images/houses/house-5-1.jpg"
       ],
-      "isHit": false,
       "status": "approved"
     },
     {
@@ -330,26 +216,6 @@
         "be": "На беразе возера, 40 км ад Магилёву",
         "en": "On the lake shore, 40 km from Mogilev"
       },
-      "features_i18n": {
-        "ru": [
-          "Баня",
-          "Бассейн",
-          "Настольный теннис",
-          "Сауна"
-        ],
-        "be": [
-          "Баня",
-          "Басейн",
-          "Настольны тэніс",
-          "Саўна"
-        ],
-        "en": [
-          "Sauna",
-          "Pool",
-          "Table tennis",
-          "Sauna"
-        ]
-      },
       "category": "family",
       "price": 100,
       "guests": 8,
@@ -360,15 +226,14 @@
       "reviews": 2,
       "location": "На берегу озера, 40 км от Могилёва",
       "features": [
-        "Баня",
-        "Бассейн",
-        "Настольный теннис",
-        "Сауна"
+        "banya",
+        "pool",
+        "table-tennis",
+        "sauna"
       ],
       "images": [
         "assets/images/houses/house-6-1.jpg"
       ],
-      "isHit": false,
       "status": "approved"
     },
     {
@@ -389,29 +254,6 @@
         "be": "Набярэжная Волгі, 18 км ад Магилёву",
         "en": "Volga Embankment, 18 km from Mogilev"
       },
-      "features_i18n": {
-        "ru": [
-          "Русская баня",
-          "Вид на реку",
-          "Камин",
-          "Терраса",
-          "Парковка"
-        ],
-        "be": [
-          "Руская баня",
-          "Від на раку",
-          "Камін",
-          "Тэраса",
-          "Паркоўка"
-        ],
-        "en": [
-          "Russian banya",
-          "River view",
-          "Fireplace",
-          "Terrace",
-          "Parking"
-        ]
-      },
       "category": "banya",
       "price": 450,
       "guests": 20,
@@ -422,17 +264,16 @@
       "reviews": 2,
       "location": "Набережная Волги, 18 км от Могилёва",
       "features": [
-        "Русская баня",
-        "Вид на реку",
-        "Камин",
-        "Терраса",
-        "Парковка"
+        "russian-banya",
+        "river-view",
+        "fireplace",
+        "terrace",
+        "parking"
       ],
       "images": [
         "assets/images/houses/house-7-1.jpg",
         "assets/images/houses/house-7-2.jpg"
       ],
-      "isHit": true,
       "status": "approved"
     },
     {
@@ -453,49 +294,25 @@
         "be": "Раіфа, 28 км ад Магилёву",
         "en": "Raifa, 28 km from Mogilev"
       },
-      "features_i18n": {
-        "ru": [
-          "Бассейн",
-          "Баня",
-          "Детская площадка",
-          "Мангал",
-          "Wi-Fi"
-        ],
-        "be": [
-          "Басейн",
-          "Баня",
-          "Дзіцячая пляцоўка",
-          "Мангал",
-          "Wi-Fi"
-        ],
-        "en": [
-          "Pool",
-          "Sauna",
-          "Playground",
-          "Grill",
-          "Wi-Fi"
-        ]
-      },
       "category": "family",
       "price": 280,
       "guests": 16,
       "bedrooms": 5,
       "bathrooms": 3,
       "area": 300,
-      "rating": 4.5,
+      "rating": 4,
       "reviews": 2,
       "location": "Раифа, 28 км от Могилёва",
       "features": [
-        "Бассейн",
-        "Баня",
-        "Детская площадка",
-        "Мангал",
-        "Wi-Fi"
+        "pool",
+        "banya",
+        "playground",
+        "grill",
+        "wifi"
       ],
       "images": [
         "assets/images/houses/house-8-1.jpg"
       ],
-      "isHit": false,
       "status": "approved"
     },
     {
@@ -516,29 +333,6 @@
         "be": "Возера Лебяжае, 22 км ад Магилёву",
         "en": "Lebyazhye Lake, 22 km from Mogilev"
       },
-      "features_i18n": {
-        "ru": [
-          "Озеро",
-          "Барбекю",
-          "Рыбалка",
-          "Беседка",
-          "Парковка"
-        ],
-        "be": [
-          "Возера",
-          "Барбекю",
-          "Рыбалка",
-          "Альтанка",
-          "Паркоўка"
-        ],
-        "en": [
-          "Lake",
-          "BBQ",
-          "Fishing",
-          "Gazebo",
-          "Parking"
-        ]
-      },
       "category": "pool",
       "price": 200,
       "guests": 12,
@@ -549,17 +343,16 @@
       "reviews": 2,
       "location": "Озеро Лебяжье, 22 км от Могилёва",
       "features": [
-        "Озеро",
-        "Барбекю",
-        "Рыбалка",
-        "Беседка",
-        "Парковка"
+        "lake",
+        "bbq",
+        "fishing",
+        "gazebo",
+        "parking"
       ],
       "images": [
         "assets/images/houses/house-9-1.jpg",
         "assets/images/houses/house-9-2.jpg"
       ],
-      "isHit": false,
       "status": "approved"
     },
     {
@@ -580,29 +373,6 @@
         "be": "Прыгарад Магилёву, 12 км ад цэнтра",
         "en": "Mogilev suburb, 12 km from center"
       },
-      "features_i18n": {
-        "ru": [
-          "Бассейн",
-          "Банкетный зал",
-          "Сцена",
-          "Парковка",
-          "Охрана"
-        ],
-        "be": [
-          "Басейн",
-          "Банкетная зала",
-          "Сцэна",
-          "Паркоўка",
-          "Ахова"
-        ],
-        "en": [
-          "Pool",
-          "Banquet hall",
-          "Stage",
-          "Parking",
-          "Security"
-        ]
-      },
       "category": "wedding",
       "price": 700,
       "guests": 50,
@@ -613,18 +383,17 @@
       "reviews": 2,
       "location": "Пригород Могилёва, 12 км от центра",
       "features": [
-        "Бассейн",
-        "Банкетный зал",
-        "Сцена",
-        "Парковка",
-        "Охрана"
+        "pool",
+        "banquet-hall",
+        "stage",
+        "parking",
+        "security"
       ],
       "images": [
         "assets/images/houses/house-10-1.jpg",
         "assets/images/houses/house-10-2.jpg",
         "assets/images/houses/house-10-3.jpg"
       ],
-      "isHit": true,
       "status": "approved"
     },
     {
@@ -645,29 +414,6 @@
         "be": "Зелянодольскі раён, 35 км ад Магилёву",
         "en": "Zelenodolsky District, 35 km from Mogilev"
       },
-      "features_i18n": {
-        "ru": [
-          "Баня на дровах",
-          "Чан",
-          "Рыбалка",
-          "Лес",
-          "Тишина"
-        ],
-        "be": [
-          "Баня на дровах",
-          "Чан",
-          "Рыбалка",
-          "Лес",
-          "Цішыня"
-        ],
-        "en": [
-          "Wood-fired sauna",
-          "Hot tub",
-          "Fishing",
-          "Forest",
-          "Quiet"
-        ]
-      },
       "category": "banya",
       "price": 200,
       "guests": 10,
@@ -678,16 +424,15 @@
       "reviews": 2,
       "location": "Зеленодольский район, 35 км от Могилёва",
       "features": [
-        "Баня на дровах",
-        "Чан",
-        "Рыбалка",
-        "Лес",
-        "Тишина"
+        "wood-banya",
+        "hot-tub",
+        "fishing",
+        "forest",
+        "quiet"
       ],
       "images": [
         "assets/images/houses/house-11-1.jpg"
       ],
-      "isHit": true,
       "status": "approved"
     },
     {
@@ -708,29 +453,6 @@
         "be": "Сасновы бор, 45 км ад Магилёву",
         "en": "Pine forest, 45 km from Mogilev"
       },
-      "features_i18n": {
-        "ru": [
-          "Эко-материалы",
-          "Камин",
-          "Гриль",
-          "Лес",
-          "Тишина"
-        ],
-        "be": [
-          "Эка-матэрыялы",
-          "Камін",
-          "Грыль",
-          "Лес",
-          "Цішыня"
-        ],
-        "en": [
-          "Eco materials",
-          "Fireplace",
-          "Grill",
-          "Forest",
-          "Quiet"
-        ]
-      },
       "category": "family",
       "price": 140,
       "guests": 6,
@@ -741,17 +463,16 @@
       "reviews": 2,
       "location": "Сосновый бор, 45 км от Могилёва",
       "features": [
-        "Эко-материалы",
-        "Камин",
-        "Гриль",
-        "Лес",
-        "Тишина"
+        "eco-materials",
+        "fireplace",
+        "grill",
+        "forest",
+        "quiet"
       ],
       "images": [
         "assets/images/houses/house-12-1.jpg",
         "assets/images/houses/house-12-2.jpg"
       ],
-      "isHit": false,
       "status": "approved"
     },
     {
@@ -772,29 +493,6 @@
         "be": "Магілёўская вобласць",
         "en": "Mogilev Region"
       },
-      "features_i18n": {
-        "ru": [
-          "Озеро",
-          "Баня",
-          "Барбекю",
-          "Рыбалка",
-          "Парковка"
-        ],
-        "be": [
-          "Возера",
-          "Баня",
-          "Барбекю",
-          "Рыбалка",
-          "Паркоўка"
-        ],
-        "en": [
-          "Lake",
-          "Sauna",
-          "BBQ",
-          "Fishing",
-          "Parking"
-        ]
-      },
       "category": "family",
       "price": 250,
       "guests": 8,
@@ -805,17 +503,16 @@
       "reviews": 2,
       "location": "Могилёвская область",
       "features": [
-        "Озеро",
-        "Баня",
-        "Барбекю",
-        "Рыбалка",
-        "Парковка"
+        "lake",
+        "banya",
+        "bbq",
+        "fishing",
+        "parking"
       ],
       "images": [
         "assets/images/houses/house-new-1.jpg",
         "assets/images/houses/house-new-2.jpg"
       ],
-      "isHit": false,
       "status": "approved",
       "description": "Просторный коттедж с видом на озеро. Идеально подходит для семейного отдыха. Есть баня, мангальная зона и собственная пристань для лодок.",
       "createdAt": "2026-05-12T19:34:53.596Z"
@@ -838,29 +535,6 @@
         "be": "г. Магілёў, вул. Садовая, 24",
         "en": "Mogilev, Sadovaya Street, 24"
       },
-      "features_i18n": {
-        "ru": [
-          "Wi-Fi",
-          "Парковка",
-          "Кухня",
-          "ТВ",
-          "Отопление"
-        ],
-        "be": [
-          "Wi-Fi",
-          "Паркоўка",
-          "Кухня",
-          "ТБ",
-          "Ацяпленне"
-        ],
-        "en": [
-          "Wi-Fi",
-          "Parking",
-          "Kitchen",
-          "TV",
-          "Heating"
-        ]
-      },
       "category": "family",
       "price": 330,
       "guests": 10,
@@ -871,17 +545,16 @@
       "reviews": 2,
       "location": "г. Могилев, ул. Садовая, 24",
       "features": [
-        "Wi-Fi",
-        "Парковка",
-        "Кухня",
-        "ТВ",
-        "Отопление"
+        "wifi",
+        "parking",
+        "kitchen",
+        "tv",
+        "heating"
       ],
       "images": [
         "assets/images/houses/house-14-1.jpg",
         "assets/images/houses/house-14-2.jpg"
       ],
-      "isHit": false,
       "status": "approved"
     },
     {
@@ -902,29 +575,6 @@
         "be": "аг. Княжыцы, вул. Цэнтральная, 93, Магілёўскі р-н",
         "en": "Knyazhitsy, Central Street, 93, Mogilev District"
       },
-      "features_i18n": {
-        "ru": [
-          "Панорамные окна",
-          "Камин",
-          "Wi-Fi",
-          "Парковка",
-          "Терраса"
-        ],
-        "be": [
-          "Панарамныя вокны",
-          "Камін",
-          "Wi-Fi",
-          "Паркоўка",
-          "Тэраса"
-        ],
-        "en": [
-          "Panoramic windows",
-          "Fireplace",
-          "Wi-Fi",
-          "Parking",
-          "Terrace"
-        ]
-      },
       "category": "family",
       "price": 440,
       "guests": 6,
@@ -932,21 +582,20 @@
       "bathrooms": 1,
       "area": 120,
       "rating": 5,
-      "reviews": 2,
+      "reviews": 1,
       "location": "аг. Княжицы, ул. Центральная, 93, Могилевский р-н",
       "features": [
-        "Панорамные окна",
-        "Камин",
-        "Wi-Fi",
-        "Парковка",
-        "Терраса"
+        "panoramic-windows",
+        "fireplace",
+        "wifi",
+        "parking",
+        "terrace"
       ],
       "images": [
         "assets/images/houses/house-15-1.jpg",
         "assets/images/houses/house-15-2.jpg",
         "assets/images/houses/house-15-3.jpg"
       ],
-      "isHit": true,
       "status": "approved"
     },
     {
@@ -967,49 +616,25 @@
         "be": "в. Туманаўка, 13, Магілёўскі р-н",
         "en": "Tumanovka village, 13, Mogilev District"
       },
-      "features_i18n": {
-        "ru": [
-          "Баня",
-          "Барбекю",
-          "Парковка",
-          "Сад",
-          "Детская площадка"
-        ],
-        "be": [
-          "Баня",
-          "Барбекю",
-          "Паркоўка",
-          "Сад",
-          "Дзіцячая пляцоўка"
-        ],
-        "en": [
-          "Sauna",
-          "BBQ",
-          "Parking",
-          "Garden",
-          "Playground"
-        ]
-      },
       "category": "family",
       "price": 165,
       "guests": 12,
       "bedrooms": 2,
       "bathrooms": 1,
       "area": 150,
-      "rating": 4.5,
-      "reviews": 2,
+      "rating": 0,
+      "reviews": 0,
       "location": "д. Тумановка, 13, Могилевский р-н",
       "features": [
-        "Баня",
-        "Барбекю",
-        "Парковка",
-        "Сад",
-        "Детская площадка"
+        "banya",
+        "bbq",
+        "parking",
+        "garden",
+        "playground"
       ],
       "images": [
         "assets/images/houses/house-16-1.jpg"
       ],
-      "isHit": false,
       "status": "approved"
     },
     {
@@ -1030,54 +655,27 @@
         "be": "в. Туманаўка, 31, Магілёўскі р-н",
         "en": "Tumanovka village, 31, Mogilev District"
       },
-      "features_i18n": {
-        "ru": [
-          "Баня",
-          "Бассейн",
-          "Барбекю",
-          "Парковка",
-          "Wi-Fi",
-          "Караоке"
-        ],
-        "be": [
-          "Баня",
-          "Басейн",
-          "Барбекю",
-          "Паркоўка",
-          "Wi-Fi",
-          "Караоке"
-        ],
-        "en": [
-          "Sauna",
-          "Pool",
-          "BBQ",
-          "Parking",
-          "Wi-Fi",
-          "Karaoke"
-        ]
-      },
-      "category": "hits",
+      "category": "pool",
       "price": 165,
       "guests": 18,
       "bedrooms": 3,
       "bathrooms": 2,
       "area": 250,
-      "rating": 5,
-      "reviews": 2,
+      "rating": 0,
+      "reviews": 0,
       "location": "д. Тумановка, 31, Могилевский р-н",
       "features": [
-        "Баня",
-        "Бассейн",
-        "Барбекю",
-        "Парковка",
-        "Wi-Fi",
-        "Караоке"
+        "banya",
+        "pool",
+        "bbq",
+        "parking",
+        "wifi",
+        "karaoke"
       ],
       "images": [
         "assets/images/houses/house-17-1.jpg",
         "assets/images/houses/house-17-2.jpg"
       ],
-      "isHit": true,
       "status": "approved"
     },
     {
@@ -1098,50 +696,26 @@
         "be": "г. Магілёў, вул. Бруснічная, 2",
         "en": "Mogilev, Brusnichnaya Street, 2"
       },
-      "features_i18n": {
-        "ru": [
-          "Wi-Fi",
-          "Парковка",
-          "Кухня",
-          "ТВ",
-          "Стиральная машина"
-        ],
-        "be": [
-          "Wi-Fi",
-          "Паркоўка",
-          "Кухня",
-          "ТБ",
-          "Пральная машына"
-        ],
-        "en": [
-          "Wi-Fi",
-          "Parking",
-          "Kitchen",
-          "TV",
-          "Washing machine"
-        ]
-      },
       "category": "family",
       "price": 110,
       "guests": 10,
       "bedrooms": 3,
       "bathrooms": 2,
       "area": 160,
-      "rating": 4.5,
-      "reviews": 2,
+      "rating": 0,
+      "reviews": 0,
       "location": "г. Могилев, ул. Брусничная, 2",
       "features": [
-        "Wi-Fi",
-        "Парковка",
-        "Кухня",
-        "ТВ",
-        "Стиральная машина"
+        "wifi",
+        "parking",
+        "kitchen",
+        "tv",
+        "washing-machine"
       ],
       "images": [
         "assets/images/houses/house-18-1.jpg",
         "assets/images/houses/house-18-2.jpg"
       ],
-      "isHit": false,
       "status": "approved"
     },
     {
@@ -1162,35 +736,6 @@
         "be": "г. Магілёў, пер. Лізы Чайкінай, 11/Б",
         "en": "Mogilev, Liza Chaikina Lane, 11/B"
       },
-      "features_i18n": {
-        "ru": [
-          "Баня",
-          "Бассейн",
-          "Караоке",
-          "Бильярд",
-          "Парковка",
-          "Wi-Fi",
-          "Барбекю"
-        ],
-        "be": [
-          "Баня",
-          "Басейн",
-          "Караоке",
-          "Більярд",
-          "Паркоўка",
-          "Wi-Fi",
-          "Барбекю"
-        ],
-        "en": [
-          "Sauna",
-          "Pool",
-          "Karaoke",
-          "Billiards",
-          "Parking",
-          "Wi-Fi",
-          "BBQ"
-        ]
-      },
       "category": "wedding",
       "price": 385,
       "guests": 24,
@@ -1201,20 +746,19 @@
       "reviews": 0,
       "location": "г. Могилев, пер. Лизы Чайкиной, 11/Б",
       "features": [
-        "Баня",
-        "Бассейн",
-        "Караоке",
-        "Бильярд",
-        "Парковка",
-        "Wi-Fi",
-        "Барбекю"
+        "banya",
+        "pool",
+        "karaoke",
+        "billiards",
+        "parking",
+        "wifi",
+        "bbq"
       ],
       "images": [
         "assets/images/houses/house-19-1.jpg",
         "assets/images/houses/house-19-2.jpg",
         "assets/images/houses/house-19-3.jpg"
       ],
-      "isHit": true,
       "status": "approved"
     },
     {
@@ -1235,29 +779,6 @@
         "be": "Магілёўскі р-н, в. Буйнічы, 15 км ад горада",
         "en": "Mogilev District, Buinichi village, 15 km from the city"
       },
-      "features_i18n": {
-        "ru": [
-          "Детская площадка",
-          "Баня",
-          "Барбекю",
-          "Парковка",
-          "Сад"
-        ],
-        "be": [
-          "Дзіцячая пляцоўка",
-          "Баня",
-          "Барбекю",
-          "Паркоўка",
-          "Сад"
-        ],
-        "en": [
-          "Playground",
-          "Sauna",
-          "BBQ",
-          "Parking",
-          "Garden"
-        ]
-      },
       "category": "family",
       "price": 260,
       "guests": 14,
@@ -1268,11 +789,11 @@
       "reviews": 0,
       "location": "Могилевский р-н, д. Буйничи, 15 км от города",
       "features": [
-        "Детская площадка",
-        "Баня",
-        "Барбекю",
-        "Парковка",
-        "Сад"
+        "playground",
+        "banya",
+        "bbq",
+        "parking",
+        "garden"
       ],
       "images": [
         "assets/images/houses/house-20-1.jpg",
@@ -1280,7 +801,6 @@
         "assets/images/houses/house-20-3.jpg",
         "assets/images/houses/house-20-4.jpg"
       ],
-      "isHit": false,
       "status": "approved"
     }
   ],
@@ -1309,17 +829,6 @@
     },
     {
       "id": "3",
-      "name": "Хиты продаж",
-      "slug": "hits",
-      "icon": "assets/icons/hits.svg",
-      "name_i18n": {
-        "ru": "Хиты продаж",
-        "be": "Хіты продажаў",
-        "en": "Best sellers"
-      }
-    },
-    {
-      "id": "4",
       "name": "Под свадьбы и корпоративы",
       "slug": "wedding",
       "icon": "assets/icons/wedding.svg",
@@ -1330,7 +839,7 @@
       }
     },
     {
-      "id": "5",
+      "id": "4",
       "name": "С русской баней на дровах",
       "slug": "banya",
       "icon": "assets/icons/banya.svg",
@@ -1541,7 +1050,7 @@
       "userId": 4,
       "userEmail": "juliusnovo@gmail.com",
       "houseId": 14,
-      "houseName": "Элинтая Вилла",
+      "houseName": "Коттедж на Садовой",
       "name": "Julius",
       "phone": "375444444444",
       "checkIn": "2026-06-12",
@@ -1560,7 +1069,7 @@
       "userPhone": "+375297654321",
       "userEmail": "ivan@example.by",
       "houseId": 3,
-      "houseName": "Дом у озера",
+      "houseName": "Новая сосновка Premium",
       "name": "Иван",
       "phone": "375297654321",
       "checkIn": "2025-08-10",
@@ -1575,36 +1084,10 @@
   ],
   "favorites": [
     {
-      "houseId": 1,
-      "id": "3"
-    },
-    {
-      "houseId": 7,
-      "id": "4"
-    },
-    {
-      "houseId": 1,
-      "id": "5"
-    },
-    {
-      "houseId": 2,
-      "id": "6"
-    },
-    {
-      "houseId": 4,
-      "id": "7"
-    },
-    {
-      "houseId": 1,
-      "id": "8"
-    },
-    {
-      "houseId": 2,
-      "id": "9"
-    },
-    {
+      "id": "2",
+      "userId": 2,
       "houseId": 3,
-      "id": "10"
+      "createdAt": "2024-05-02T10:00:00.000Z"
     },
     {
       "userId": "1",
@@ -1617,102 +1100,6 @@
       "houseId": "3",
       "createdAt": "2026-06-09T10:03:46.233Z",
       "id": "lKhUUzW-vfw"
-    },
-    {
-      "userId": "2",
-      "houseId": "2",
-      "createdAt": "2026-06-09T13:05:44.124Z",
-      "id": "g3scl9_HH08"
-    },
-    {
-      "userId": "2",
-      "houseId": "3",
-      "createdAt": "2026-06-09T13:06:53.031Z",
-      "id": "7ZhxXyTIgjU"
-    },
-    {
-      "userId": "2",
-      "houseId": "3",
-      "createdAt": "2026-06-09T13:06:55.602Z",
-      "id": "nJmIMly8MRA"
-    },
-    {
-      "userId": "2",
-      "houseId": "2",
-      "createdAt": "2026-06-09T13:06:57.743Z",
-      "id": "3OLtPT8H-GU"
-    },
-    {
-      "userId": "2",
-      "houseId": "3",
-      "createdAt": "2026-06-09T13:07:05.982Z",
-      "id": "yLxT8_Im1tQ"
-    },
-    {
-      "userId": "2",
-      "houseId": "3",
-      "createdAt": "2026-06-09T13:07:11.652Z",
-      "id": "kli_AMkFIfE"
-    },
-    {
-      "userId": "2",
-      "houseId": "2",
-      "createdAt": "2026-06-09T13:07:13.139Z",
-      "id": "sZDM5Z3Dv-o"
-    },
-    {
-      "userId": "2",
-      "houseId": "3",
-      "createdAt": "2026-06-09T13:07:15.500Z",
-      "id": "PXYngSzlo1c"
-    },
-    {
-      "userId": "2",
-      "houseId": "2",
-      "createdAt": "2026-06-09T13:11:43.959Z",
-      "id": "LEfq4kMU_JQ"
-    },
-    {
-      "userId": "2",
-      "houseId": "5",
-      "createdAt": "2026-06-09T13:11:51.929Z",
-      "id": "PEKtSEySv94"
-    },
-    {
-      "userId": "2",
-      "houseId": "2",
-      "createdAt": "2026-06-09T13:14:45.827Z",
-      "id": "MG9yBAGMV84"
-    },
-    {
-      "userId": "2",
-      "houseId": "3",
-      "createdAt": "2026-06-09T13:14:52.887Z",
-      "id": "N1XqHI9xtPQ"
-    },
-    {
-      "userId": "2",
-      "houseId": "3",
-      "createdAt": "2026-06-09T13:22:38.935Z",
-      "id": "UsKwFp703u8"
-    },
-    {
-      "userId": "2",
-      "houseId": "1",
-      "createdAt": "2026-06-09T13:38:58.400Z",
-      "id": "2jH87ZuxhE0"
-    },
-    {
-      "userId": "2",
-      "houseId": "7",
-      "createdAt": "2026-06-09T13:40:00.927Z",
-      "id": "V9uG98TfSXY"
-    },
-    {
-      "userId": "2",
-      "houseId": "6",
-      "createdAt": "2026-06-09T13:41:28.766Z",
-      "id": "Vn--GMSXqzY"
     }
   ],
   "reviews": [
@@ -1845,16 +1232,28 @@
       "houseId": 4,
       "userId": 5,
       "userName": "Saprano Violiny",
+      "rating": 3,
+      "text": "Дом нормальный, но ожидали большего за такую цену. Бассейн был холодноват, хозяин долго не отвечал.",
+      "phrases": [
+        "Удобное расположение"
+      ],
+      "createdAt": "2026-03-22T09:15:00.000Z"
+    },
+    {
+      "id": "10",
+      "houseId": 4,
+      "userId": 4,
+      "userName": "Julius Novochrono",
       "rating": 4,
       "text": "Хороший дом, всё необходимое есть. Немного далеко от магазинов, но для отдыха самое то.",
       "phrases": [
         "Уютно",
         "Тихо и спокойно"
       ],
-      "createdAt": "2026-03-22T09:15:00.000Z"
+      "createdAt": "2026-05-10T14:30:00.000Z"
     },
     {
-      "id": "10",
+      "id": "11",
       "houseId": 5,
       "userId": 4,
       "userName": "Julius Novochrono",
@@ -1868,7 +1267,7 @@
       "createdAt": "2026-02-28T18:40:00.000Z"
     },
     {
-      "id": "11",
+      "id": "12",
       "houseId": 5,
       "userId": 6,
       "userName": "Gazan Piochiny",
@@ -1881,7 +1280,7 @@
       "createdAt": "2026-05-03T20:10:00.000Z"
     },
     {
-      "id": "12",
+      "id": "13",
       "houseId": 6,
       "userId": 3,
       "userName": "Мария Петрова",
@@ -1895,7 +1294,7 @@
       "createdAt": "2026-01-28T11:20:00.000Z"
     },
     {
-      "id": "13",
+      "id": "14",
       "houseId": 6,
       "userId": 2,
       "userName": "Иван Иванов",
@@ -1908,7 +1307,7 @@
       "createdAt": "2026-04-12T15:55:00.000Z"
     },
     {
-      "id": "14",
+      "id": "15",
       "houseId": 7,
       "userId": 5,
       "userName": "Saprano Violiny",
@@ -1922,7 +1321,7 @@
       "createdAt": "2026-02-10T13:30:00.000Z"
     },
     {
-      "id": "15",
+      "id": "16",
       "houseId": 7,
       "userId": 4,
       "userName": "Julius Novochrono",
@@ -1935,7 +1334,7 @@
       "createdAt": "2026-05-20T19:45:00.000Z"
     },
     {
-      "id": "16",
+      "id": "17",
       "houseId": 8,
       "userId": 2,
       "userName": "Иван Иванов",
@@ -1949,20 +1348,19 @@
       "createdAt": "2026-03-05T10:15:00.000Z"
     },
     {
-      "id": "17",
+      "id": "18",
       "houseId": 8,
       "userId": 6,
       "userName": "Gazan Piochiny",
-      "rating": 4,
-      "text": "Хороший дом, Wi-Fi быстрый, мангал в порядке. Рядом монастырь — красиво.",
+      "rating": 3,
+      "text": "Дом неплохой, но Wi-Fi постоянно отваливался. Мангал ржавый, пришлось чистить самим. Рядом монастырь — красиво, но это единственный плюс.",
       "phrases": [
-        "Быстрая связь",
-        "Чистый дом"
+        "Красивое место"
       ],
       "createdAt": "2026-04-28T14:20:00.000Z"
     },
     {
-      "id": "18",
+      "id": "19",
       "houseId": 9,
       "userId": 3,
       "userName": "Мария Петрова",
@@ -1976,7 +1374,7 @@
       "createdAt": "2026-01-20T16:40:00.000Z"
     },
     {
-      "id": "19",
+      "id": "20",
       "houseId": 9,
       "userId": 5,
       "userName": "Saprano Violiny",
@@ -1989,7 +1387,7 @@
       "createdAt": "2026-05-08T12:30:00.000Z"
     },
     {
-      "id": "20",
+      "id": "21",
       "houseId": 10,
       "userId": 4,
       "userName": "Julius Novochrono",
@@ -2003,7 +1401,7 @@
       "createdAt": "2026-02-25T21:00:00.000Z"
     },
     {
-      "id": "21",
+      "id": "22",
       "houseId": 10,
       "userId": 2,
       "userName": "Иван Иванов",
@@ -2016,7 +1414,7 @@
       "createdAt": "2026-06-01T18:15:00.000Z"
     },
     {
-      "id": "22",
+      "id": "23",
       "houseId": 11,
       "userId": 6,
       "userName": "Gazan Piochiny",
@@ -2030,7 +1428,7 @@
       "createdAt": "2026-03-18T17:25:00.000Z"
     },
     {
-      "id": "23",
+      "id": "24",
       "houseId": 11,
       "userId": 3,
       "userName": "Мария Петрова",
@@ -2044,7 +1442,7 @@
       "createdAt": "2026-05-15T13:10:00.000Z"
     },
     {
-      "id": "24",
+      "id": "25",
       "houseId": 12,
       "userId": 5,
       "userName": "Saprano Violiny",
@@ -2058,7 +1456,7 @@
       "createdAt": "2026-02-05T11:50:00.000Z"
     },
     {
-      "id": "25",
+      "id": "26",
       "houseId": 12,
       "userId": 4,
       "userName": "Julius Novochrono",
@@ -2071,7 +1469,7 @@
       "createdAt": "2026-04-22T19:30:00.000Z"
     },
     {
-      "id": "26",
+      "id": "27",
       "houseId": 13,
       "userId": 2,
       "userName": "Иван Иванов",
@@ -2085,7 +1483,7 @@
       "createdAt": "2026-03-28T14:45:00.000Z"
     },
     {
-      "id": "27",
+      "id": "28",
       "houseId": 13,
       "userId": 6,
       "userName": "Gazan Piochiny",
@@ -2098,7 +1496,7 @@
       "createdAt": "2026-05-25T10:20:00.000Z"
     },
     {
-      "id": "28",
+      "id": "29",
       "houseId": 14,
       "userId": 3,
       "userName": "Мария Петрова",
@@ -2112,7 +1510,7 @@
       "createdAt": "2026-01-10T16:00:00.000Z"
     },
     {
-      "id": "29",
+      "id": "30",
       "houseId": 14,
       "userId": 5,
       "userName": "Saprano Violiny",
@@ -2125,7 +1523,7 @@
       "createdAt": "2026-04-18T12:35:00.000Z"
     },
     {
-      "id": "30",
+      "id": "31",
       "houseId": 15,
       "userId": 4,
       "userName": "Julius Novochrono",
@@ -2136,135 +1534,7 @@
         "Уютно",
         "Чистый дом"
       ],
-      "createdAt": "2026-02-14T20:00:00.000Z"
-    },
-    {
-      "id": "31",
-      "houseId": 15,
-      "userId": 2,
-      "userName": "Иван Иванов",
-      "rating": 5,
-      "text": "Были с женой на годовщину. Терраса с видом, камин вечером — сказка! Спасибо хозяевам.",
-      "phrases": [
-        "Отличный хозяин",
-        "Красивое место",
-        "Уютно"
-      ],
-      "createdAt": "2026-05-30T22:10:00.000Z"
-    },
-    {
-      "id": "32",
-      "houseId": 16,
-      "userId": 6,
-      "userName": "Gazan Piochiny",
-      "rating": 5,
-      "text": "Уютный дом, сад красивый. Дети играли на площадке, мы жарили шашлыки. Всё супер!",
-      "phrases": [
-        "Уютно",
-        "Чистый дом",
-        "Отличный хозяин"
-      ],
-      "createdAt": "2026-03-12T15:20:00.000Z"
-    },
-    {
-      "id": "33",
-      "houseId": 16,
-      "userId": 3,
-      "userName": "Мария Петрова",
-      "rating": 4,
-      "text": "Приятный загородный дом. Баня хорошая, барбекю-зона удобная. Рекомендую семьям.",
-      "phrases": [
-        "Уютно",
-        "Тихо и спокойно"
-      ],
-      "createdAt": "2026-05-18T11:45:00.000Z"
-    },
-    {
-      "id": "34",
-      "houseId": 17,
-      "userId": 5,
-      "userName": "Saprano Violiny",
-      "rating": 5,
-      "text": "Огромный коттедж! Нас было 15 человек — всем хватило места. Бассейн, караоке, баня — праздник!",
-      "phrases": [
-        "Чистый дом",
-        "Отличный хозяин",
-        "Быстрая связь"
-      ],
-      "createdAt": "2026-02-20T23:30:00.000Z"
-    },
-    {
-      "id": "35",
-      "houseId": 17,
-      "userId": 4,
-      "userName": "Julius Novochrono",
-      "rating": 5,
-      "text": "Отмечали день рождения. Караоке до утра, бассейн, барбекю. Лучший отдых в жизни!",
-      "phrases": [
-        "Уютно",
-        "Отличный хозяин"
-      ],
-      "createdAt": "2026-06-05T02:15:00.000Z"
-    },
-    {
-      "id": "36",
-      "houseId": 18,
-      "userId": 2,
-      "userName": "Иван Иванов",
-      "rating": 5,
-      "text": "Комфортный дом в городе. Стиральная машина, кухня — всё как дома. Очень удобно!",
-      "phrases": [
-        "Чистый дом",
-        "Удобное расположение",
-        "Быстрая связь"
-      ],
-      "createdAt": "2026-01-25T13:40:00.000Z"
-    },
-    {
-      "id": "37",
-      "houseId": 18,
-      "userId": 6,
-      "userName": "Gazan Piochiny",
-      "rating": 4,
-      "text": "Хороший дом для длительного проживания. Всё работает, парковка рядом. Рекомендую.",
-      "phrases": [
-        "Удобное расположение",
-        "Чистый дом"
-      ],
-      "createdAt": "2026-04-08T17:55:00.000Z"
-    }
-  ],
-  "selection-requests": [
-    {
-      "id": "1",
-      "name": "Мария Козлова",
-      "phone": "+375 (29) 555-12-34",
-      "checkIn": "2026-07-10",
-      "checkOut": "2026-07-15",
-      "guests": 6,
-      "budget": 800,
-      "requirements": "Нужен дом с бассейном и баней, желательно недалеко от Могилёва. 3-4 спальни.",
-      "applicantType": "guest",
-      "userId": null,
-      "userEmail": null,
-      "status": "pending",
-      "createdAt": "2026-06-01T09:30:00.000Z"
-    },
-    {
-      "id": "2",
-      "name": "Иван Иванов",
-      "phone": "+375297654321",
-      "checkIn": "2026-08-01",
-      "checkOut": "2026-08-07",
-      "guests": 4,
-      "budget": 1200,
-      "requirements": "Семейный отдых, тихое место, мангал и детская площадка.",
-      "applicantType": "renter",
-      "userId": "2",
-      "userEmail": "ivan@example.by",
-      "status": "processed",
-      "createdAt": "2026-06-03T14:15:00.000Z",
-      "processedAt": "2026-06-07T21:37:02.487Z"
+      "createdAt": "2026-02-14T20:"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
