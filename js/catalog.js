@@ -1,4 +1,4 @@
-import API from './api.js';
+﻿import API from './api.js';
 import i18n from './i18n.js';
 import { showNotification, createHouseCard, updateFavoriteButtons, initFavorites } from './main.js';
 import { getHouseAmenityLabels } from './house-common.js';
@@ -211,12 +211,14 @@ const Catalog = {
             activeCount++;
         }
 
-        if (tags.length === 0) {
-            container.hidden = true;
-            resetAll.hidden = true;
-            filterCount.hidden = true;
-            return;
-        }
+       // Исправленный блок проверки пустого списка
+    if (tags.length === 0) {
+        container.innerHTML = ''; // ОЧИЩАЕМ HTML ПОСЛЕДНЕГО ТЕГА
+        container.hidden = true;
+        resetAll.hidden = true;
+        filterCount.hidden = true;
+        return;
+    }
 
         container.hidden = false;
         resetAll.hidden = false;
