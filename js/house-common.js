@@ -97,12 +97,21 @@ export function getHouseAmenityLabels(house, lang = 'ru') {
 /**
  * Возвращает массив переведённых доп. услуг.
  */
-export function getAdditionalServiceLabels(lang = 'ru') {
-    return HOUSE_COMMON_I18N.additionalServices.map(
-        service => service[lang] || service.ru
+export function getAllAdditionalServices(lang = 'ru') {
+    return Object.entries(HOUSE_COMMON_I18N.additionalServices).map(
+        ([key, translations]) => ({
+            key,
+            label: translations[lang] || translations.ru
+        })
     );
 }
 
+export function getHouseServiceLabels(house, lang = 'ru') {
+    const houseServices = house?.services || [];
+    return houseServices
+        .map(slug => HOUSE_COMMON_I18N.additionalServices[slug]?.[lang] || slug)
+        .filter(Boolean);
+}
 /**
  * Рассчитывает цены для дома по дням недели.
  */
