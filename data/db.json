@@ -34,6 +34,11 @@
         "sauna",
         "bbq"
       ],
+      "services": [
+        "catering",
+        "chef",
+        "transfer"
+      ],
       "images": [
         "assets/images/houses/house-1-1.jpg",
         "assets/images/houses/house-1-2.jpg",
@@ -76,6 +81,10 @@
         "sauna",
         "billiards"
       ],
+      "services": [
+        "catering",
+        "transfer"
+      ],
       "images": [
         "assets/images/houses/house-2-1.jpg",
         "assets/images/houses/house-2-2.jpg"
@@ -116,6 +125,14 @@
         "sauna",
         "karaoke"
       ],
+      "services": [
+        "catering",
+        "show",
+        "chef",
+        "buffet",
+        "transfer",
+        "events"
+      ],
       "images": [
         "assets/images/houses/house-3-1.jpg",
         "assets/images/houses/house-3-2.jpg"
@@ -155,6 +172,10 @@
         "table-tennis",
         "sauna"
       ],
+      "services": [
+        "catering",
+        "chef"
+      ],
       "images": [
         "assets/images/houses/house-4-1.jpg"
       ],
@@ -192,6 +213,9 @@
         "pool",
         "table-tennis",
         "sauna"
+      ],
+      "services": [
+        "transfer"
       ],
       "images": [
         "assets/images/houses/house-5-1.jpg"
@@ -231,6 +255,10 @@
         "table-tennis",
         "sauna"
       ],
+      "services": [
+        "catering",
+        "transfer"
+      ],
       "images": [
         "assets/images/houses/house-6-1.jpg"
       ],
@@ -269,6 +297,13 @@
         "fireplace",
         "terrace",
         "parking"
+      ],
+      "services": [
+        "catering",
+        "show",
+        "chef",
+        "buffet",
+        "transfer"
       ],
       "images": [
         "assets/images/houses/house-7-1.jpg",
@@ -310,6 +345,11 @@
         "grill",
         "wifi"
       ],
+      "services": [
+        "catering",
+        "chef",
+        "transfer"
+      ],
       "images": [
         "assets/images/houses/house-8-1.jpg"
       ],
@@ -348,6 +388,10 @@
         "fishing",
         "gazebo",
         "parking"
+      ],
+      "services": [
+        "catering",
+        "transfer"
       ],
       "images": [
         "assets/images/houses/house-9-1.jpg",
@@ -388,6 +432,14 @@
         "stage",
         "parking",
         "security"
+      ],
+      "services": [
+        "catering",
+        "show",
+        "chef",
+        "buffet",
+        "transfer",
+        "events"
       ],
       "images": [
         "assets/images/houses/house-10-1.jpg",
@@ -430,6 +482,9 @@
         "forest",
         "quiet"
       ],
+      "services": [
+        "catering"
+      ],
       "images": [
         "assets/images/houses/house-11-1.jpg"
       ],
@@ -459,7 +514,7 @@
       "bedrooms": 2,
       "bathrooms": 1,
       "area": 120,
-      "rating": 4.5,
+      "rating": 3,
       "reviews": 2,
       "location": "Сосновый бор, 45 км от Могилёва",
       "features": [
@@ -469,6 +524,7 @@
         "forest",
         "quiet"
       ],
+      "services": [],
       "images": [
         "assets/images/houses/house-12-1.jpg",
         "assets/images/houses/house-12-2.jpg"
@@ -508,6 +564,10 @@
         "bbq",
         "fishing",
         "parking"
+      ],
+      "services": [
+        "catering",
+        "transfer"
       ],
       "images": [
         "assets/images/houses/house-new-1.jpg",
@@ -551,6 +611,11 @@
         "tv",
         "heating"
       ],
+      "services": [
+        "catering",
+        "buffet",
+        "transfer"
+      ],
       "images": [
         "assets/images/houses/house-14-1.jpg",
         "assets/images/houses/house-14-2.jpg"
@@ -590,6 +655,10 @@
         "wifi",
         "parking",
         "terrace"
+      ],
+      "services": [
+        "catering",
+        "chef"
       ],
       "images": [
         "assets/images/houses/house-15-1.jpg",
@@ -632,6 +701,10 @@
         "garden",
         "playground"
       ],
+      "services": [
+        "catering",
+        "transfer"
+      ],
       "images": [
         "assets/images/houses/house-16-1.jpg"
       ],
@@ -672,6 +745,13 @@
         "wifi",
         "karaoke"
       ],
+      "services": [
+        "catering",
+        "show",
+        "chef",
+        "buffet",
+        "events"
+      ],
       "images": [
         "assets/images/houses/house-17-1.jpg",
         "assets/images/houses/house-17-2.jpg"
@@ -711,6 +791,9 @@
         "kitchen",
         "tv",
         "washing-machine"
+      ],
+      "services": [
+        "transfer"
       ],
       "images": [
         "assets/images/houses/house-18-1.jpg",
@@ -754,6 +837,14 @@
         "wifi",
         "bbq"
       ],
+      "services": [
+        "catering",
+        "show",
+        "chef",
+        "buffet",
+        "transfer",
+        "events"
+      ],
       "images": [
         "assets/images/houses/house-19-1.jpg",
         "assets/images/houses/house-19-2.jpg",
@@ -795,6 +886,11 @@
         "parking",
         "garden"
       ],
+      "services": [
+        "catering",
+        "chef",
+        "transfer"
+      ],
       "images": [
         "assets/images/houses/house-20-1.jpg",
         "assets/images/houses/house-20-2.jpg",
@@ -802,120 +898,6 @@
         "assets/images/houses/house-20-4.jpg"
       ],
       "status": "approved"
-    }
-  ],
-  "categories": [
-    {
-      "id": "1",
-      "name": "С бассейном",
-      "slug": "pool",
-      "icon": "assets/icons/pool.svg",
-      "name_i18n": {
-        "ru": "С бассейном",
-        "be": "З басейнам",
-        "en": "With pool"
-      }
-    },
-    {
-      "id": "2",
-      "name": "Семейные и уютные",
-      "slug": "family",
-      "icon": "assets/icons/family.svg",
-      "name_i18n": {
-        "ru": "Семейные и уютные",
-        "be": "Сямейныя і ўтульныя",
-        "en": "Family and cozy"
-      }
-    },
-    {
-      "id": "3",
-      "name": "Под свадьбы и корпоративы",
-      "slug": "wedding",
-      "icon": "assets/icons/wedding.svg",
-      "name_i18n": {
-        "ru": "Под свадьбы и корпоративы",
-        "be": "Пад вяселлі і карпаратыўныя мерапрыемствы",
-        "en": "For weddings and corporate events"
-      }
-    },
-    {
-      "id": "4",
-      "name": "С русской баней на дровах",
-      "slug": "banya",
-      "icon": "assets/icons/banya.svg",
-      "name_i18n": {
-        "ru": "С русской баней на дровах",
-        "be": "З рускай баняй на дровах",
-        "en": "With wood-fired Russian banya"
-      }
-    }
-  ],
-  "services": [
-    {
-      "id": "1",
-      "name": "Кейтеринг",
-      "icon": "assets/icons/catering.svg",
-      "description": "Организация питания любой сложности",
-      "name_i18n": {
-        "ru": "Кейтеринг",
-        "be": "Кейтэрынг",
-        "en": "Catering"
-      }
-    },
-    {
-      "id": "2",
-      "name": "Шоу программа",
-      "icon": "assets/icons/show.svg",
-      "description": "Развлекательные программы для гостей",
-      "name_i18n": {
-        "ru": "Шоу программа",
-        "be": "Шоу праграма",
-        "en": "Show program"
-      }
-    },
-    {
-      "id": "3",
-      "name": "Выездной повар",
-      "icon": "assets/icons/chef.svg",
-      "description": "Приготовление блюд на вашей кухне",
-      "name_i18n": {
-        "ru": "Выездной повар",
-        "be": "Выязны кухар",
-        "en": "Private chef"
-      }
-    },
-    {
-      "id": "4",
-      "name": "Фуршет",
-      "icon": "assets/icons/buffet.svg",
-      "description": "Организация фуршетов и банкетов",
-      "name_i18n": {
-        "ru": "Фуршет",
-        "be": "Фуршэт",
-        "en": "Buffet"
-      }
-    },
-    {
-      "id": "5",
-      "name": "Трансфер",
-      "icon": "assets/icons/transfer.svg",
-      "description": "Доставка гостей к месту отдыха",
-      "name_i18n": {
-        "ru": "Трансфер",
-        "be": "Трансфер",
-        "en": "Transfer"
-      }
-    },
-    {
-      "id": "6",
-      "name": "Мероприятия под ключ",
-      "icon": "assets/icons/events.svg",
-      "description": "Полная организация мероприятий",
-      "name_i18n": {
-        "ru": "Мероприятия под ключ",
-        "be": "Мерапрыемствы пад ключ",
-        "en": "Turnkey events"
-      }
     }
   ],
   "users": [
@@ -1100,6 +1082,12 @@
       "houseId": "3",
       "createdAt": "2026-06-09T10:03:46.233Z",
       "id": "lKhUUzW-vfw"
+    },
+    {
+      "userId": "2",
+      "houseId": "5",
+      "createdAt": "2026-06-09T19:01:59.502Z",
+      "id": "fbJAPi9okcw"
     }
   ],
   "reviews": [
@@ -1460,7 +1448,7 @@
       "houseId": 12,
       "userId": 4,
       "userName": "Julius Novochrono",
-      "rating": ,
+      "rating": 1,
       "text": "Уютно и атмосферно. Гриль-зона отличная. Немного далеко от цивилизации, но в этом и кайф.",
       "phrases": [
         "Уютно",
@@ -1535,6 +1523,102 @@
         "Чистый дом"
       ],
       "createdAt": "2026-02-14T20:"
+    }
+  ],
+  "selection-requests": [
+    {
+      "id": "1",
+      "name": "Мария Козлова",
+      "phone": "+375 (29) 555-12-34",
+      "checkIn": "2026-07-10",
+      "checkOut": "2026-07-15",
+      "guests": 6,
+      "budget": 800,
+      "requirements": "Нужен дом с бассейном и баней, желательно недалеко от Могилёва. 3-4 спальни.",
+      "applicantType": "guest",
+      "userId": null,
+      "userEmail": null,
+      "status": "pending",
+      "createdAt": "2026-06-01T09:30:00.000Z"
+    },
+    {
+      "id": "2",
+      "name": "Иван Иванов",
+      "phone": "+375297654321",
+      "checkIn": "2026-08-01",
+      "checkOut": "2026-08-07",
+      "guests": 4,
+      "budget": 1200,
+      "requirements": "Семейный отдых, тихое место, мангал и детская площадка.",
+      "applicantType": "renter",
+      "userId": "2",
+      "userEmail": "ivan@example.by",
+      "status": "processed",
+      "createdAt": "2026-06-03T14:15:00.000Z",
+      "processedAt": "2026-06-07T21:37:02.487Z"
+    },
+    {
+      "id": "3",
+      "name": "Александр Петров",
+      "phone": "+375 (33) 222-44-55",
+      "checkIn": "2026-09-15",
+      "checkOut": "2026-09-20",
+      "guests": 12,
+      "budget": 2500,
+      "requirements": "Корпоративный отдых для IT-компании. Нужен большой коттедж с караоке, бильярдом и Wi-Fi. Желательно с бассейном.",
+      "applicantType": "guest",
+      "userId": null,
+      "userEmail": "petrov@techcorp.by",
+      "status": "pending",
+      "createdAt": "2026-06-08T11:20:00.000Z"
+    },
+    {
+      "id": "4",
+      "name": "Елена Сидорова",
+      "phone": "+375 (44) 777-88-99",
+      "checkIn": "2026-07-25",
+      "checkOut": "2026-07-28",
+      "guests": 2,
+      "budget": 600,
+      "requirements": "Романтический уикенд для двоих. Нужен уютный дом с камином и красивым видом. Желательно A-frame или эко-домик.",
+      "applicantType": "renter",
+      "userId": "4",
+      "userEmail": "juliusnovo@gmail.com",
+      "status": "rejected",
+      "createdAt": "2026-06-05T16:45:00.000Z",
+      "processedAt": "2026-06-06T10:12:00.000Z",
+      "rejectionReason": "К сожалению, на указанные даты все подходящие дома уже забронированы."
+    },
+    {
+      "id": "5",
+      "name": "Дмитрий Волков",
+      "phone": "+375 (25) 111-22-33",
+      "checkIn": "2026-10-01",
+      "checkOut": "2026-10-05",
+      "guests": 20,
+      "budget": 4000,
+      "requirements": "Свадьба на 20 человек. Нужна вилла с банкетным залом, сценой и парковкой. Обязательно бассейн и охрана.",
+      "applicantType": "guest",
+      "userId": null,
+      "userEmail": "volkov.d@mail.ru",
+      "status": "processed",
+      "createdAt": "2026-06-09T08:00:00.000Z",
+      "processedAt": "2026-06-09T14:30:00.000Z"
+    },
+    {
+      "name": "Иван Иванов",
+      "phone": "+375297654321",
+      "checkIn": null,
+      "checkOut": null,
+      "guests": 2,
+      "budget": null,
+      "requirements": null,
+      "applicantType": "renter",
+      "userId": "2",
+      "userEmail": "ivan@example.by",
+      "status": "pending",
+      "createdAt": "2026-06-09T19:12:14.581Z",
+      "id": "CmKEsWcqWck"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
