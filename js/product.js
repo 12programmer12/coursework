@@ -14,6 +14,11 @@ import {
     recalculateHouseRating,
     renderStars
 } from './reviews.js';
+import {
+    calculateHousePrices,
+    getAdditionalServiceLabels,
+    getHouseAmenityLabels
+} from './house-common.js';
 
 const CONTACT_PHONE = '+3758435286548';
 const CONTACT_TELEGRAM = 'https://t.me/domiktut';
@@ -116,18 +121,13 @@ const Product = {
         document.getElementById('featureArea').textContent =
             `${this.house.area} ${i18n.t('product.squareMeters')}`;
 
-        document.getElementById('priceWeekday').textContent =
-            `${this.house.price} ${currency}`;
-        document.getElementById('priceFriday').textContent =
-            `${Math.round(this.house.price * 1.25)} ${currency}`;
-        document.getElementById('priceSaturday').textContent =
-            `${Math.round(this.house.price * 1.5)} ${currency}`;
-        document.getElementById('priceSunday').textContent =
-            `${Math.round(this.house.price * 1.5)} ${currency}`;
-        document.getElementById('depositAmount').textContent =
-            `${Math.round(this.house.price * 0.2)} ${currency}`;
-        document.getElementById('fullWeekendPrice').textContent =
-            `${Math.round(this.house.price * 1.5)} ${currency}`;
+        const prices = calculateHousePrices(this.house.price);
+        document.getElementById('priceWeekday').textContent = `${prices.weekday} ${currency}`;
+        document.getElementById('priceFriday').textContent = `${prices.friday} ${currency}`;
+        document.getElementById('priceSaturday').textContent = `${prices.saturday} ${currency}`;
+        document.getElementById('priceSunday').textContent = `${prices.sunday} ${currency}`;
+        document.getElementById('depositAmount').textContent = `${prices.deposit} ${currency}`;
+        document.getElementById('fullWeekendPrice').textContent = `${prices.fullWeekend} ${currency}`;
     },
 
     renderRatingSummary() {
@@ -145,7 +145,7 @@ const Product = {
         container.hidden = false;
         container.innerHTML = `
             <span class="product__rating-stars" aria-label="${rating} ${i18n.t('reviews.outOf5')}">
-                ${renderStars(Math.round(rating))}
+                ${renderStars(rating)}
             </span>
             <span class="product__rating-value">${rating}</span>
             <span class="product__rating-count">
@@ -177,24 +177,15 @@ const Product = {
     },
 
     renderAmenities() {
-        const features = this.house.features || [];
-        const featuresI18n = this.house.features_i18n || {};
-        const currentLang = i18n.currentLang;
-
+        const amenities = getHouseAmenityLabels(this.house, i18n.currentLang);
         const container = document.getElementById('productAmenities');
-        container.innerHTML = features.map((feature, index) => {
-            const translatedFeature = featuresI18n[currentLang]?.[index] || feature;
-            return `<div class="amenity-item">${translatedFeature}</div>`;
-        }).join('');
+        container.innerHTML = amenities.map(label =>
+            `<div class="amenity-item">${label}</div>`
+        ).join('');
     },
 
     renderAdditionalServices() {
-        const services = [
-            i18n.t('services.catering'),
-            i18n.t('services.show'),
-            i18n.t('services.chef')
-        ];
-
+        const services = getAdditionalServiceLabels(i18n.currentLang);
         const container = document.getElementById('additionalServices');
         container.innerHTML = services.map(service =>
             `<div class="service-item">${service}</div>`

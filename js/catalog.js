@@ -1,6 +1,7 @@
 import API from './api.js';
 import i18n from './i18n.js';
 import { showNotification, createHouseCard, updateFavoriteButtons, initFavorites } from './main.js';
+import { getHouseAmenityLabels } from './house-common.js';
 import AccessibilityManager from './accessibility.js';
 import { enrichHousesWithReviews, sortHouses, syncAllHouseReviewStats } from './reviews.js';
 import { initHeaderBehavior } from './header-behavior.js';
@@ -49,7 +50,14 @@ const Catalog = {
         }
     },
 
+    syncCategoryFilters() {
+        this.filters.categories = [...document.querySelectorAll('[data-category-filter]:checked')]
+            .map(cb => cb.value);
+    },
+
     async applyFilters() {
+        this.syncCategoryFilters();
+
         const params = {};
 
         if (this.filters.search) {
@@ -71,12 +79,12 @@ const Catalog = {
                     const name = (house.name_i18n?.ru || house.name || '').toLowerCase();
                     const location = (house.location_i18n?.ru || house.location || '').toLowerCase();
                     const desc = (house.description_i18n?.ru || house.description || '').toLowerCase();
-                    const features = (house.features || []).join(' ').toLowerCase();
+                    const amenities = getHouseAmenityLabels(house, i18n.currentLang).join(' ').toLowerCase();
 
                     return name.includes(searchLower) ||
                         location.includes(searchLower) ||
                         desc.includes(searchLower) ||
-                        features.includes(searchLower);
+                        amenities.includes(searchLower);
                 });
             }
 
@@ -194,8 +202,8 @@ const Catalog = {
             this.filters.categories.forEach(cat => {
                 const label = document.querySelector(`[data-category-filter][value="${cat}"]`)?.nextElementSibling?.textContent || cat;
                 tags.push({ label, type: 'category', value: cat });
+                activeCount++;
             });
-            activeCount++;
         }
 
         if (this.filters.minBedrooms) {
@@ -218,18 +226,13 @@ const Catalog = {
         container.innerHTML = tags.map(tag => `
             <span class="active-filter-tag">
                 ${tag.label}
-                <svg class="active-filter-tag__remove" width="16" height="16" viewBox="0 0 16 16" fill="none" data-remove-filter="${tag.type}" data-filter-value="${tag.value || ''}">
-                    <path d="M4 4l8 8M12 4L4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
+                <button type="button" class="active-filter-tag__remove" aria-label="${i18n.t('catalog.reset')}" data-remove-filter="${tag.type}" data-filter-value="${tag.value ?? ''}">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                        <path d="M4 4l8 8M12 4L4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
             </span>
         `).join('');
-
-        container.querySelectorAll('[data-remove-filter]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const type = btn.getAttribute('data-remove-filter');
-                this.removeFilter(type, btn.getAttribute('data-filter-value'));
-            });
-        });
     },
 
     removeFilter(type, value) {
@@ -245,9 +248,16 @@ const Catalog = {
                 document.querySelectorAll('.filter-dropdown__guest-btn[data-guests]').forEach(b => b.classList.remove('active'));
                 break;
             case 'category':
-                this.filters.categories = this.filters.categories.filter(c => c !== value);
-                const cb = document.querySelector(`[data-category-filter][value="${value}"]`);
-                if (cb) cb.checked = false;
+                if (value) {
+                    this.filters.categories = this.filters.categories.filter(c => c !== value);
+                    const cb = document.querySelector(`[data-category-filter][value="${value}"]`);
+                    if (cb) cb.checked = false;
+                } else {
+                    this.filters.categories = [];
+                    document.querySelectorAll('[data-category-filter]').forEach(item => {
+                        item.checked = false;
+                    });
+                }
                 break;
             case 'bedrooms':
                 this.filters.minBedrooms = null;
@@ -277,6 +287,14 @@ const Catalog = {
     },
 
     bindEvents() {
+        document.getElementById('activeFilters')?.addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-remove-filter]');
+            if (!btn) return;
+            e.preventDefault();
+            e.stopPropagation();
+            this.removeFilter(btn.dataset.removeFilter, btn.dataset.filterValue ?? '');
+        });
+
         const searchInput = document.getElementById('catalogSearch');
         let searchDebounce;
         searchInput?.addEventListener('input', (e) => {
@@ -380,16 +398,6 @@ const Catalog = {
                 } else {
                     this.filters.categories = this.filters.categories.filter(c => c !== cb.value);
                 }
-            });
-        });
-
-        document.querySelectorAll('[data-selection]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                this.filters.categories = [btn.getAttribute('data-selection')];
-                document.querySelectorAll('[data-category-filter]').forEach(cb => {
-                    cb.checked = cb.value === btn.getAttribute('data-selection');
-                });
-                this.applyFilters();
             });
         });
 

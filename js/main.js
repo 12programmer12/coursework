@@ -6,7 +6,8 @@ import Accordion from './components/accordion.js';
 import Modal from './components/modal.js';
 import API from './api.js';
 import i18n from './i18n.js';
-import { enrichHousesWithReviews, sortHouses } from './reviews.js';
+import { enrichHousesWithReviews, sortHouses, renderStars } from './reviews.js';
+import { getHouseAmenityLabels } from './house-common.js';
 import { initHeaderBehavior } from './header-behavior.js';
 
 
@@ -127,12 +128,12 @@ function createHouseCard(house) {
 
     const houseName = house.name_i18n?.[i18n.currentLang] || house.name;
     const imagePath = fixImagePath(house.images?.[0] || 'assets/images/placeholder.jpg');
-    const translatedFeatures = house.features_i18n?.[i18n.currentLang] || house.features || [];
+    const translatedFeatures = getHouseAmenityLabels(house, i18n.currentLang);
+    const rating = house.rating || 0;
 
     card.innerHTML = `
         <div class="catalog-card__image">
             <img src="${imagePath}" alt="${houseName}" loading="lazy">
-            ${house.isHit ? '<span class="catalog-card__badge" data-i18n="catalog.hit">Хит</span>' : ''}
             <button class="catalog-card__favorite" 
                     data-favorite="${house.id}"
                     aria-label="${i18n.t('catalog.addToFavorites')}"
@@ -147,7 +148,7 @@ function createHouseCard(house) {
         <div class="catalog-card__content">
             <h3 class="catalog-card__title" data-house-name>${houseName}</h3>
             <div class="catalog-card__rating">
-                <span class="catalog-card__rating-stars">★ ${house.rating || '0'}</span>
+                <span class="catalog-card__rating-stars" aria-label="${rating}">${renderStars(rating)}</span>
                 <span class="catalog-card__rating-count">${i18n.t('reviews.count').replace('{count}', house.reviews || 0)}</span>
             </div>
             <div class="catalog-card__features">
