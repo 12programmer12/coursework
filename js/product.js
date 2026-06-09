@@ -16,7 +16,7 @@ import {
 } from './reviews.js';
 import {
     calculateHousePrices,
-    getAdditionalServiceLabels,
+    getHouseServiceLabels,
     getHouseAmenityLabels
 } from './house-common.js';
 
@@ -184,13 +184,21 @@ const Product = {
         ).join('');
     },
 
-    renderAdditionalServices() {
-        const services = getAdditionalServiceLabels(i18n.currentLang);
-        const container = document.getElementById('additionalServices');
-        container.innerHTML = services.map(service =>
-            `<div class="service-item">${service}</div>`
-        ).join('');
-    },
+        renderAdditionalServices() {
+            const labels = getHouseServiceLabels(this.house, i18n.currentLang);
+            const container = document.getElementById('additionalServices');
+            
+            if (!container) return;
+            
+            if (labels.length === 0) {
+                container.innerHTML = `<p class="product__text">${i18n.t('product.noServices') || 'Дополнительные услуги не предоставляются'}</p>`;
+                return;
+            }
+            
+            container.innerHTML = labels.map(label =>
+                `<div class="service-item">${label}</div>`
+            ).join('');
+        },
 
     getCurrentUser() {
         const stored = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
