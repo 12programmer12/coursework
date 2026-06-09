@@ -137,6 +137,10 @@
     color: var(--text-on-primary);
 }
 
+.catalog-card__favorite.active svg path {
+    fill: currentColor;
+}
+
 .catalog-card__content {
     padding: var(--spacing-md);
 }

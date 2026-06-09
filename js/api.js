@@ -138,7 +138,9 @@ const API = {
 
     async getFavorites(userId) {
         try {
-            return await this.fetch(`/favorites?userId=${userId}`);
+            const all = await this.fetch('/favorites');
+            const normalizedUserId = String(userId);
+            return all.filter(item => item.userId != null && String(item.userId) === normalizedUserId);
         } catch (error) {
             console.error('API getFavorites error:', error);
             return [];
@@ -146,9 +148,14 @@ const API = {
     },
 
     async addToFavorites(favoriteData) {
+        const payload = {
+            ...favoriteData,
+            userId: String(favoriteData.userId),
+            houseId: String(favoriteData.houseId)
+        };
         return this.fetch('/favorites', {
             method: 'POST',
-            body: JSON.stringify(favoriteData)
+            body: JSON.stringify(payload)
         });
     },
 

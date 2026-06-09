@@ -1,6 +1,6 @@
 import API from './api.js';
 import i18n from './i18n.js';
-import { showNotification, createHouseCard, updateFavoriteButtons } from './main.js';
+import { showNotification, createHouseCard, updateFavoriteButtons, initFavorites } from './main.js';
 import AccessibilityManager from './accessibility.js';
 import { enrichHousesWithReviews, sortHouses, syncAllHouseReviewStats } from './reviews.js';
 import { initHeaderBehavior } from './header-behavior.js';
@@ -29,10 +29,11 @@ const Catalog = {
         initHeaderBehavior();
 
         await i18n.init();
-        
+        await initFavorites();
+
         await this.loadHouses();
         this.bindEvents();
-        this.render();
+        await this.render();
     },
 
     async loadHouses() {
@@ -95,7 +96,7 @@ const Catalog = {
         }
     },
 
-    render() {
+    async render() {
         const grid = document.getElementById('catalogGrid');
         const emptyState = document.getElementById('emptyState');
         const pagination = document.getElementById('catalogPagination');
@@ -134,7 +135,7 @@ const Catalog = {
             i18n.translateCardsWithHouses(pageHouses);
         }, 50);
 
-        updateFavoriteButtons();
+        await updateFavoriteButtons();
     },
 
     renderPagination(totalPages) {

@@ -14,6 +14,7 @@ const Profile = {
         this.hidePreloader();
         this.checkAuth();
         await i18n.init();
+       
         await initFavorites();
         await this.loadUserData();
         this.bindEvents();
@@ -24,53 +25,71 @@ const Profile = {
         });
     },
 
-    async loadFavorites() {
-        try {
-            const container = document.getElementById('favoritesList');
-            const records = await API.getFavorites(this.currentUser.id);
+  async loadFavorites() {
+    try {
+        const container = document.getElementById('favoritesList');
+        if (!container) return;
 
-            if (!records || records.length === 0) {
-                container.innerHTML = this.renderEmptyState('profile.favorites.empty');
-                return;
-            }
+        // Получаем список избранных из API
+        const records = await API.getFavorites(this.currentUser.id);
+        console.log('📋 Записи избранного:', records);
 
-            const housePromises = records.map(record => API.getHouseById(record.houseId));
-            const houses = await Promise.all(housePromises);
+        // Если записей нет, показываем пустое состояние
+        if (!records || records.length === 0) {
+            container.innerHTML = this.renderEmptyState('profile.favorites.empty');
+            return;
+        }
 
-            const validHouses = houses.filter(Boolean);
+        const uniqueHouseIds = [...new Set(records.map(record => String(record.houseId)))];
 
-            if (validHouses.length === 0) {
-                container.innerHTML = this.renderEmptyState('profile.favorites.empty');
-                return;
-            }
-
-            container.innerHTML = validHouses.map(house => `
-                <article class="favorite-card">
-                    <a href="product.html?id=${house.id}" class="favorite-card__link">
-                        <img src="${fixImagePath(house.images?.[0] || '')}" alt="${house.name}" class="favorite-card__image">
-                        <div class="favorite-card__info">
-                            <h3 class="favorite-card__title">${house.name_i18n?.[i18n.currentLang] || house.name}</h3>
-                            <span class="favorite-card__price">${house.price} ${i18n.t('common.currency')}</span>
-                            ${house.rating ? `<span class="favorite-card__rating">★ ${house.rating} · ${house.reviews || 0}</span>` : ''}
-                        </div>
-                    </a>
-                    <button class="btn btn--outline btn--sm favorite-card__remove" data-favorite="${house.id}">
-                        ${i18n.t('common.removeFromFavorites') || 'Удалить'}
-                    </button>
-                </article>
-            `).join('');
-
-            await updateFavoriteButtons();
-
-        } catch (error) {
-            console.error('❌ Error loading favorites:', error);
-            const container = document.getElementById('favoritesList');
-            if (container) {
-                container.innerHTML = this.renderEmptyState('profile.favorites.empty');
+        const houses = [];
+        for (const houseId of uniqueHouseIds) {
+            try {
+                const house = await API.getHouseById(houseId);
+                if (house) {
+                    houses.push(house);
+                } else {
+                    console.warn(`⚠️ Дом с ID ${houseId} не найден`);
+                }
+            } catch (err) {
+                console.warn(`⚠️ Ошибка при загрузке дома ${houseId}:`, err);
             }
         }
-    },
 
+       
+        if (houses.length === 0) {
+            container.innerHTML = this.renderEmptyState('profile.favorites.empty');
+            return;
+        }
+
+        // Рендерим карточки избранных домов
+        container.innerHTML = houses.map(house => `
+            <article class="favorite-card">
+                <a href="product.html?id=${house.id}" class="favorite-card__link">
+                    <img src="${fixImagePath(house.images?.[0] || '')}" alt="${house.name}" class="favorite-card__image">
+                    <div class="favorite-card__info">
+                        <h3 class="favorite-card__title">${house.name_i18n?.[i18n.currentLang] || house.name}</h3>
+                        <span class="favorite-card__price">${house.price} ${i18n.t('common.currency')}</span>
+                        ${house.rating ? `<span class="favorite-card__rating">★ ${house.rating} · ${house.reviews || 0}</span>` : ''}
+                    </div>
+                </a>
+                <button class="btn btn--outline btn--sm favorite-card__remove" data-favorite="${house.id}">
+                    ${i18n.t('common.removeFromFavorites') || 'Удалить'}
+                </button>
+            </article>
+        `).join('');
+
+        // Обновляем состояние кнопок "Избранное" на странице
+        await updateFavoriteButtons();
+
+    } catch (error) {
+        console.error('❌ Ошибка при загрузке избранного:', error);
+        const container = document.getElementById('favoritesList');
+        if (container) {
+            container.innerHTML = this.renderEmptyState('profile.favorites.empty');
+        }
+    }
+},
     hidePreloader() {
         const preloader = document.querySelector('[data-preloader]');
         if (preloader) {

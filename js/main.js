@@ -1,4 +1,4 @@
-import ThemeManager from './theme.js';
+﻿import ThemeManager from './theme.js';
 import AccessibilityManager from './accessibility.js';
 import BurgerMenu from './components/burger-menu.js';
 import Slider from './components/slider.js';
@@ -224,7 +224,7 @@ function initFilters() {
 let favoritesInitialized = false;
 
 async function initFavorites() {
-    localStorage.removeItem('favorites');
+   
 
     if (favoritesInitialized) {
         await updateFavoriteButtons();
@@ -277,25 +277,18 @@ async function handleFavoriteClick(houseId, btn) {
 
         if (existing) {
             await API.removeFromFavorites(existing.id);
-            btn.classList.remove('active');
-            const svg = btn.querySelector('svg path');
-            if (svg) svg.setAttribute('fill', 'none');
             showNotification(i18n.t('common.removedFromFavorites'), 'success');
         } else {
             await API.addToFavorites({
-                userId: user.id,
-                houseId,
+                userId: String(user.id),
+                houseId: String(houseId),
                 createdAt: new Date().toISOString()
             });
-            btn.classList.add('active');
-            const svg = btn.querySelector('svg path');
-            if (svg) svg.setAttribute('fill', 'currentColor');
             showNotification(i18n.t('common.addedToFavorites'), 'success');
         }
 
-        if (window.location.pathname.includes('profile.html')) {
-            window.dispatchEvent(new CustomEvent('favoritesChanged'));
-        }
+        await updateFavoriteButtons();
+        window.dispatchEvent(new CustomEvent('favoritesChanged'));
     } catch (error) {
         console.error('❌ Favorite error:', error);
         showNotification(i18n.t('common.error'), 'error');
@@ -308,7 +301,7 @@ async function getFavorites() {
 
     try {
         const records = await API.getFavorites(user.id);
-        return records.map(item => String(item.houseId));
+        return [...new Set(records.map(item => String(item.houseId)))];
     } catch (error) {
         console.error('❌ Error loading favorites:', error);
         return [];
