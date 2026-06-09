@@ -570,20 +570,21 @@ html[data-accessibility="active"][data-font-size="extra-large"] .search-form__bt
 
 /* Стили для hero-оверлея при разных схемах */
 html[data-accessibility="active"][data-color-scheme="black-yellow"] .hero__overlay,
-html[data-accessibility="active"][data-color-scheme="blue-yellow"] .hero__overlay {
-    background: rgba(0, 0, 0, 0.7);
-}
-
-html[data-accessibility="active"][data-color-scheme="white-black"] .hero__overlay {
-    background: rgba(255, 255, 255, 0.7);
-}
-
-html[data-accessibility="active"][data-color-scheme="black-white"] .hero__overlay {
-    background: rgba(0, 0, 0, 0.85);
-}
-
+html[data-accessibility="active"][data-color-scheme="blue-yellow"] .hero__overlay,
+html[data-accessibility="active"][data-color-scheme="white-black"] .hero__overlay,
+html[data-accessibility="active"][data-color-scheme="black-white"] .hero__overlay,
 html[data-accessibility="active"][data-color-scheme="dark-blue-light"] .hero__overlay {
-    background: rgba(10, 14, 39, 0.85);
+    background: var(--bg-primary);
+}
+
+html[data-accessibility="active"] .hero__container {
+    color: var(--text-primary);
+}
+
+html[data-accessibility="active"] .hero__title,
+html[data-accessibility="active"] .hero__subtitle {
+    color: var(--text-primary);
+    opacity: 1;
 }
 
 /* Стили для категорий при разных схемах */

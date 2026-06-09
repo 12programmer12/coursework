@@ -1,4 +1,4 @@
-﻿import API from './api.js';
+import API from './api.js';
 import i18n from './i18n.js';
 import ThemeManager from './theme.js';
 import AccessibilityManager from "./accessibility.js";
@@ -103,13 +103,14 @@ const Landlord = {
         });
 
         document.addEventListener('click', async (e) => {
-            if (e.target.matches('[data-edit-property]')) {
-                const id = parseInt(e.target.getAttribute('data-edit-property'));
-                this.openEditModal(id);
+            const editBtn = e.target.closest('[data-edit-property]');
+            const deleteBtn = e.target.closest('[data-delete-property]');
+
+            if (editBtn) {
+                await this.openEditModal(editBtn.getAttribute('data-edit-property'));
             }
-            if (e.target.matches('[data-delete-property]')) {
-                const id = parseInt(e.target.getAttribute('data-delete-property'));
-                await this.deleteProperty(id);
+            if (deleteBtn) {
+                await this.deleteProperty(deleteBtn.getAttribute('data-delete-property'));
             }
         });
 
@@ -138,8 +139,8 @@ const Landlord = {
         try {
             const propertyLinks = await API.getProperties({ landlordId: this.currentUser.id });
             const allHouses = await API.getHouses();
-            const houseIds = propertyLinks.map(link => link.houseId);
-            this.myHouses = allHouses.filter(h => houseIds.includes(h.id));
+            const houseIds = propertyLinks.map(link => String(link.houseId));
+            this.myHouses = allHouses.filter(h => houseIds.includes(String(h.id)));
 
             document.getElementById('propertyCount').textContent = this.myHouses.length;
             const container = document.getElementById('propertiesList');
@@ -151,7 +152,7 @@ const Landlord = {
 
             container.innerHTML = this.myHouses.map(h => {
                 const img = fixImagePath(h.images?.[0]);
-                const link = propertyLinks.find(l => l.houseId === h.id);
+                const link = propertyLinks.find(l => String(l.houseId) === String(h.id));
                 const status = link?.status || h.status || 'pending';
                 const statusClass = status === 'approved' ? 'approved' : status === 'rejected' ? 'rejected' : 'pending';
 
@@ -179,9 +180,9 @@ const Landlord = {
         try {
             const container = document.getElementById('landlordBookingsList');
             const allBookings = await API.getBookings();
-            const myHouseIds = this.myHouses.map(h => h.id);
+            const myHouseIds = this.myHouses.map(h => String(h.id));
             const myBookings = allBookings.filter(booking =>
-                myHouseIds.includes(booking.houseId)
+                myHouseIds.includes(String(booking.houseId))
             );
 
             if (myBookings.length === 0) {
@@ -271,7 +272,7 @@ const Landlord = {
     },
 
     openEditModal(id) {
-        const house = this.myHouses.find(h => h.id === id);
+        const house = this.myHouses.find(h => String(h.id) === String(id));
         if (!house) return;
 
         document.getElementById('propId').value = house.id;

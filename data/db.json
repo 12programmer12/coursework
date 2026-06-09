@@ -1559,6 +1559,18 @@
     {
       "houseId": 3,
       "id": "10"
+    },
+    {
+      "userId": "1",
+      "houseId": "2",
+      "createdAt": "2026-06-09T10:03:43.920Z",
+      "id": "cMzQHGLoFIo"
+    },
+    {
+      "userId": "1",
+      "houseId": "3",
+      "createdAt": "2026-06-09T10:03:46.233Z",
+      "id": "lKhUUzW-vfw"
     }
   ],
   "reviews": [

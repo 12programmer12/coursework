@@ -1,6 +1,9 @@
-﻿import API from './api.js';
+import API from './api.js';
 import i18n from './i18n.js';
-import { showNotification, createHouseCard } from './main.js';
+import { showNotification, createHouseCard, updateFavoriteButtons } from './main.js';
+import AccessibilityManager from './accessibility.js';
+import { enrichHousesWithReviews, sortHouses, syncAllHouseReviewStats } from './reviews.js';
+import { initHeaderBehavior } from './header-behavior.js';
 
 const Catalog = {
     _initialized: false,
@@ -21,6 +24,11 @@ const Catalog = {
     async init() {
         if (this._initialized) return;
         this._initialized = true;
+        
+        await i18n.init();
+        AccessibilityManager.init();
+        initHeaderBehavior();
+        
         await this.loadHouses();
         this.bindEvents();
         this.render();
@@ -28,8 +36,10 @@ const Catalog = {
 
     async loadHouses() {
         try {
-            this.allHouses = await API.getHouses();
-            this.filteredHouses = [...this.allHouses];
+            const houses = await API.getHouses();
+            await syncAllHouseReviewStats().catch(() => null);
+            this.allHouses = await enrichHousesWithReviews(houses);
+            this.filteredHouses = sortHouses(this.allHouses, this.sort);
         } catch (error) {
             console.error('Error loading houses:', error);
             this.allHouses = [];
@@ -49,14 +59,9 @@ const Catalog = {
         if (this.filters.maxGuests !== null) params.guests_gte = this.filters.maxGuests;
         if (this.filters.minBedrooms !== null) params.bedrooms_gte = this.filters.minBedrooms;
 
-        const [field, order] = this.sort.split('-');
-        if (field !== 'name') {
-            params._sort = field;
-            params._order = order;
-        }
-
         try {
             let houses = await API.getHouses(params);
+            houses = await enrichHousesWithReviews(houses);
 
             if (this.filters.search) {
                 const searchLower = this.filters.search.toLowerCase();
@@ -79,17 +84,7 @@ const Catalog = {
                 );
             }
 
-            if (field === 'name') {
-                houses.sort((a, b) => {
-                    const nameA = a.name_i18n?.[i18n.currentLang] || a.name;
-                    const nameB = b.name_i18n?.[i18n.currentLang] || b.name;
-                    return order === 'asc'
-                        ? nameA.localeCompare(nameB, 'be-BY')
-                        : nameB.localeCompare(nameA, 'be-BY');
-                });
-            }
-
-            this.filteredHouses = houses;
+            this.filteredHouses = sortHouses(houses, this.sort);
             this.currentPage = 1;
             this.render();
             this.updateActiveFilters();
@@ -137,6 +132,8 @@ const Catalog = {
         setTimeout(() => {
             i18n.translateCardsWithHouses(pageHouses);
         }, 50);
+
+        updateFavoriteButtons();
     },
 
     renderPagination(totalPages) {
@@ -217,13 +214,13 @@ const Catalog = {
         filterCount.textContent = activeCount;
 
         container.innerHTML = tags.map(tag => `
-      <span class="active-filter-tag">
-        ${tag.label}
-        <svg class="active-filter-tag__remove" width="16" height="16" viewBox="0 0 16 16" fill="none" data-remove-filter="${tag.type}" data-filter-value="${tag.value || ''}">
-          <path d="M4 4l8 8M12 4L4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-      </span>
-    `).join('');
+            <span class="active-filter-tag">
+                ${tag.label}
+                <svg class="active-filter-tag__remove" width="16" height="16" viewBox="0 0 16 16" fill="none" data-remove-filter="${tag.type}" data-filter-value="${tag.value || ''}">
+                    <path d="M4 4l8 8M12 4L4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </span>
+        `).join('');
 
         container.querySelectorAll('[data-remove-filter]').forEach(btn => {
             btn.addEventListener('click', () => {

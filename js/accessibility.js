@@ -109,6 +109,15 @@
         this.updateAccessibilityPanel();
         this.lastHeaderOffset = null;
         this.syncHeaderHeight();
+        this.keepHeaderVisible();
+    },
+
+    keepHeaderVisible() {
+        if (!this.currentSettings.enabled) return;
+
+        document.querySelectorAll('.header').forEach(header => {
+            header.classList.remove('header--hidden');
+        });
     },
 
     syncHeaderHeight() {

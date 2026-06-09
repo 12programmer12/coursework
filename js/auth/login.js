@@ -51,18 +51,24 @@ const Login = {
         form?.addEventListener('submit', (e) => this.handleSubmit(e));
 
         document.querySelectorAll('[data-modal-close]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.modal').forEach(m => {
-                    m.classList.remove('active');
-                    m.hidden = true;
-                });
-            });
+            btn.addEventListener('click', () => this.hideLoginError());
+        });
+
+        document.querySelector('[data-modal="login-error"]')?.addEventListener('click', (e) => {
+            if (e.target.matches('[data-modal="login-error"]')) {
+                this.hideLoginError();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.hideLoginError();
+            }
         });
     },
 
     validateField(input) {
         const value = input.value.trim();
-        const errorEl = document.querySelector(`[data-error="${input.name}"]`);
 
         if (!value) {
             this.showError(input.name, i18n.t('validation.required'));
@@ -90,6 +96,33 @@ const Login = {
     clearError(field) {
         const errorEl = document.querySelector(`[data-error="${field}"]`);
         if (errorEl) errorEl.textContent = '';
+    },
+
+    showLoginError(message) {
+        const modal = document.querySelector('[data-modal="login-error"]');
+        const messageEl = document.getElementById('loginErrorMessage');
+
+        if (messageEl) {
+            messageEl.textContent = message;
+        }
+
+        if (!modal) return;
+
+        modal.removeAttribute('hidden');
+        modal.classList.add('active');
+        document.body.classList.add('modal-open');
+        document.body.style.overflow = 'hidden';
+        modal.querySelector('[data-modal-close]')?.focus();
+    },
+
+    hideLoginError() {
+        const modal = document.querySelector('[data-modal="login-error"]');
+        if (!modal) return;
+
+        modal.classList.remove('active');
+        modal.setAttribute('hidden', '');
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
     },
 
     async handleSubmit(e) {
@@ -123,8 +156,12 @@ const Login = {
                 id: user.id,
                 email: user.email,
                 role: user.role,
-                name: user.firstName
+                name: user.firstName,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                phone: user.phone
             };
+
             if (remember) {
                 localStorage.setItem('currentUser', JSON.stringify(session));
             } else {
@@ -132,18 +169,15 @@ const Login = {
             }
 
             const redirect = {
-                'renter': '../pages/catalog.html',
-                'landlord': '../pages/admin.html?tab=properties',
-                'admin': '../pages/admin.html'
+                renter: '../pages/catalog.html',
+                landlord: '../pages/landlord-profile.html',
+                admin: '../pages/admin.html'
             };
             window.location.href = redirect[user.role] || '../index.html';
 
         } catch (error) {
             console.error('Login error:', error);
-            const modal = document.querySelector('[data-modal="login-error"]');
-            document.getElementById('loginErrorMessage').textContent = i18n.t('auth.login.errorText');
-            modal.classList.add('active');
-            modal.hidden = false;
+            this.showLoginError(i18n.t('auth.login.errorText'));
         } finally {
             submitBtn.disabled = false;
         }

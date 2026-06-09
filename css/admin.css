@@ -1,4 +1,4 @@
-﻿.admin-container {
+.admin-container {
     display: flex;
     min-height: calc(100vh - var(--header-height));
     padding-top: var(--header-height);
@@ -206,6 +206,79 @@
 .booking-card__status.cancelled {
     background: #fee2e2;
     color: #991b1b;
+}
+
+.booking-card__status.processed {
+    background: #e0e7ff;
+    color: #3730a3;
+}
+
+.selections-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.selection-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.selection-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.selection-card__title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin: 0 0 var(--spacing-xs);
+}
+
+.selection-card__meta {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    margin: 0;
+}
+
+.selection-card__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    align-items: center;
+}
+
+.selection-card__type {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+}
+
+.selection-card__requirements {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius-md);
+    border-left: 3px solid var(--color-primary);
+}
+
+.selection-card__requirements p {
+    margin: var(--spacing-xs) 0 0;
+    color: var(--text-primary);
+    line-height: var(--line-height-relaxed);
+    white-space: pre-wrap;
 }
 
 .booking-card__info {

@@ -1,28 +1,53 @@
-﻿import API from './api.js';
+import API from './api.js';
 import i18n from './i18n.js';
+import Modal from './components/modal.js';
 
 import { fixImagePath } from './main.js';
 import AccessibilityManager from "./accessibility.js";
+import { initHeaderBehavior } from './header-behavior.js';
+import {
+    QUICK_PHRASE_KEYS,
+    canUserReview,
+    formatReviewDate,
+    markCompletedBookings,
+    normalizeId,
+    recalculateHouseRating,
+    renderStars
+} from './reviews.js';
+
+const CONTACT_PHONE = '+3758435286548';
+const CONTACT_TELEGRAM = 'https://t.me/domiktut';
 
 const Product = {
     houseId: null,
     house: null,
+    reviews: [],
     currentImageIndex: 0,
+    selectedRating: 0,
+    selectedPhrases: [],
 
     async init() {
         this.getHouseIdFromURL();
         await this.loadHouseData();
         AccessibilityManager.init();
+        initHeaderBehavior();
+        Modal.init();
         this.bindEvents();
         this.initMap();
+        this.scrollToReviewsIfNeeded();
+    },
+
+    scrollToReviewsIfNeeded() {
+        if (window.location.hash !== '#reviews') return;
+        document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     },
 
     getHouseIdFromURL() {
         const params = new URLSearchParams(window.location.search);
         const idParam = params.get('id');
-        this.houseId = idParam ? parseInt(idParam) : null;
+        this.houseId = idParam ? idParam.trim() : null;
 
-        if (!this.houseId || isNaN(this.houseId)) {
+        if (!this.houseId) {
             console.warn('⚠️ Invalid houseId, redirecting to catalog');
             window.location.href = this.getCatalogPath();
         }
@@ -44,11 +69,19 @@ const Product = {
                 return;
             }
 
+            this.reviews = await API.getReviews(this.houseId);
+            const reviewCount = this.reviews.length;
+            this.house.rating = reviewCount
+                ? Math.round((this.reviews.reduce((sum, item) => sum + (item.rating || 0), 0) / reviewCount) * 10) / 10
+                : 0;
+            this.house.reviews = reviewCount;
+
             this.renderHouseData();
             this.renderGallery();
             this.renderAmenities();
             this.renderAdditionalServices();
-            this.renderReviews();
+            this.renderRatingSummary();
+            await this.renderReviewsSection();
 
         } catch (error) {
             console.error('❌ Error loading house:', error);
@@ -94,6 +127,30 @@ const Product = {
             `${Math.round(this.house.price * 0.2)} ${currency}`;
         document.getElementById('fullWeekendPrice').textContent =
             `${Math.round(this.house.price * 1.5)} ${currency}`;
+    },
+
+    renderRatingSummary() {
+        const container = document.getElementById('productRatingSummary');
+        if (!container) return;
+
+        const rating = this.house.rating || 0;
+        const count = this.house.reviews || 0;
+
+        if (!count) {
+            container.hidden = true;
+            return;
+        }
+
+        container.hidden = false;
+        container.innerHTML = `
+            <span class="product__rating-stars" aria-label="${rating} ${i18n.t('reviews.outOf5')}">
+                ${renderStars(Math.round(rating))}
+            </span>
+            <span class="product__rating-value">${rating}</span>
+            <span class="product__rating-count">
+                ${i18n.t('reviews.count').replace('{count}', count)}
+            </span>
+        `;
     },
 
     renderGallery() {
@@ -143,22 +200,205 @@ const Product = {
         ).join('');
     },
 
-    renderReviews() {
-        const reviews = Array.isArray(this.house.reviews) ? this.house.reviews : [];
+    getCurrentUser() {
+        const stored = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
+        return stored ? JSON.parse(stored) : null;
+    },
+
+    async renderReviewsSection() {
+        await this.renderReviewForm();
+        this.renderReviewsList();
+    },
+
+    async renderReviewForm() {
+        const container = document.getElementById('reviewFormContainer');
+        if (!container) return;
+
+        const user = this.getCurrentUser();
+        let bookings = [];
+
+        if (user?.id) {
+            bookings = await API.getUserBookings(user.id);
+            bookings = await markCompletedBookings(bookings);
+        }
+
+        const access = canUserReview({
+            user,
+            bookings,
+            reviews: this.reviews,
+            houseId: this.houseId
+        });
+
+        if (!access.allowed) {
+            container.hidden = true;
+            container.innerHTML = '';
+            return;
+        }
+
+        container.hidden = false;
+        this.selectedRating = 0;
+        this.selectedPhrases = [];
+
+        container.innerHTML = `
+            <h3 class="review-form__title">${i18n.t('reviews.leaveReview')}</h3>
+            <div class="review-form__rating">
+                <span class="review-form__label">${i18n.t('reviews.rating')}</span>
+                <div class="review-stars-input" data-review-stars>
+                    ${[1, 2, 3, 4, 5].map(value => `
+                        <button type="button" class="review-stars-input__star" data-star-value="${value}" aria-label="${value}">
+                            ☆
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
+            <div class="review-form__phrases">
+                <span class="review-form__label">${i18n.t('reviews.quickPhrases')}</span>
+                <div class="review-phrases" data-review-phrases>
+                    ${QUICK_PHRASE_KEYS.map(key => `
+                        <button type="button" class="review-phrase" data-phrase-key="${key}">
+                            ${i18n.t(key)}
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="review-form__label" for="reviewText">${i18n.t('reviews.text')}</label>
+                <textarea id="reviewText" class="review-form__textarea" rows="4" placeholder="${i18n.t('reviews.textPlaceholder')}"></textarea>
+            </div>
+            <button type="button" class="btn btn--primary" data-submit-review>
+                ${i18n.t('reviews.submit')}
+            </button>
+        `;
+
+        container.querySelector('[data-review-stars]')?.addEventListener('click', (e) => {
+            const star = e.target.closest('[data-star-value]');
+            if (!star) return;
+            this.selectedRating = parseInt(star.dataset.starValue, 10);
+            this.updateStarInput(container);
+        });
+
+        container.querySelector('[data-review-phrases]')?.addEventListener('click', (e) => {
+            const phraseBtn = e.target.closest('[data-phrase-key]');
+            if (!phraseBtn) return;
+
+            const key = phraseBtn.dataset.phraseKey;
+            const phraseText = i18n.t(key);
+            const textarea = container.querySelector('#reviewText');
+
+            if (this.selectedPhrases.includes(key)) {
+                this.selectedPhrases = this.selectedPhrases.filter(item => item !== key);
+                phraseBtn.classList.remove('active');
+            } else {
+                this.selectedPhrases.push(key);
+                phraseBtn.classList.add('active');
+                if (textarea && !textarea.value.includes(phraseText)) {
+                    textarea.value = textarea.value
+                        ? `${textarea.value.trim()} ${phraseText}`
+                        : phraseText;
+                }
+            }
+        });
+
+        container.querySelector('[data-submit-review]')?.addEventListener('click', () => {
+            this.submitReview(container);
+        });
+    },
+
+    updateStarInput(container) {
+        container.querySelectorAll('[data-star-value]').forEach(star => {
+            const value = parseInt(star.dataset.starValue, 10);
+            const active = value <= this.selectedRating;
+            star.classList.toggle('active', active);
+            star.textContent = active ? '★' : '☆';
+        });
+    },
+
+    async submitReview(formContainer) {
+        const user = this.getCurrentUser();
+        if (!user?.id) {
+            alert(i18n.t('reviews.authRequired'));
+            window.location.href = this.getLoginPath();
+            return;
+        }
+
+        const text = formContainer.querySelector('#reviewText')?.value.trim() || '';
+
+        if (!this.selectedRating) {
+            alert(i18n.t('reviews.ratingRequired'));
+            return;
+        }
+
+        if (!text) {
+            alert(i18n.t('reviews.textRequired'));
+            return;
+        }
+
+        const submitBtn = formContainer.querySelector('[data-submit-review]');
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = i18n.t('common.loading');
+
+        try {
+            const phrases = this.selectedPhrases.map(key => i18n.t(key));
+
+            await API.createReview({
+                houseId: this.houseId,
+                userId: user.id,
+                userName: `${user.firstName || ''} ${user.lastName || ''}`.trim() || user.nickname || 'Гость',
+                rating: this.selectedRating,
+                text,
+                phrases,
+                createdAt: new Date().toISOString()
+            });
+
+            const updated = await recalculateHouseRating(this.houseId);
+            this.house.rating = updated.rating;
+            this.house.reviews = updated.count;
+            this.reviews = await API.getReviews(this.houseId);
+
+            this.renderRatingSummary();
+            formContainer.hidden = true;
+            formContainer.innerHTML = '';
+            this.renderReviewsList();
+            alert(i18n.t('reviews.success'));
+        } catch (error) {
+            console.error('Review submit error:', error);
+            alert(i18n.t('common.error'));
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+        }
+    },
+
+    renderReviewsList() {
         const container = document.getElementById('productReviews');
-        if (reviews.length === 0) {
+        if (!container) return;
+
+        if (!this.reviews.length) {
             container.innerHTML = `<p class="product__text">${i18n.t('product.noReviews')}</p>`;
             return;
         }
 
-        container.innerHTML = reviews.map(review => `
-            <div class="review-item">
+        const sortedReviews = [...this.reviews].sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+
+        container.innerHTML = sortedReviews.map(review => `
+            <article class="review-item">
                 <div class="review-header">
-                    <span class="review-author">${review.userName || review.author || 'Аноним'}</span>
-                    <span class="review-rating">${'★'.repeat(review.rating || 5)}${'☆'.repeat(5 - (review.rating || 5))}</span>
+                    <div>
+                        <span class="review-author">${review.userName || 'Гость'}</span>
+                        <span class="review-date">${formatReviewDate(review.createdAt, i18n.currentLang)}</span>
+                    </div>
+                    <span class="review-rating" aria-label="${review.rating}">${renderStars(review.rating || 0)}</span>
                 </div>
-                <p class="review-text">${review.text || review.comment || ''}</p>
-            </div>
+                ${review.phrases?.length ? `
+                    <div class="review-phrases review-phrases--readonly">
+                        ${review.phrases.map(phrase => `<span class="review-phrase review-phrase--readonly">${phrase}</span>`).join('')}
+                    </div>
+                ` : ''}
+                <p class="review-text">${review.text || ''}</p>
+            </article>
         `).join('');
     },
 
@@ -195,7 +435,6 @@ const Product = {
 
     bindEvents() {
 
-        this.setupModalHandlers();
         const leftArrow = document.querySelector('.gallery__arrow--left');
         const rightArrow = document.querySelector('.gallery__arrow--right');
         const images = this.house.images || [];
@@ -222,6 +461,9 @@ const Product = {
             e.preventDefault();
             await this.handleBooking(e.target);
         });
+
+        document.querySelector('[data-contact-write]')?.setAttribute('href', CONTACT_TELEGRAM);
+        document.querySelector('[data-contact-call]')?.setAttribute('href', `tel:${CONTACT_PHONE}`);
 
         const phoneInput = document.getElementById('bookingPhone');
         phoneInput?.addEventListener('input', (e) => {
@@ -382,7 +624,7 @@ const Product = {
             await API.createBooking(data);
             console.log('✅ Booking created successfully');
 
-            this.closeModal();
+            Modal.close();
 
             this.showSuccessMessage(data.name);
             form.reset();
@@ -427,72 +669,22 @@ const Product = {
 
         document.body.appendChild(modal);
 
-        modal.querySelector('[data-modal-close]').addEventListener('click', () => {
+        const closeSuccessModal = () => {
             modal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+            document.body.style.overflow = '';
             setTimeout(() => modal.remove(), 250);
-        });
+        };
+
+        modal.querySelector('[data-modal-close]').addEventListener('click', closeSuccessModal);
 
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
-                modal.classList.remove('active');
-                setTimeout(() => modal.remove(), 250);
+                closeSuccessModal();
             }
         });
     },
 
-    setupModalHandlers() {
-        document.querySelectorAll('[data-modal-open]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const modalId = btn.getAttribute('data-modal-open');
-                this.openModal(modalId);
-            });
-        });
-
-        document.querySelectorAll('[data-modal-close]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                this.closeModal();
-            });
-        });
-
-        document.querySelectorAll('.modal').forEach(modal => {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    this.closeModal();
-                }
-            });
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                this.closeModal();
-            }
-        });
-    },
-
-    openModal(modalId) {
-        const modal = document.querySelector(`[data-modal="${modalId}"]`);
-        if (!modal) return;
-
-        modal.classList.add('active');
-        modal.hidden = false;
-        document.body.classList.add('modal-open');
-
-        setTimeout(() => {
-            const firstInput = modal.querySelector('input, textarea, button:not([data-modal-close])');
-            if (firstInput) firstInput.focus();
-        }, 300);
-    },
-
-    closeModal() {
-        const activeModal = document.querySelector('.modal.active');
-        if (!activeModal) return;
-
-        activeModal.classList.remove('active');
-        setTimeout(() => {
-            activeModal.hidden = true;
-        }, 250);
-        document.body.classList.remove('modal-open');
-    }
 };
 
 document.addEventListener('DOMContentLoaded', () => {

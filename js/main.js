@@ -1,4 +1,4 @@
-﻿import ThemeManager from './theme.js';
+import ThemeManager from './theme.js';
 import AccessibilityManager from './accessibility.js';
 import BurgerMenu from './components/burger-menu.js';
 import Slider from './components/slider.js';
@@ -6,6 +6,10 @@ import Accordion from './components/accordion.js';
 import Modal from './components/modal.js';
 import API from './api.js';
 import i18n from './i18n.js';
+import { enrichHousesWithReviews, sortHouses } from './reviews.js';
+import { initHeaderBehavior } from './header-behavior.js';
+
+
 
 document.addEventListener('DOMContentLoaded', async () => {
     const preloader = document.querySelector('[data-preloader]');
@@ -28,12 +32,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         autoplaySpeed: 6000
     });
 
-    initHeaderScroll();
+    initHeaderBehavior();
     await loadCatalog();
     i18n.translateCards();
     initSearch();
     initFilters();
-    initFavorites();
+    await initFavorites();
     initForms();
     initSmoothScroll();
     initLazyLoading();
@@ -45,19 +49,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     console.log('✅ DOMIKTUT application initialized successfully!');
 });
-
-function initHeaderScroll() {
-    const header = document.querySelector('[data-header]');
-    if (!header) return;
-
-    window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 100) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
-}
 
 async function loadCatalog() {
     const catalogGrid = document.querySelector('[data-catalog-grid]');
@@ -91,13 +82,17 @@ async function loadCatalog() {
             </div>
         `;
 
-        const houses = await API.getHouses({ sort: 'rating', order: 'desc' });
+        let houses = await API.getHouses();
+        houses = await enrichHousesWithReviews(houses);
+        houses = sortHouses(houses, 'rating-desc');
         catalogGrid.innerHTML = '';
 
         houses.slice(0, 8).forEach(house => {
             const card = createHouseCard(house);
             catalogGrid.appendChild(card);
         });
+
+        await updateFavoriteButtons();
 
     } catch (error) {
         console.error('❌ Error loading catalog:', error);
@@ -109,6 +104,11 @@ async function loadCatalog() {
         `;
     }
 }
+
+
+
+
+
 
 function createHouseCard(house) {
     const getProductPath = (houseId) => {
@@ -124,53 +124,19 @@ function createHouseCard(house) {
     card.setAttribute('data-house-card', '');
     card.setAttribute('data-house-id', house.id);
 
-    const isFavorite = isHouseFavorite(house.id);
     const houseName = house.name_i18n?.[i18n.currentLang] || house.name;
     const imagePath = fixImagePath(house.images?.[0] || 'assets/images/placeholder.jpg');
-
-    const featuresTranslations = {
-        'Баня': { ru: 'Баня', be: 'Баня', en: 'Sauna' },
-        'Бассейн': { ru: 'Бассейн', be: 'Басейн', en: 'Pool' },
-        'Настольный теннис': { ru: 'Настольный теннис', be: 'Настольны тэніс', en: 'Table tennis' },
-        'Сауна': { ru: 'Сауна', be: 'Саўна', en: 'Sauna' },
-        'Барбекю': { ru: 'Барбекю', be: 'Барбекю', en: 'BBQ' },
-        'Бильярд': { ru: 'Бильярд', be: 'Більярд', en: 'Billiards' },
-        'Караоке': { ru: 'Караоке', be: 'Караоке', en: 'Karaoke' },
-        'Русская баня': { ru: 'Русская баня', be: 'Руская баня', en: 'Russian banya' },
-        'Вид на реку': { ru: 'Вид на реку', be: 'Від на раку', en: 'River view' },
-        'Камин': { ru: 'Камин', be: 'Камін', en: 'Fireplace' },
-        'Терраса': { ru: 'Терраса', be: 'Тэраса', en: 'Terrace' },
-        'Парковка': { ru: 'Парковка', be: 'Паркоўка', en: 'Parking' },
-        'Детская площадка': { ru: 'Детская площадка', be: 'Дзіцячая пляцоўка', en: 'Playground' },
-        'Мангал': { ru: 'Мангал', be: 'Мангал', en: 'Grill' },
-        'Wi-Fi': { ru: 'Wi-Fi', be: 'Wi-Fi', en: 'Wi-Fi' },
-        'Озеро': { ru: 'Озеро', be: 'Возера', en: 'Lake' },
-        'Рыбалка': { ru: 'Рыбалка', be: 'Рыбалка', en: 'Fishing' },
-        'Беседка': { ru: 'Беседка', be: 'Альтанка', en: 'Gazebo' },
-        'Банкетный зал': { ru: 'Банкетный зал', be: 'Банкетная зала', en: 'Banquet hall' },
-        'Сцена': { ru: 'Сцена', be: 'Сцэна', en: 'Stage' },
-        'Охрана': { ru: 'Охрана', be: 'Ахова', en: 'Security' },
-        'Баня на дровах': { ru: 'Баня на дровах', be: 'Баня на дровах', en: 'Wood-fired sauna' },
-        'Чан': { ru: 'Чан', be: 'Чан', en: 'Hot tub' },
-        'Лес': { ru: 'Лес', be: 'Лес', en: 'Forest' },
-        'Тишина': { ru: 'Тишина', be: 'Цішыня', en: 'Quiet' },
-        'Эко-материалы': { ru: 'Эко-материалы', be: 'Эка-матэрыялы', en: 'Eco materials' },
-        'Гриль': { ru: 'Гриль', be: 'Грыль', en: 'Grill' }
-    };
-
-    const translatedFeatures = house.features?.map(feature =>
-        featuresTranslations[feature]?.[i18n.currentLang] || feature
-    ) || [];
+    const translatedFeatures = house.features_i18n?.[i18n.currentLang] || house.features || [];
 
     card.innerHTML = `
         <div class="catalog-card__image">
             <img src="${imagePath}" alt="${houseName}" loading="lazy">
             ${house.isHit ? '<span class="catalog-card__badge" data-i18n="catalog.hit">Хит</span>' : ''}
-            <button class="catalog-card__favorite ${isFavorite ? 'active' : ''}" 
+            <button class="catalog-card__favorite" 
                     data-favorite="${house.id}"
                     aria-label="${i18n.t('catalog.addToFavorites')}"
                     data-i18n-aria="catalog.addToFavorites">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="${isFavorite ? 'currentColor' : 'none'}">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path d="M10 2.5l1.903 3.854a1 1 0 00.754.547l4.243.616-3.07 3.003a1 1 0 00-.288.884l.724 4.226L10 13.5l-3.766 1.98.724-4.226a1 1 0 00-.288-.884l-3.07-3.003 4.243-.616a1 1 0 00.754-.547L10 2.5z" 
                           stroke="currentColor" stroke-width="1.5"/>
                 </svg>
@@ -179,6 +145,10 @@ function createHouseCard(house) {
         </div>
         <div class="catalog-card__content">
             <h3 class="catalog-card__title" data-house-name>${houseName}</h3>
+            <div class="catalog-card__rating">
+                <span class="catalog-card__rating-stars">★ ${house.rating || '0'}</span>
+                <span class="catalog-card__rating-count">${i18n.t('reviews.count').replace('{count}', house.reviews || 0)}</span>
+            </div>
             <div class="catalog-card__features">
                 <span class="catalog-card__feature" data-house-feature>
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -250,7 +220,18 @@ function initFilters() {
     });
 }
 
-function initFavorites() {
+let favoritesInitialized = false;
+
+async function initFavorites() {
+    localStorage.removeItem('favorites');
+
+    if (favoritesInitialized) {
+        await updateFavoriteButtons();
+        return;
+    }
+
+    favoritesInitialized = true;
+
     document.addEventListener('click', async (e) => {
         const favoriteBtn = e.target.closest('[data-favorite]');
         if (!favoriteBtn) return;
@@ -258,34 +239,57 @@ function initFavorites() {
         e.preventDefault();
         e.stopPropagation();
 
-        const houseId = parseInt(favoriteBtn.getAttribute('data-favorite'));
-        if (!houseId || isNaN(houseId)) return;
+        const houseId = favoriteBtn.getAttribute('data-favorite');
+        if (!houseId) return;
 
         await handleFavoriteClick(houseId, favoriteBtn);
     });
 
-    updateFavoriteButtons();
+    document.querySelectorAll('.header__favorites').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const user = getCurrentUser();
+            const profilePath = window.location.pathname.includes('/pages/')
+                ? 'profile.html#favorites'
+                : 'pages/profile.html#favorites';
+            const loginPath = window.location.pathname.includes('/pages/')
+                ? 'login.html'
+                : 'pages/login.html';
+
+            window.location.href = user ? profilePath : loginPath;
+        });
+    });
+
+    await updateFavoriteButtons();
 }
 
 async function handleFavoriteClick(houseId, btn) {
-    const favorites = getFavorites();
-    const isFavorite = favorites.includes(houseId);
+    const user = getCurrentUser();
+
+    if (!user) {
+        showNotification(i18n.t('favorites.authRequired'), 'info');
+        return;
+    }
 
     try {
-        if (isFavorite) {
-            const newFavorites = favorites.filter(id => id !== houseId);
-            localStorage.setItem('favorites', JSON.stringify(newFavorites));
+        const records = await API.getFavorites(user.id);
+        const existing = records.find(item => String(item.houseId) === String(houseId));
+
+        if (existing) {
+            await API.removeFromFavorites(existing.id);
             btn.classList.remove('active');
             const svg = btn.querySelector('svg path');
             if (svg) svg.setAttribute('fill', 'none');
-            showNotification(i18n.t('common.removedFromFavorites') || 'Удалено из избранного', 'success');
+            showNotification(i18n.t('common.removedFromFavorites'), 'success');
         } else {
-            const newFavorites = [...favorites, houseId];
-            localStorage.setItem('favorites', JSON.stringify(newFavorites));
+            await API.addToFavorites({
+                userId: user.id,
+                houseId,
+                createdAt: new Date().toISOString()
+            });
             btn.classList.add('active');
             const svg = btn.querySelector('svg path');
             if (svg) svg.setAttribute('fill', 'currentColor');
-            showNotification(i18n.t('common.addedToFavorites') || 'Добавлено в избранное', 'success');
+            showNotification(i18n.t('common.addedToFavorites'), 'success');
         }
 
         if (window.location.pathname.includes('profile.html')) {
@@ -293,34 +297,36 @@ async function handleFavoriteClick(houseId, btn) {
         }
     } catch (error) {
         console.error('❌ Favorite error:', error);
-        showNotification(i18n.t('common.error') || 'Ошибка', 'error');
+        showNotification(i18n.t('common.error'), 'error');
     }
 }
 
-function getFavorites() {
+async function getFavorites() {
+    const user = getCurrentUser();
+    if (!user) return [];
+
     try {
-        return JSON.parse(localStorage.getItem('favorites') || '[]');
-    } catch (e) {
-        console.error('❌ Error parsing favorites:', e);
+        const records = await API.getFavorites(user.id);
+        return records.map(item => String(item.houseId));
+    } catch (error) {
+        console.error('❌ Error loading favorites:', error);
         return [];
     }
 }
 
-function updateFavoriteButtons() {
-    const favorites = getFavorites();
+async function updateFavoriteButtons() {
+    const favorites = await getFavorites();
+
     document.querySelectorAll('[data-favorite]').forEach(btn => {
-        const houseId = parseInt(btn.getAttribute('data-favorite'));
-        const isFavorite = favorites.includes(houseId);
+        const houseId = btn.getAttribute('data-favorite');
+        const isFavorite = favorites.includes(String(houseId));
         btn.classList.toggle('active', isFavorite);
+
         const svg = btn.querySelector('svg path');
         if (svg) {
             svg.setAttribute('fill', isFavorite ? 'currentColor' : 'none');
         }
     });
-}
-
-function isHouseFavorite(houseId) {
-    return getFavorites().includes(houseId);
 }
 
 function initForms() {
@@ -352,6 +358,12 @@ function initForms() {
         selectionForm.addEventListener('submit', handleSelectionRequest);
     }
 
+    document.querySelectorAll('[data-modal-open="selection-modal"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            requestAnimationFrame(() => prefillSelectionForm());
+        });
+    });
+
     const bookingForm = document.querySelector('[data-booking-form]');
     if (bookingForm) {
         bookingForm.addEventListener('submit', handleBooking);
@@ -363,18 +375,65 @@ function initForms() {
     }
 }
 
+function getCurrentUser() {
+    const stored = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
+    return stored ? JSON.parse(stored) : null;
+}
+
+function prefillSelectionForm() {
+    const user = getCurrentUser();
+    const nameInput = document.getElementById('selectionName');
+    const phoneInput = document.getElementById('selectionPhone');
+
+    if (!user) return;
+
+    if (nameInput) {
+        const fullName = [user.firstName, user.lastName].filter(Boolean).join(' ').trim();
+        nameInput.value = fullName || user.name || '';
+    }
+
+    if (phoneInput && user.phone) {
+        phoneInput.value = user.phone;
+    }
+}
+
 async function handleSelectionRequest(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
+    const user = getCurrentUser();
+
+    const data = {
+        name: formData.get('name')?.trim(),
+        phone: formData.get('phone')?.trim(),
+        checkIn: formData.get('checkIn') || null,
+        checkOut: formData.get('checkOut') || null,
+        guests: formData.get('guests') ? parseInt(formData.get('guests'), 10) : null,
+        budget: formData.get('budget') ? parseInt(formData.get('budget'), 10) : null,
+        requirements: formData.get('requirements')?.trim() || null,
+        applicantType: user?.role === 'renter' ? 'renter' : 'guest',
+        userId: user?.id || null,
+        userEmail: user?.email || null,
+        status: 'pending',
+        createdAt: new Date().toISOString()
+    };
 
     try {
         await API.createSelectionRequest(data);
-        showNotification('Заявка успешно отправлена!', 'success');
+        showNotification(i18n.t('modal.success.title'), 'success');
         e.target.reset();
+
+        const selectionModal = document.querySelector('[data-modal="selection-modal"]');
+        if (selectionModal) {
+            Modal.close(selectionModal);
+        }
+
+        const successModal = document.querySelector('[data-modal="success-modal"]');
+        if (successModal) {
+            Modal.open('success-modal');
+        }
     } catch (error) {
         console.error('❌ Selection request error:', error);
-        showNotification('Ошибка при отправке заявки', 'error');
+        showNotification(i18n.t('common.error'), 'error');
     }
 }
 
@@ -567,5 +626,6 @@ export {
     fixImagePath,
     initFavorites,
     getFavorites,
-    updateFavoriteButtons
+    updateFavoriteButtons,
+    getCurrentUser
 };

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru" data-theme="light" data-accessibility="normal">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../css/variables.css">
     <link rel="stylesheet" href="../css/reset.css">
@@ -76,6 +76,7 @@
             </nav>
 
             <h1 class="product__title" id="productName">Название дома</h1>
+            <div class="product__rating-summary" id="productRatingSummary" hidden></div>
             <p class="product__location" id="productLocation">
                 <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
                     <path d="M10 2C6.13 2 3 5.13 3 9c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
@@ -170,8 +171,9 @@
                         <div class="product__map" id="productMap"></div>
                     </div>
 
-                    <div class="product__section">
+                    <div class="product__section product__section--reviews" id="reviews">
                         <h2 class="product__section-title" data-i18n="product.reviews">Отзывы</h2>
+                        <div id="reviewFormContainer" class="review-form" hidden></div>
                         <div class="reviews__list" id="productReviews"></div>
                     </div>
                 </div>
@@ -222,11 +224,9 @@
                         <button class="btn btn--primary btn--full" data-modal-open="booking-modal" data-i18n="product.book">Забронировать</button>
 
                         <div class="booking-card__contacts">
-                            <button class="btn btn--outline btn--full" data-i18n="product.write">Написать</button>
-                            <button class="btn btn--outline btn--full" data-i18n="product.call">Позвонить</button>
+                            <a href="https://t.me/domiktut" target="_blank" rel="noopener noreferrer" class="btn btn--outline btn--full" data-contact-write data-i18n="product.write">Написать</a>
+                            <a href="tel:+3758435286548" class="btn btn--outline btn--full" data-contact-call data-i18n="product.call">Позвонить</a>
                         </div>
-
-                        <button class="btn btn--outline btn--full" data-i18n="product.additionalService">Выездное обслуживание</button>
                     </div>
                 </div>
             </div>

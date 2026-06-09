@@ -1,4 +1,4 @@
-﻿import API from '../api.js';
+import API from '../api.js';
 import i18n from '../i18n.js';
 import ThemeManager from '../theme.js';
 import AccessibilityManager from "../accessibility.js";
@@ -51,18 +51,7 @@ const Register = {
     bindEvents() {
         document.querySelectorAll('input[name="passwordMethod"]').forEach(radio => {
             radio.addEventListener('change', (e) => {
-                const manual = document.getElementById('manualPasswordFields');
-                const auto = document.getElementById('autoPasswordFields');
-
-                if (e.target.value === 'manual') {
-                    manual.hidden = false;
-                    auto.hidden = true;
-                } else {
-                    manual.hidden = true;
-                    auto.hidden = false;
-                    this.generateAutoPassword();
-                }
-                this.checkFormValidity();
+                this.togglePasswordMethod(e.target.value);
             });
         });
 
@@ -91,18 +80,73 @@ const Register = {
         document.querySelectorAll('.auth-form input').forEach(input => {
             input.addEventListener('blur', () => this.validateField(input));
             input.addEventListener('input', () => {
-                this.clearError(input);
-                this.checkFormValidity();
+                this.clearError(input.name || input);
+                this.updatePasswordRequirements();
             });
         });
 
-        document.getElementById('agreement')?.addEventListener('change', () => this.checkFormValidity());
+        document.getElementById('agreement')?.addEventListener('change', () => {
+            this.clearError('agreement');
+        });
 
         document.getElementById('registerForm')?.addEventListener('submit', (e) => this.handleSubmit(e));
 
         document.getElementById('goToCatalog')?.addEventListener('click', () => {
             window.location.href = '../pages/catalog.html';
         });
+    },
+
+    togglePasswordMethod(method) {
+        const manual = document.getElementById('manualPasswordFields');
+        const auto = document.getElementById('autoPasswordFields');
+        const password = document.getElementById('password');
+        const passwordConfirm = document.getElementById('passwordConfirm');
+
+        if (method === 'manual') {
+            manual.hidden = false;
+            auto.hidden = true;
+            if (password) password.required = true;
+            if (passwordConfirm) passwordConfirm.required = true;
+        } else {
+            manual.hidden = true;
+            auto.hidden = false;
+            if (password) {
+                password.required = false;
+                password.value = '';
+            }
+            if (passwordConfirm) {
+                passwordConfirm.required = false;
+                passwordConfirm.value = '';
+            }
+            this.clearError('password');
+            this.clearError('passwordConfirm');
+            this.generateAutoPassword();
+        }
+    },
+
+    isStrongPassword(password) {
+        return !this.getPasswordError(password);
+    },
+
+    getPasswordError(password) {
+        if (!password) return i18n.t('validation.required');
+        if (password.length < 8 || password.length > 20) return i18n.t('validation.passwordLength');
+        if (!/[A-Z]/.test(password)) return i18n.t('validation.passwordUppercase');
+        if (!/[a-z]/.test(password)) return i18n.t('validation.passwordLowercase');
+        if (!/\d/.test(password)) return i18n.t('validation.passwordNumber');
+        if (!/[^A-Za-z0-9]/.test(password)) return i18n.t('validation.passwordSpecial');
+        return '';
+    },
+
+    getPasswordMethod() {
+        return document.querySelector('input[name="passwordMethod"]:checked')?.value || 'manual';
+    },
+
+    getActivePassword() {
+        if (this.getPasswordMethod() === 'auto') {
+            return document.getElementById('autoPassword')?.value || '';
+        }
+        return document.getElementById('password')?.value || '';
     },
 
     formatPhone(input) {
@@ -134,7 +178,7 @@ const Register = {
             uppercase: /[A-Z]/.test(password),
             lowercase: /[a-z]/.test(password),
             number: /\d/.test(password),
-            special: /[@$!%*?&]/.test(password)
+            special: /[^A-Za-z0-9]/.test(password)
         };
 
         Object.entries(requirements).forEach(([key, valid]) => {
@@ -144,11 +188,10 @@ const Register = {
             }
         });
 
-        this.checkFormValidity();
     },
 
     validatePasswordMatch() {
-        const passwordMethod = document.querySelector('input[name="passwordMethod"]:checked')?.value;
+        const passwordMethod = this.getPasswordMethod();
         if (passwordMethod === 'auto') {
             this.clearError('passwordConfirm');
             return true;
@@ -180,7 +223,6 @@ const Register = {
         password = password.split('').sort(() => Math.random() - 0.5).join('');
 
         document.getElementById('autoPassword').value = password;
-        this.checkFormValidity();
     },
 
     copyPassword() {
@@ -214,17 +256,23 @@ const Register = {
         const noun = nouns[Math.floor(Math.random() * nouns.length)];
 
         document.getElementById('nickname').value = `${adj}${noun}${numbers}`;
-        this.checkFormValidity();
+        this.clearError('nickname');
     },
 
     validateField(input) {
         const name = input.name;
         const value = input.value.trim();
-        const errorEl = document.querySelector(`[data-error="${name}"]`);
 
-        if (input.required && !value) {
-            this.showError(name, i18n.t('validation.required'));
-            return false;
+        if (input.required) {
+            if (input.type === 'checkbox') {
+                if (!input.checked) {
+                    this.showError(name, i18n.t('validation.agreementRequired'));
+                    return false;
+                }
+            } else if (!value) {
+                this.showError(name, i18n.t('validation.required'));
+                return false;
+            }
         }
 
         switch (name) {
@@ -267,6 +315,30 @@ const Register = {
                     return false;
                 }
                 break;
+            case 'password':
+                if (this.getPasswordMethod() === 'manual') {
+                    const passwordError = this.getPasswordError(value);
+                    if (passwordError) {
+                        this.showError(name, passwordError);
+                        return false;
+                    }
+                }
+                break;
+            case 'passwordConfirm':
+                if (this.getPasswordMethod() === 'manual') {
+                    const password = document.getElementById('password')?.value || '';
+                    if (value !== password) {
+                        this.showError(name, i18n.t('validation.passwordMatch'));
+                        return false;
+                    }
+                }
+                break;
+            case 'agreement':
+                if (!input.checked) {
+                    this.showError(name, i18n.t('validation.agreementRequired'));
+                    return false;
+                }
+                break;
         }
 
         this.clearError(name);
@@ -283,62 +355,53 @@ const Register = {
     },
 
     clearError(field) {
-        const errorEl = document.querySelector(`[data-error="${field}"]`);
+        const fieldName = typeof field === 'string' ? field : field?.name;
+        if (!fieldName) return;
+
+        const errorEl = document.querySelector(`[data-error="${fieldName}"]`);
         if (errorEl) errorEl.textContent = '';
-        const input = document.querySelector(`[name="${field}"]`);
+
+        const input = document.querySelector(`[name="${fieldName}"]`);
         if (input) input.classList.remove('form-group--error');
     },
 
-    checkFormValidity() {
-        const form = document.getElementById('registerForm');
-        const submitBtn = document.getElementById('registerSubmit');
+    shouldValidateField(input) {
+        const passwordMethod = this.getPasswordMethod();
 
-        const passwordMethod = document.querySelector('input[name="passwordMethod"]:checked')?.value;
-
-        let isPasswordValid = false;
-        if (passwordMethod === 'auto') {
-            const autoPassword = document.getElementById('autoPassword')?.value || '';
-            isPasswordValid = autoPassword.length >= 8 &&
-                /[A-Z]/.test(autoPassword) &&
-                /[a-z]/.test(autoPassword) &&
-                /\d/.test(autoPassword) &&
-                /[@$!%*?&]/.test(autoPassword);
-        } else {
-            isPasswordValid = document.querySelectorAll('.requirement.valid').length === 5 &&
-                this.validatePasswordMatch();
+        if (passwordMethod === 'auto' && (input.name === 'password' || input.name === 'passwordConfirm')) {
+            return false;
         }
 
-        const agreement = document.getElementById('agreement')?.checked;
-        const requiredFields = form.querySelectorAll('[required]');
-
-        const allFilled = Array.from(requiredFields).every(input => {
-            if (passwordMethod === 'auto' && input.name === 'passwordConfirm') {
-                return true;
-            }
-            if (passwordMethod === 'auto' &&
-                (input.id === 'password' || input.id === 'passwordConfirm')) {
-                return true;
-            }
-            if (input.type === 'checkbox') return input.checked;
-            return input.value.trim() !== '';
-        });
-
-        submitBtn.disabled = !(isPasswordValid && agreement && allFilled);
+        return input.required || input.name === 'agreement';
     },
 
     async handleSubmit(e) {
         e.preventDefault();
 
         let isValid = true;
-        document.querySelectorAll('.auth-form [required]').forEach(input => {
-            const passwordMethod = document.querySelector('input[name="passwordMethod"]:checked')?.value;
-            if (passwordMethod === 'auto' && input.name === 'passwordConfirm') {
-                return;
+        let firstInvalid = null;
+
+        document.querySelectorAll('.auth-form input, .auth-form #agreement').forEach(input => {
+            if (!this.shouldValidateField(input)) return;
+            if (!this.validateField(input)) {
+                isValid = false;
+                if (!firstInvalid) firstInvalid = input;
             }
-            if (!this.validateField(input)) isValid = false;
         });
 
-        if (!isValid) return;
+        const passwordMethod = this.getPasswordMethod();
+        const password = this.getActivePassword();
+
+        if (passwordMethod === 'auto' && !this.isStrongPassword(password)) {
+            alert(i18n.t('auth.register.autoPasswordHelp'));
+            isValid = false;
+        }
+
+        if (!isValid) {
+            firstInvalid?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            firstInvalid?.focus?.();
+            return;
+        }
 
         const submitBtn = document.getElementById('registerSubmit');
         submitBtn.disabled = true;
@@ -346,7 +409,6 @@ const Register = {
 
         try {
             const formData = new FormData(e.target);
-            const passwordMethod = formData.get('passwordMethod');
 
             const userData = {
                 firstName: formData.get('firstName'),
@@ -357,9 +419,7 @@ const Register = {
                 email: formData.get('email'),
                 nickname: formData.get('nickname'),
                 role: formData.get('role'),
-                password: passwordMethod === 'auto'
-                    ? document.getElementById('autoPassword').value
-                    : formData.get('password'),
+                password,
                 createdAt: new Date().toISOString(),
                 favorites: [],
                 bookings: []

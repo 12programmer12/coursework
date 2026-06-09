@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru" data-theme="light" data-accessibility="normal">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../css/variables.css">
     <link rel="stylesheet" href="../css/reset.css">
@@ -109,21 +109,32 @@
                         </div>
                     </div>
 
+                <div class="settings__group settings__group--accessibility">
+                    <div class="settings__label" data-i18n="settings.accessibility">Версия для слабовидящих</div>
+                    <button type="button" class="settings__accessibility-toggle" data-accessibility-toggle aria-pressed="false">
+                        <span data-accessibility-toggle-label data-i18n="settings.accessibilityOn">Включить</span>
+                    </button>
+                </div>
+
+                <div class="settings__accessibility-panel" data-accessibility-panel hidden>
                     <div class="settings__group">
-                        <div class="settings__label" data-i18n="settings.colorScheme">Цветовая схема</div>
+                        <div class="settings__label" data-i18n="settings.colorScheme">Цвет фона и текста</div>
                         <div class="settings__buttons">
-                            <button class="settings__btn active" data-color-scheme="default" data-i18n="colors.default">Стандарт</button>
-                            <button class="settings__btn" data-color-scheme="warm" data-i18n="colors.warm">Тёплая</button>
-                            <button class="settings__btn" data-color-scheme="cool" data-i18n="colors.cool">Холодная</button>
+                            <button class="settings__btn" data-color-scheme="black-yellow" title="Жёлтый текст на чёрном фоне">Жёлтый на чёрном</button>
+                            <button class="settings__btn" data-color-scheme="white-black" title="Чёрный текст на белом фоне">Чёрный на белом</button>
+                            <button class="settings__btn" data-color-scheme="blue-yellow" title="Жёлтый текст на синем фоне">Жёлтый на синем</button>
+                            <button class="settings__btn" data-color-scheme="black-white" title="Белый текст на чёрном фоне">Белый на чёрном</button>
+                            <button class="settings__btn" data-color-scheme="dark-blue-light" title="Светлый текст на тёмно-синем фоне">Белый на тёмно-синем</button>
                         </div>
                     </div>
 
                     <div class="settings__group">
                         <div class="settings__label" data-i18n="settings.fontSize">Размер шрифта</div>
-                        <div class="settings__buttons">
-                            <button class="settings__btn" data-font-size="small" data-i18n="fontSize.small">Маленький</button>
-                            <button class="settings__btn active" data-font-size="medium" data-i18n="fontSize.medium">Средний</button>
-                            <button class="settings__btn" data-font-size="large" data-i18n="fontSize.large">Большой</button>
+                        <div class="settings__buttons settings__buttons--font">
+                            <button class="settings__btn active" data-font-size="normal" data-i18n="fontSize.normal">Обычный</button>
+                            <button class="settings__btn" data-font-size="increased" data-i18n="fontSize.increased">Увеличенный</button>
+                            <button class="settings__btn" data-font-size="large" data-i18n="fontSize.large">Крупный</button>
+                            <button class="settings__btn" data-font-size="extra-large" data-i18n="fontSize.extraLarge">Очень крупный</button>
                         </div>
                     </div>
 
@@ -131,14 +142,15 @@
                         <div class="settings__label" data-i18n="settings.images">Изображения</div>
                         <div class="settings__toggle-wrapper">
                             <label class="settings__toggle">
-                                <input type="checkbox" id="toggleImages" checked>
+                                <input type="checkbox" id="toggleImages">
                                 <span class="settings__toggle-slider"></span>
-                                <span class="settings__toggle-label" data-i18n="settings.showImages">Показывать изображения</span>
+                                <span class="settings__toggle-label" data-i18n="settings.hideImages">Скрыть изображения</span>
                             </label>
                         </div>
                     </div>
 
-                    <button class="settings__reset" data-i18n="settings.reset">Сбросить настройки</button>
+                    <button type="button" class="settings__reset" data-accessibility-reset data-i18n="settings.resetAccessibility">Сбросить настройки</button>
+                </div>
                 </div>
             </div>
 
@@ -345,7 +357,8 @@
                         <option value="rating-asc" data-i18n="sort.rating.asc">По рейтингу (возрастание)</option>
                         <option value="price-asc" data-i18n="sort.price.asc">По цене (возрастание)</option>
                         <option value="price-desc" data-i18n="sort.price.desc">По цене (убывание)</option>
-                        <option value="reviews-desc" data-i18n="sort.reviews.desc">По отзывам</option>
+                        <option value="reviews-desc" data-i18n="sort.reviews.desc">По отзывам (убывание)</option>
+                        <option value="reviews-asc" data-i18n="sort.reviews.asc">По отзывам (возрастание)</option>
                         <option value="name-asc" data-i18n="sort.name.asc">По названию (А-Я)</option>
                     </select>
                 </div>
@@ -437,7 +450,6 @@
 
                 <div class="footer__buttons">
                     <button class="btn btn--outline" data-i18n="footer.legalInfo">Информация для юр. лиц</button>
-                    <button class="btn btn--outline" data-i18n="footer.serviceRequest">Заявка на выездное обслуживание</button>
                     <button class="btn btn--primary" data-modal-open="selection-modal" data-i18n="footer.selectionRequest">Заявка на подбор</button>
                 </div>
 

@@ -1,4 +1,4 @@
-﻿const Modal = {
+const Modal = {
     activeModal: null,
 
     init() {
@@ -10,8 +10,9 @@
         if (!modal) return;
 
         this.activeModal = modal;
+        modal.removeAttribute('hidden');
         modal.classList.add('active');
-        modal.hidden = false;
+        document.body.classList.add('modal-open');
         document.body.style.overflow = 'hidden';
 
         const firstFocusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
@@ -30,11 +31,15 @@
         if (!modal) return;
 
         modal.classList.remove('active');
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
+
         setTimeout(() => {
-            modal.hidden = true;
+            if (!modal.classList.contains('active')) {
+                modal.setAttribute('hidden', '');
+            }
         }, 300);
 
-        document.body.style.overflow = '';
         this.activeModal = null;
     },
 
@@ -45,6 +50,9 @@
     },
 
     trapFocus(modal) {
+        if (modal.dataset.focusTrapInit) return;
+        modal.dataset.focusTrapInit = 'true';
+
         const focusableElements = modal.querySelectorAll(
             'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
         );

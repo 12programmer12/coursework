@@ -1,17 +1,22 @@
-﻿import API from './api.js';
+import API from './api.js';
 import i18n from './i18n.js';
-import { fixImagePath, getFavorites, updateFavoriteButtons } from './main.js';
+import { fixImagePath, updateFavoriteButtons, initFavorites } from './main.js';
 import AccessibilityManager from "./accessibility.js";
+import { initHeaderBehavior } from './header-behavior.js';
 
 const Profile = {
     currentUser: null,
 
     async init() {
+        this.hidePreloader();
         this.checkAuth();
+        await initFavorites();
         await this.loadUserData();
         AccessibilityManager.init();
+        initHeaderBehavior();
         this.bindEvents();
-        this.switchTab('bookings');
+        const initialTab = window.location.hash === '#favorites' ? 'favorites' : 'bookings';
+        this.switchTab(initialTab);
         window.addEventListener('favoritesChanged', () => {
             this.loadFavorites();
         });
@@ -19,19 +24,15 @@ const Profile = {
 
     async loadFavorites() {
         try {
-            console.log('❤️ Loading favorites...');
-            const favorites = getFavorites(); // Берем из localStorage
             const container = document.getElementById('favoritesList');
+            const records = await API.getFavorites(this.currentUser.id);
 
-            console.log('📦 Favorites IDs:', favorites);
-
-            if (!favorites || favorites.length === 0) {
+            if (!records || records.length === 0) {
                 container.innerHTML = this.renderEmptyState('profile.favorites.empty');
                 return;
             }
 
-            // Загружаем детали домов
-            const housePromises = favorites.map(id => API.getHouseById(id));
+            const housePromises = records.map(record => API.getHouseById(record.houseId));
             const houses = await Promise.all(housePromises);
 
             const validHouses = houses.filter(Boolean);
@@ -42,22 +43,22 @@ const Profile = {
             }
 
             container.innerHTML = validHouses.map(house => `
-                <div class="favorite-card">
-                    <img src="${fixImagePath(house.images?.[0] || '')}" alt="${house.name}" class="favorite-card__image">
-                    <div class="favorite-card__info">
-                        <a href="product.html?id=${house.id}" class="booking-card__house">
-                            ${house.name_i18n?.[i18n.currentLang] || house.name}
-                        </a>
-                        <span class="favorite-card__price">${house.price} ${i18n.t('common.currency')}</span>
-                    </div>
-                    <button class="btn btn--outline btn--sm" data-favorite="${house.id}" style="margin-top: 10px;">
+                <article class="favorite-card">
+                    <a href="product.html?id=${house.id}" class="favorite-card__link">
+                        <img src="${fixImagePath(house.images?.[0] || '')}" alt="${house.name}" class="favorite-card__image">
+                        <div class="favorite-card__info">
+                            <h3 class="favorite-card__title">${house.name_i18n?.[i18n.currentLang] || house.name}</h3>
+                            <span class="favorite-card__price">${house.price} ${i18n.t('common.currency')}</span>
+                            ${house.rating ? `<span class="favorite-card__rating">★ ${house.rating} · ${house.reviews || 0}</span>` : ''}
+                        </div>
+                    </a>
+                    <button class="btn btn--outline btn--sm favorite-card__remove" data-favorite="${house.id}">
                         ${i18n.t('common.removeFromFavorites') || 'Удалить'}
                     </button>
-                </div>
+                </article>
             `).join('');
 
-            // Пересоздаем обработчики для кнопок удаления
-            updateFavoriteButtons();
+            await updateFavoriteButtons();
 
         } catch (error) {
             console.error('❌ Error loading favorites:', error);
@@ -65,6 +66,14 @@ const Profile = {
             if (container) {
                 container.innerHTML = this.renderEmptyState('profile.favorites.empty');
             }
+        }
+    },
+
+    hidePreloader() {
+        const preloader = document.querySelector('[data-preloader]');
+        if (preloader) {
+            preloader.classList.add('hidden');
+            preloader.style.display = 'none';
         }
     },
 
@@ -132,13 +141,26 @@ const Profile = {
 
     async loadBookings() {
         try {
-            const bookings = await API.getUserBookings(this.currentUser.id);
+            let bookings = await API.getUserBookings(this.currentUser.id);
             const container = document.getElementById('bookingsList');
 
             if (!bookings || bookings.length === 0) {
                 container.innerHTML = this.renderEmptyState('profile.bookings.empty');
                 return;
             }
+
+            const today = new Date().toISOString().split('T')[0];
+            bookings = await Promise.all(bookings.map(async booking => {
+                if (booking.status === 'confirmed' && booking.checkOut && booking.checkOut < today) {
+                    try {
+                        await API.updateBooking(booking.id, { status: 'completed' });
+                        booking.status = 'completed';
+                    } catch (error) {
+                        console.warn('Could not mark booking completed:', error);
+                    }
+                }
+                return booking;
+            }));
 
             container.innerHTML = bookings.map(booking => `
                 <div class="booking-card">
@@ -159,6 +181,11 @@ const Profile = {
                         <span>${i18n.t('product.cost')}</span>
                         <span class="booking-card__total">${booking.totalPrice || 0} ${i18n.t('common.currency')}</span>
                     </div>
+                    ${booking.status === 'completed' ? `
+                        <a href="product.html?id=${booking.houseId}#reviews" class="btn btn--outline btn--sm booking-card__review-link">
+                            ${i18n.t('reviews.leaveReview')}
+                        </a>
+                    ` : ''}
                 </div>
             `).join('');
         } catch (error) {

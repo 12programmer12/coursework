@@ -1,4 +1,4 @@
-﻿const API = {
+const API = {
     baseURL: 'http://localhost:3000',
 
     async fetch(endpoint, options = {}) {
@@ -94,8 +94,39 @@
         });
     },
 
+    async getSelectionRequests() {
+        try {
+            return await this.fetch('/selection-requests');
+        } catch (error) {
+            console.error('API getSelectionRequests error:', error);
+            return [];
+        }
+    },
+
+    async updateSelectionRequest(id, requestData) {
+        return this.fetch(`/selection-requests/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(requestData)
+        });
+    },
+
     async getReviews(houseId) {
-        return this.fetch(`/reviews?houseId=${houseId}`);
+        try {
+            const allReviews = await this.getAllReviews();
+            return allReviews.filter(review => String(review.houseId) === String(houseId));
+        } catch (error) {
+            console.error('API getReviews error:', error);
+            return [];
+        }
+    },
+
+    async getAllReviews() {
+        try {
+            return await this.fetch('/reviews');
+        } catch (error) {
+            console.error('API getAllReviews error:', error);
+            return [];
+        }
     },
 
     async createReview(reviewData) {
@@ -106,7 +137,12 @@
     },
 
     async getFavorites(userId) {
-        return this.fetch(`/favorites?userId=${userId}`);
+        try {
+            return await this.fetch(`/favorites?userId=${userId}`);
+        } catch (error) {
+            console.error('API getFavorites error:', error);
+            return [];
+        }
     },
 
     async addToFavorites(favoriteData) {

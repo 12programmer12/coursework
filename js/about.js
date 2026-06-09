@@ -1,6 +1,8 @@
-﻿import ThemeManager from './theme.js';
+import ThemeManager from './theme.js';
 import i18n from './i18n.js';
 import AccessibilityManager from "./accessibility.js";
+import { initHeaderBehavior } from './header-behavior.js';
+import { initFavorites } from './main.js';
 
 function getPagePath(pageName) {
     const currentPath = window.location.pathname;
@@ -35,7 +37,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     await i18n.init();
     ThemeManager.init();
     AccessibilityManager.init();
-
+    initHeaderBehavior();
+    await initFavorites();
     initProfileButton();
 
     initCarousel();
