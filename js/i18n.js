@@ -1,4 +1,5 @@
-import API from "./api.js";
+﻿import API from "./api.js";
+import { getHouseAmenityLabels } from './house-common.js';
 
 const i18n = {
     currentLang: 'ru',
@@ -26,9 +27,10 @@ const i18n = {
             'hero.openFilters': 'Открыть подборку',
             'hero.showHeader': 'Показать шапку',
 
-            'category.pool': 'С бассейном',
-            'category.family': 'Семейные и уютные',
-            'category.hits': 'Хиты продаж',
+                'category.pool': 'С бассейном',
+                'category.family': 'Семейные и уютные',
+                'category.wedding': 'Под свадьбы и корпоративы',
+                'category.banya': 'С русской баней на дровах',
 
             'about.title': 'О нас',
             'about.legal': 'Работаем с юридическими и физическими лицами',
@@ -529,9 +531,10 @@ const i18n = {
             'hero.openFilters': 'Адкрыць падборку',
             'hero.showHeader': 'Паказаць шапку',
 
-            'category.pool': 'З басейнам',
-            'category.family': 'Сямейныя і ўтульныя',
-            'category.hits': 'Хіты продажаў',
+                'category.pool': 'З басейнам',
+                'category.family': 'Сямейныя і ўтульныя',
+                'category.wedding': 'Пад вяселлі і карпаратыўныя мерапрыемствы',
+                'category.banya': 'З рускай баняй на дровах',
 
             'about.title': 'Пра нас',
             'about.legal': 'Працуем з юрыдычнымі і фізічнымі асобамі',
@@ -1033,9 +1036,10 @@ const i18n = {
             'hero.openFilters': 'Open selection',
             'hero.showHeader': 'Show header',
 
-            'category.pool': 'With pool',
-            'category.family': 'Family and cozy',
-            'category.hits': 'Best sellers',
+                'category.pool': 'With pool',
+                'category.family': 'Family and cozy',
+                'category.wedding': 'For weddings and corporate events',
+                'category.banya': 'With wood-fired Russian banya',
 
             'about.title': 'About us',
             'about.legal': 'We work with legal entities and individuals',
@@ -1572,22 +1576,7 @@ const i18n = {
                 titleEl.textContent = house.name_i18n?.[this.currentLang] || house.name;
             }
 
-            const featuresContainer = card.querySelector('.catalog-card__features');
-            if (featuresContainer && house.features_i18n) {
-                const featureEls = featuresContainer.querySelectorAll('[data-house-feature]');
-                const translatedFeatures = house.features_i18n[this.currentLang] || house.features;
-
-                featureEls.forEach((featureEl, idx) => {
-                    if (idx >= 2 && translatedFeatures[idx - 2]) {
-                        const svgIcon = featureEl.querySelector('svg');
-                        featureEl.innerHTML = '';
-                        if (svgIcon) {
-                            featureEl.appendChild(svgIcon.cloneNode(true));
-                        }
-                        featureEl.appendChild(document.createTextNode(translatedFeatures[idx - 2]));
-                    }
-                });
-            }
+            this.updateCardFeatures(card, house);
 
             const priceEl = card.querySelector('.catalog-card__price');
             if (priceEl) {
@@ -1605,17 +1594,32 @@ const i18n = {
                 moreBtn.textContent = this.t('common.more');
             }
 
-            const hitBadge = card.querySelector('.catalog-card__badge');
-            if (hitBadge) {
-                hitBadge.textContent = this.t('catalog.hit');
-            }
-
             const guestsEl = card.querySelector('.catalog-card__guests');
             if (guestsEl) {
                 guestsEl.textContent = `${this.t('common.guests')} ${house.guests}`;
             }
         });
     },
+
+    updateCardFeatures(card, house) {
+        const featuresContainer = card.querySelector('.catalog-card__features');
+        if (!featuresContainer || !house) return;
+
+        const featureEls = featuresContainer.querySelectorAll('[data-house-feature]');
+        const translatedFeatures = getHouseAmenityLabels(house, this.currentLang);
+
+        featureEls.forEach((featureEl, idx) => {
+            if (idx >= 2 && translatedFeatures[idx - 2]) {
+                const svgIcon = featureEl.querySelector('svg');
+                featureEl.innerHTML = '';
+                if (svgIcon) {
+                    featureEl.appendChild(svgIcon.cloneNode(true));
+                }
+                featureEl.appendChild(document.createTextNode(translatedFeatures[idx - 2]));
+            }
+        });
+    },
+
     translateCardsWithHouses(houses) {
         document.querySelectorAll('[data-house-card]').forEach((card, index) => {
             const house = houses[index];
@@ -1628,22 +1632,7 @@ const i18n = {
                 titleEl.textContent = house.name_i18n?.[this.currentLang] || house.name;
             }
 
-            const featuresContainer = card.querySelector('.catalog-card__features');
-            if (featuresContainer && house.features_i18n) {
-                const featureEls = featuresContainer.querySelectorAll('[data-house-feature]');
-                const translatedFeatures = house.features_i18n[this.currentLang] || house.features;
-
-                featureEls.forEach((featureEl, idx) => {
-                    if (idx >= 2 && translatedFeatures[idx - 2]) {
-                        const svgIcon = featureEl.querySelector('svg');
-                        featureEl.innerHTML = '';
-                        if (svgIcon) {
-                            featureEl.appendChild(svgIcon.cloneNode(true));
-                        }
-                        featureEl.appendChild(document.createTextNode(translatedFeatures[idx - 2]));
-                    }
-                });
-            }
+            this.updateCardFeatures(card, house);
 
             const priceEl = card.querySelector('.catalog-card__price');
             if (priceEl) {
@@ -1659,11 +1648,6 @@ const i18n = {
             const moreBtn = card.querySelector('.catalog-card__button');
             if (moreBtn) {
                 moreBtn.textContent = this.t('common.more');
-            }
-
-            const hitBadge = card.querySelector('.catalog-card__badge');
-            if (hitBadge) {
-                hitBadge.textContent = this.t('catalog.hit');
             }
 
             const guestsEl = card.querySelector('.catalog-card__guests');

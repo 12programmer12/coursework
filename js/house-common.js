@@ -40,9 +40,12 @@ export const HOUSE_COMMON_I18N = {
     },
 
     additionalServices: [
-        { key: 'catering', ru: 'Кейтеринг', be: 'Кейтэрынг', en: 'Catering' },
-        { key: 'show', ru: 'Шоу программа', be: 'Шоу праграма', en: 'Show program' },
-        { key: 'chef', ru: 'Выездной повар', be: 'Выязны кухар', en: 'Private chef' }
+    { key: 'catering', ru: 'Кейтеринг', be: 'Кейтэрынг', en: 'Catering' },
+    { key: 'show', ru: 'Шоу программа', be: 'Шоу праграма', en: 'Show program' },
+    { key: 'chef', ru: 'Выездной повар', be: 'Выязны кухар', en: 'Private chef' },
+    { key: 'buffet', ru: 'Фуршет', be: 'Фуршэт', en: 'Buffet' },
+    { key: 'transfer', ru: 'Трансфер', be: 'Трансфер', en: 'Transfer' },
+    { key: 'events', ru: 'Мероприятия под ключ', be: 'Мерапрыемствы пад ключ', en: 'Turnkey events' }
     ]
 };
 
