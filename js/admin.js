@@ -1,4 +1,4 @@
-﻿import API from './api.js';
+import API from './api.js';
 import i18n from './i18n.js';
 import ThemeManager from './theme.js';
 import AccessibilityManager from "./accessibility.js";
@@ -48,6 +48,7 @@ const Admin = {
         this.checkAuth();
         this.bindEvents();
         await this.loadModeration();
+        await this.updateSelectionsBadge();
     },
 
     checkAuth() {
@@ -73,6 +74,10 @@ const Admin = {
 
         document.getElementById('bookingsFilter')?.addEventListener('change', (e) => {
             this.loadBookings(e.target.value);
+        });
+
+        document.getElementById('selectionsFilter')?.addEventListener('change', (e) => {
+            this.loadSelections(e.target.value);
         });
 
         document.getElementById('editObjectForm')?.addEventListener('submit', async (e) => {
@@ -118,6 +123,11 @@ const Admin = {
                 await this.cancelBooking(bookingId);
             }
 
+            if (target.matches('[data-process-selection]')) {
+                const selectionId = target.getAttribute('data-process-selection');
+                await this.processSelection(selectionId);
+            }
+
             if (target.matches('[data-edit-house]')) {
                 const houseData = JSON.parse(target.getAttribute('data-edit-house'));
                 this.openEditModal(houseData);
@@ -145,6 +155,9 @@ const Admin = {
         switch (tab) {
             case 'moderation':
                 this.loadModeration();
+                break;
+            case 'selections':
+                this.loadSelections();
                 break;
             case 'bookings':
                 this.loadBookings();
@@ -219,6 +232,125 @@ const Admin = {
                 console.error('Error rejecting house:', error);
                 alert(i18n.t('common.error'));
             }
+        }
+    },
+
+    async updateSelectionsBadge() {
+        try {
+            const requests = await API.getSelectionRequests();
+            const pendingCount = requests.filter(r => r.status === 'pending' || !r.status).length;
+            const badge = document.getElementById('selectionsCount');
+            if (badge) badge.textContent = pendingCount;
+        } catch (error) {
+            console.error('Error updating selections badge:', error);
+        }
+    },
+
+    async loadSelections(filter = 'all') {
+        try {
+            const requests = await API.getSelectionRequests();
+            const sorted = [...requests].sort((a, b) =>
+                new Date(b.createdAt || 0) - new Date(a.createdAt || 0)
+            );
+
+            const filtered = filter === 'all'
+                ? sorted
+                : sorted.filter(r => (r.status || 'pending') === filter);
+
+            const container = document.getElementById('selectionsList');
+            const pendingCount = requests.filter(r => r.status === 'pending' || !r.status).length;
+            const badge = document.getElementById('selectionsCount');
+            if (badge) badge.textContent = pendingCount;
+
+            if (!container) return;
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<p class="empty-state">${i18n.t('admin.noSelections')}</p>`;
+                return;
+            }
+
+            container.innerHTML = filtered.map(request => {
+                const status = request.status || 'pending';
+                const applicantLabel = request.applicantType === 'renter'
+                    ? i18n.t('admin.applicantRenter')
+                    : i18n.t('admin.applicantGuest');
+
+                return `
+                <div class="selection-card">
+                    <div class="selection-card__header">
+                        <div>
+                            <h3 class="selection-card__title">${request.name}</h3>
+                            <p class="selection-card__meta">${request.phone}</p>
+                        </div>
+                        <div class="selection-card__badges">
+                            <span class="selection-card__type">${applicantLabel}</span>
+                            <span class="booking-card__status ${status}">
+                                ${i18n.t(`selection.status.${status}`) || status}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="booking-card__info">
+                        <div class="booking-card__detail">
+                            <span class="booking-card__detail-label">${i18n.t('hero.checkin')}:</span>
+                            <span class="booking-card__detail-value">${this.formatDate(request.checkIn)}</span>
+                        </div>
+                        <div class="booking-card__detail">
+                            <span class="booking-card__detail-label">${i18n.t('hero.checkout')}:</span>
+                            <span class="booking-card__detail-value">${this.formatDate(request.checkOut)}</span>
+                        </div>
+                        <div class="booking-card__detail">
+                            <span class="booking-card__detail-label">${i18n.t('hero.guests')}:</span>
+                            <span class="booking-card__detail-value">${request.guests || '—'}</span>
+                        </div>
+                        <div class="booking-card__detail">
+                            <span class="booking-card__detail-label">${i18n.t('form.budget')}:</span>
+                            <span class="booking-card__detail-value">${request.budget ? `${request.budget} BYN` : '—'}</span>
+                        </div>
+                        ${request.userEmail ? `
+                        <div class="booking-card__detail">
+                            <span class="booking-card__detail-label">Email:</span>
+                            <span class="booking-card__detail-value">${request.userEmail}</span>
+                        </div>
+                        ` : ''}
+                        <div class="booking-card__detail">
+                            <span class="booking-card__detail-label">${i18n.t('admin.submittedAt')}:</span>
+                            <span class="booking-card__detail-value">${this.formatDateTime(request.createdAt)}</span>
+                        </div>
+                    </div>
+                    ${request.requirements ? `
+                    <div class="selection-card__requirements">
+                        <span class="booking-card__detail-label">${i18n.t('form.requirements')}:</span>
+                        <p>${request.requirements}</p>
+                    </div>
+                    ` : ''}
+                    ${status === 'pending' ? `
+                    <div class="booking-card__actions">
+                        <button class="btn btn--primary" data-process-selection="${request.id}">
+                            ${i18n.t('admin.markProcessed')}
+                        </button>
+                    </div>
+                    ` : ''}
+                </div>
+            `}).join('');
+        } catch (error) {
+            console.error('Error loading selections:', error);
+        }
+    },
+
+    async processSelection(id) {
+        if (!confirm(i18n.t('admin.confirmProcessSelection'))) return;
+
+        try {
+            await API.updateSelectionRequest(id, {
+                status: 'processed',
+                processedAt: new Date().toISOString()
+            });
+            alert(i18n.t('admin.selectionProcessed'));
+            await this.loadSelections(document.getElementById('selectionsFilter')?.value || 'all');
+            await this.updateSelectionsBadge();
+        } catch (error) {
+            console.error('Error processing selection:', error);
+            alert(i18n.t('common.error'));
         }
     },
 
@@ -409,8 +541,20 @@ const Admin = {
     },
 
     formatDate(dateStr) {
-        if (!dateStr) return '-';
+        if (!dateStr) return '—';
         return new Date(dateStr).toLocaleDateString(i18n.currentLang === 'ru' ? 'ru-RU' : i18n.currentLang === 'be' ? 'be-BY' : 'en-US');
+    },
+
+    formatDateTime(dateStr) {
+        if (!dateStr) return '—';
+        const locale = i18n.currentLang === 'ru' ? 'ru-RU' : i18n.currentLang === 'be' ? 'be-BY' : 'en-US';
+        return new Date(dateStr).toLocaleString(locale, {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
     }
 };
 

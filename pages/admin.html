@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru" data-theme="light" data-accessibility="normal">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../css/variables.css">
     <link rel="stylesheet" href="../css/reset.css">
@@ -55,6 +55,13 @@
                     <span data-i18n="admin.moderation">Модерация</span>
                     <span class="admin-badge" id="moderationCount">0</span>
                 </button>
+                <button class="admin-nav__item" data-tab="selections">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2H3V4zm0 4h14v8a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm3 2v2h8v-2H6z" fill="currentColor"/>
+                    </svg>
+                    <span data-i18n="admin.selections">Заявки на подбор</span>
+                    <span class="admin-badge" id="selectionsCount">0</span>
+                </button>
                 <button class="admin-nav__item" data-tab="bookings">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm0 2h8v2H6V4zm0 4h8v2H6V8zm0 4h8v2H6v-2z" fill="currentColor"/>
@@ -86,6 +93,26 @@
 
                 <div class="moderation-list" id="moderationList">
                     <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                </div>
+            </div>
+
+            <div class="admin-panel" id="selectionsPanel">
+                <div class="admin-panel__header">
+                    <h1 class="admin-panel__title" data-i18n="admin.selectionsTitle">Заявки на подбор</h1>
+                    <p class="admin-panel__subtitle" data-i18n="admin.selectionsSubtitle">Заявки от гостей и съёмщиков на персональный подбор жилья</p>
+                </div>
+
+                <div class="bookings-filters">
+                    <select class="form-select" id="selectionsFilter">
+                        <option value="all" data-i18n="admin.allSelections">Все заявки</option>
+                        <option value="pending" data-i18n="admin.pending">Ожидают</option>
+                        <option value="processed" data-i18n="admin.processed">Обработаны</option>
+                    </select>
+                </div>
+
+                <div class="selections-list" id="selectionsList">
                     <div class="skeleton-card"></div>
                     <div class="skeleton-card"></div>
                 </div>
