@@ -1,4 +1,4 @@
-﻿.faq__item {
+.faq__item {
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -522,18 +522,25 @@ html[data-accessibility="active"][data-font-size="extra-large"] {
 }
 
 /* Защита вёрстки при увеличении шрифта */
-html[data-accessibility="active"][data-font-size="increased"] .header {
+html[data-accessibility="active"] .header {
     height: auto;
+    min-height: var(--header-height);
+}
+
+html[data-accessibility="active"] .header__container {
+    height: auto;
+    min-height: 0;
+}
+
+html[data-accessibility="active"][data-font-size="increased"] .header {
     min-height: 5.5rem;
 }
 
 html[data-accessibility="active"][data-font-size="large"] .header {
-    height: auto;
     min-height: 6.5rem;
 }
 
 html[data-accessibility="active"][data-font-size="extra-large"] .header {
-    height: auto;
     min-height: 8rem;
 }
 
@@ -541,10 +548,40 @@ html[data-accessibility="active"][data-font-size="increased"] .header__container
 html[data-accessibility="active"][data-font-size="large"] .header__container,
 html[data-accessibility="active"][data-font-size="extra-large"] .header__container {
     flex-wrap: wrap;
-    height: auto;
-    min-height: 0;
     padding: var(--spacing-sm) 0;
     row-gap: var(--spacing-sm);
+}
+
+html[data-accessibility="active"][data-font-size="large"] .header__container,
+html[data-accessibility="active"][data-font-size="extra-large"] .header__container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+        "logo right"
+        "nav nav";
+    align-items: center;
+    column-gap: var(--spacing-md);
+}
+
+html[data-accessibility="active"][data-font-size="large"] .header__logo,
+html[data-accessibility="active"][data-font-size="extra-large"] .header__logo {
+    grid-area: logo;
+}
+
+html[data-accessibility="active"][data-font-size="large"] .header__right,
+html[data-accessibility="active"][data-font-size="extra-large"] .header__right {
+    grid-area: right;
+    justify-self: end;
+}
+
+html[data-accessibility="active"][data-font-size="large"] .header__nav,
+html[data-accessibility="active"][data-font-size="extra-large"] .header__nav {
+    grid-area: nav;
+    flex: none;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: var(--spacing-sm) var(--spacing-md);
 }
 
 html[data-accessibility="active"][data-font-size="large"] .header__link,
@@ -736,6 +773,10 @@ html[data-accessibility="active"] .hero__title,
 html[data-accessibility="active"] .hero__subtitle {
     color: var(--text-primary);
     opacity: 1;
+}
+
+html[data-accessibility="active"] #main-content > .breadcrumbs {
+    padding-top: calc(var(--header-offset, var(--header-height, 80px)) + var(--spacing-md));
 }
 
 html[data-accessibility="active"][data-color-scheme="black-white"] .catalog-card__title,

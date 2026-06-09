@@ -86,7 +86,7 @@
     }
 
     .hero {
-        padding: calc(var(--header-height) + var(--spacing-lg)) 0 var(--spacing-2xl);
+        padding: calc(var(--header-offset, var(--header-height)) + var(--spacing-lg)) 0 var(--spacing-2xl);
     }
 
     .hero__title {

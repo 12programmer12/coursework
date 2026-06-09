@@ -1,4 +1,4 @@
-﻿import API from '../api.js';
+import API from '../api.js';
 import i18n from '../i18n.js';
 import ThemeManager from '../theme.js';
 import AccessibilityManager from "../accessibility.js";
@@ -26,9 +26,9 @@ function applyTranslations() {
 
 const Login = {
     init() {
+        AccessibilityManager.init();
         i18n.init();
         ThemeManager.init();
-        AccessibilityManager.init();
         loadSavedTheme();
         applyTranslations();
 

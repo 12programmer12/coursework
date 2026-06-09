@@ -8,12 +8,14 @@ const Profile = {
     currentUser: null,
 
     async init() {
-        this.hidePreloader();
-        this.checkAuth();
-        await initFavorites();
-        await this.loadUserData();
         AccessibilityManager.init();
         initHeaderBehavior();
+
+        this.hidePreloader();
+        this.checkAuth();
+        await i18n.init();
+        await initFavorites();
+        await this.loadUserData();
         this.bindEvents();
         const initialTab = window.location.hash === '#favorites' ? 'favorites' : 'bookings';
         this.switchTab(initialTab);

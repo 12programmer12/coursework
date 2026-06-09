@@ -12,6 +12,8 @@ import { initHeaderBehavior } from './header-behavior.js';
 
 
 document.addEventListener('DOMContentLoaded', async () => {
+    AccessibilityManager.init();
+
     const preloader = document.querySelector('[data-preloader]');
     if (preloader) {
         setTimeout(() => {
@@ -22,7 +24,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     await i18n.init();
     ThemeManager.init();
-    AccessibilityManager.init();
     BurgerMenu.init();
     Accordion.init();
     Modal.init();

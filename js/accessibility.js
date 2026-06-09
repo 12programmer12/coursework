@@ -1,4 +1,4 @@
-﻿const AccessibilityManager = {
+const AccessibilityManager = {
     STORAGE_KEY: 'accessibility',
 
     defaultSettings: {
@@ -17,7 +17,6 @@
     currentSettings: {},
     initialized: false,
     headerObserver: null,
-    headerResizeRaf: null,
     lastHeaderOffset: null,
 
     init() {
@@ -121,27 +120,27 @@
     },
 
     syncHeaderHeight() {
-        if (this.headerResizeRaf) return;
-
-        this.headerResizeRaf = requestAnimationFrame(() => {
-            this.headerResizeRaf = null;
-
+        const measure = () => {
             const header = document.querySelector('.header');
-            if (!header) return;
-
             const root = document.documentElement;
 
-            if (!this.currentSettings.enabled) {
+            if (!header || !this.currentSettings.enabled) {
                 root.style.removeProperty('--header-offset');
                 this.lastHeaderOffset = null;
                 return;
             }
 
             const height = header.offsetHeight;
-            if (height === this.lastHeaderOffset) return;
+            if (!height || height === this.lastHeaderOffset) return;
 
             this.lastHeaderOffset = height;
             root.style.setProperty('--header-offset', `${height}px`);
+        };
+
+        measure();
+        requestAnimationFrame(() => {
+            measure();
+            requestAnimationFrame(measure);
         });
     },
 
@@ -159,6 +158,7 @@
         });
         this.headerObserver.observe(header);
         this.syncHeaderHeight();
+        window.addEventListener('load', () => this.syncHeaderHeight(), { once: true });
     },
 
     setColorScheme(scheme) {

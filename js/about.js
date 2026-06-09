@@ -34,10 +34,11 @@ function initProfileButton() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    await i18n.init();
-    ThemeManager.init();
     AccessibilityManager.init();
     initHeaderBehavior();
+
+    await i18n.init();
+    ThemeManager.init();
     await initFavorites();
     initProfileButton();
 

@@ -39,9 +39,9 @@ const Admin = {
     currentTab: 'moderation',
 
     async init() {
+        AccessibilityManager.init();
         await i18n.init();
         ThemeManager.init();
-        AccessibilityManager.init();
         loadSavedTheme();
         applyTranslations();
 

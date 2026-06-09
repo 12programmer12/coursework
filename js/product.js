@@ -27,10 +27,11 @@ const Product = {
     selectedPhrases: [],
 
     async init() {
-        this.getHouseIdFromURL();
-        await this.loadHouseData();
         AccessibilityManager.init();
         initHeaderBehavior();
+
+        this.getHouseIdFromURL();
+        await this.loadHouseData();
         Modal.init();
         this.bindEvents();
         this.initMap();

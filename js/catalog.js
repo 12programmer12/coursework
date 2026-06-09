@@ -24,10 +24,11 @@ const Catalog = {
     async init() {
         if (this._initialized) return;
         this._initialized = true;
-        
-        await i18n.init();
+
         AccessibilityManager.init();
         initHeaderBehavior();
+
+        await i18n.init();
         
         await this.loadHouses();
         this.bindEvents();

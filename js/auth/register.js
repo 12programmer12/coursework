@@ -28,9 +28,9 @@ const Register = {
     maxNicknameAttempts: 5,
 
     init() {
+        AccessibilityManager.init();
         i18n.init();
         ThemeManager.init();
-        AccessibilityManager.init();
         loadSavedTheme();
         applyTranslations();
 

@@ -432,7 +432,8 @@
         "assets/images/houses/house-7-1.jpg",
         "assets/images/houses/house-7-2.jpg"
       ],
-      "isHit": true
+      "isHit": true,
+      "status": "approved"
     },
     {
       "id": "8",
