@@ -77,14 +77,28 @@ const API = {
     },
 
     async createBooking(bookingData) {
+        const payload = {
+            ...bookingData,
+            userId: String(bookingData.userId),
+            houseId: String(bookingData.houseId)
+        };
         return this.fetch('/bookings', {
             method: 'POST',
-            body: JSON.stringify(bookingData)
+            body: JSON.stringify(payload)
         });
     },
 
     async getUserBookings(userId) {
-        return this.fetch(`/bookings?userId=${userId}`);
+        try {
+            const all = await this.fetch('/bookings');
+            const normalizedUserId = String(userId);
+            return all.filter(item =>
+                item.userId != null && String(item.userId) === normalizedUserId
+            );
+        } catch (error) {
+            console.error('API getUserBookings error:', error);
+            return [];
+        }
     },
 
     async createSelectionRequest(requestData) {
