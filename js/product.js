@@ -786,3 +786,11 @@ const Product = {
 document.addEventListener('DOMContentLoaded', () => {
     Product.init();
 });
+
+document.addEventListener('languageChanged', () => {
+    if (!Product.house) return;
+    Product.renderHouseData();
+    Product.renderAmenities();
+    Product.renderAdditionalServices();
+    Product.renderRatingSummary();
+});
