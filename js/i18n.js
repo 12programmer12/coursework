@@ -1562,6 +1562,7 @@ const i18n = {
         document.documentElement.lang = lang;
         this.translatePage();
         this.translateCards();
+        document.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang } }));
     },
 
     t(key) {
@@ -1587,39 +1588,48 @@ const i18n = {
 
     translateCards() {
         document.querySelectorAll('[data-house-card]').forEach(card => {
-            const houseId = parseInt(card.getAttribute('data-house-id'));
-            const house = this.housesCache.find(h => h.id === houseId);
+            const houseId = card.getAttribute('data-house-id');
+            const house = this.housesCache.find(h => String(h.id) === String(houseId));
 
             if (!house) return;
 
-            const titleEl = card.querySelector('[data-house-name]');
-            if (titleEl) {
-                titleEl.textContent = house.name_i18n?.[this.currentLang] || house.name;
-            }
-
-            this.updateCardFeatures(card, house);
-
-            const priceEl = card.querySelector('.catalog-card__price');
-            if (priceEl) {
-                const formattedPrice = house.price.toLocaleString(
-                    this.currentLang === 'ru' ? 'ru-RU' :
-                        this.currentLang === 'be' ? 'be-BY' : 'en-US'
-                );
-                const fromText = this.t('common.from');
-                const perNightText = this.t('common.perNight');
-                priceEl.innerHTML = `${fromText} ${formattedPrice} BYN <span>${perNightText}</span>`;
-            }
-
-            const moreBtn = card.querySelector('.catalog-card__button');
-            if (moreBtn) {
-                moreBtn.textContent = this.t('common.more');
-            }
-
-            const guestsEl = card.querySelector('.catalog-card__guests');
-            if (guestsEl) {
-                guestsEl.textContent = `${this.t('common.guests')} ${house.guests}`;
-            }
+            this.updateCardContent(card, house);
         });
+    },
+
+    updateCardContent(card, house) {
+        const titleEl = card.querySelector('[data-house-name]');
+        if (titleEl) {
+            titleEl.textContent = house.name_i18n?.[this.currentLang] || house.name;
+        }
+
+        this.updateCardFeatures(card, house);
+
+        const priceEl = card.querySelector('.catalog-card__price');
+        if (priceEl) {
+            const formattedPrice = house.price.toLocaleString(
+                this.currentLang === 'ru' ? 'ru-RU' :
+                    this.currentLang === 'be' ? 'be-BY' : 'en-US'
+            );
+            const fromText = this.t('common.from');
+            const perNightText = this.t('common.perNight');
+            priceEl.innerHTML = `${fromText} ${formattedPrice} BYN <span>${perNightText}</span>`;
+        }
+
+        const moreBtn = card.querySelector('.catalog-card__button');
+        if (moreBtn) {
+            moreBtn.textContent = this.t('common.more');
+        }
+
+        const guestsEl = card.querySelector('.catalog-card__guests');
+        if (guestsEl) {
+            guestsEl.textContent = `${this.t('common.guests')} ${house.guests}`;
+        }
+
+        const ratingCountEl = card.querySelector('.catalog-card__rating-count');
+        if (ratingCountEl) {
+            ratingCountEl.textContent = this.t('reviews.count').replace('{count}', house.reviews || 0);
+        }
     },
 
     updateCardFeatures(card, house) {
@@ -1630,56 +1640,45 @@ const i18n = {
         const translatedFeatures = getHouseAmenityLabels(house, this.currentLang);
 
         featureEls.forEach((featureEl, idx) => {
-            if (idx >= 2 && translatedFeatures[idx - 2]) {
+            if (idx === 0) {
                 const svgIcon = featureEl.querySelector('svg');
                 featureEl.innerHTML = '';
-                if (svgIcon) {
-                    featureEl.appendChild(svgIcon.cloneNode(true));
-                }
-                featureEl.appendChild(document.createTextNode(translatedFeatures[idx - 2]));
+                if (svgIcon) featureEl.appendChild(svgIcon.cloneNode(true));
+                featureEl.appendChild(document.createTextNode(`${house.bedrooms} ${this.t('common.bedrooms')}`));
+                return;
+            }
+
+            if (idx === 1) {
+                const svgIcon = featureEl.querySelector('svg');
+                featureEl.innerHTML = '';
+                if (svgIcon) featureEl.appendChild(svgIcon.cloneNode(true));
+                featureEl.appendChild(document.createTextNode(`${house.bathrooms} ${this.t('common.bathrooms')}`));
+                return;
+            }
+
+            const amenityLabel = translatedFeatures[idx - 2];
+            if (amenityLabel) {
+                featureEl.textContent = amenityLabel;
             }
         });
     },
 
     translateCardsWithHouses(houses) {
-        document.querySelectorAll('[data-house-card]').forEach((card, index) => {
-            const house = houses[index];
+        const houseById = new Map(houses.map(house => [String(house.id), house]));
+
+        document.querySelectorAll('[data-house-card]').forEach((card) => {
+            const houseId = card.getAttribute('data-house-id');
+            const house = houseById.get(String(houseId)) ||
+                this.housesCache.find(h => String(h.id) === String(houseId));
+
             if (!house) return;
 
-            const houseId = parseInt(card.getAttribute('data-house-id'));
-
-            const titleEl = card.querySelector('[data-house-name]');
-            if (titleEl) {
-                titleEl.textContent = house.name_i18n?.[this.currentLang] || house.name;
-            }
-
-            this.updateCardFeatures(card, house);
-
-            const priceEl = card.querySelector('.catalog-card__price');
-            if (priceEl) {
-                const formattedPrice = house.price.toLocaleString(
-                    this.currentLang === 'ru' ? 'ru-RU' :
-                        this.currentLang === 'be' ? 'be-BY' : 'en-US'
-                );
-                const fromText = this.t('common.from');
-                const perNightText = this.t('common.perNight');
-                priceEl.innerHTML = `${fromText} ${formattedPrice} BYN <span>${perNightText}</span>`;
-            }
-
-            const moreBtn = card.querySelector('.catalog-card__button');
-            if (moreBtn) {
-                moreBtn.textContent = this.t('common.more');
-            }
-
-            const guestsEl = card.querySelector('.catalog-card__guests');
-            if (guestsEl) {
-                guestsEl.textContent = `${this.t('common.guests')} ${house.guests}`;
-            }
+            this.updateCardContent(card, house);
         });
     },
 
     getHouseById(id) {
-        return this.housesCache.find(h => h.id === parseInt(id)) || null;
+        return this.housesCache.find(h => String(h.id) === String(id)) || null;
     },
 
     async refreshHousesCache() {

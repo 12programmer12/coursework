@@ -43,6 +43,7 @@ const Catalog = {
             await syncAllHouseReviewStats().catch(() => null);
             this.allHouses = await enrichHousesWithReviews(houses);
             this.filteredHouses = sortHouses(this.allHouses, this.sort);
+            i18n.housesCache = this.allHouses;
         } catch (error) {
             console.error('Error loading houses:', error);
             this.allHouses = [];
@@ -503,4 +504,9 @@ const Catalog = {
 
 document.addEventListener('DOMContentLoaded', () => {
     Catalog.init();
+});
+
+document.addEventListener('languageChanged', () => {
+    if (!Catalog.filteredHouses.length) return;
+    Catalog.render();
 });
