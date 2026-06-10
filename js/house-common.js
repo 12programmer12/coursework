@@ -39,14 +39,14 @@ export const HOUSE_COMMON_I18N = {
         'washing-machine': { ru: 'Стиральная машина', be: 'Пральная машына', en: 'Washing machine' }
     },
 
-    additionalServices: [
-    { key: 'catering', ru: 'Кейтеринг', be: 'Кейтэрынг', en: 'Catering' },
-    { key: 'show', ru: 'Шоу программа', be: 'Шоу праграма', en: 'Show program' },
-    { key: 'chef', ru: 'Выездной повар', be: 'Выязны кухар', en: 'Private chef' },
-    { key: 'buffet', ru: 'Фуршет', be: 'Фуршэт', en: 'Buffet' },
-    { key: 'transfer', ru: 'Трансфер', be: 'Трансфер', en: 'Transfer' },
-    { key: 'events', ru: 'Мероприятия под ключ', be: 'Мерапрыемствы пад ключ', en: 'Turnkey events' }
-    ]
+    additionalServices: {
+        catering: { ru: 'Кейтеринг', be: 'Кейтэрынг', en: 'Catering' },
+        show: { ru: 'Шоу программа', be: 'Шоу праграма', en: 'Show program' },
+        chef: { ru: 'Выездной повар', be: 'Выязны кухар', en: 'Private chef' },
+        buffet: { ru: 'Фуршет', be: 'Фуршэт', en: 'Buffet' },
+        transfer: { ru: 'Трансфер', be: 'Трансфер', en: 'Transfer' },
+        events: { ru: 'Мероприятия под ключ', be: 'Мерапрыемствы пад ключ', en: 'Turnkey events' }
+    }
 };
 
 /**
