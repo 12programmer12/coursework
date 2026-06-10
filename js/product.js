@@ -44,9 +44,30 @@ const Product = {
         this.scrollToReviewsIfNeeded();
     },
 
+    shouldHighlightOwnReview() {
+        const highlightId = sessionStorage.getItem('highlightOwnReview');
+        if (!highlightId || !this.houseId) return false;
+        return normalizeId(highlightId) === normalizeId(this.houseId);
+    },
+
+    scrollToOwnReview() {
+        requestAnimationFrame(() => {
+            const userReview = document.querySelector('.review-item--own');
+            const target = userReview || document.getElementById('reviews');
+            target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    },
+
     scrollToReviewsIfNeeded() {
+        const fromProfile = this.shouldHighlightOwnReview();
+        if (fromProfile) {
+            sessionStorage.removeItem('highlightOwnReview');
+            this.scrollToOwnReview();
+            return;
+        }
+
         if (window.location.hash !== '#reviews') return;
-        document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        this.scrollToOwnReview();
     },
 
     getHouseIdFromURL() {
@@ -305,8 +326,20 @@ const Product = {
         });
 
         if (!access.allowed) {
-            container.hidden = true;
-            container.innerHTML = '';
+            if (access.reason === 'exists') {
+                container.hidden = false;
+                container.innerHTML = `
+                    <p class="review-form__notice review-form__notice--info">${i18n.t('reviews.alreadyReviewed')}</p>
+                `;
+            } else if (access.reason === 'booking' && user?.id) {
+                container.hidden = false;
+                container.innerHTML = `
+                    <p class="review-form__notice">${i18n.t('reviews.bookingRequired')}</p>
+                `;
+            } else {
+                container.hidden = true;
+                container.innerHTML = '';
+            }
             return;
         }
 
@@ -458,8 +491,14 @@ const Product = {
             (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
         );
 
-        container.innerHTML = sortedReviews.map(review => `
-            <article class="review-item">
+        const currentUser = this.getCurrentUser();
+
+        container.innerHTML = sortedReviews.map(review => {
+            const isOwn = currentUser?.id &&
+                normalizeId(review.userId) === normalizeId(currentUser.id);
+
+            return `
+            <article class="review-item${isOwn ? ' review-item--own' : ''}"${isOwn ? ' data-own-review' : ''}>
                 <div class="review-header">
                     <div>
                         <span class="review-author">${review.userName || 'Гость'}</span>
@@ -474,7 +513,10 @@ const Product = {
                 ` : ''}
                 <p class="review-text">${review.text || ''}</p>
             </article>
-        `).join('');
+        `;
+        }).join('');
+
+        this.scrollToReviewsIfNeeded();
     },
 
     initMap() {
