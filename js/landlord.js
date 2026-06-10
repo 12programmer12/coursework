@@ -234,21 +234,31 @@ const Landlord = {
 
 
 
-            if (target.matches('[data-confirm-booking]')) {
+            const confirmBookingBtn = e.target.closest('[data-confirm-booking]');
 
-                const bookingId = parseInt(target.getAttribute('data-confirm-booking'), 10);
+            if (confirmBookingBtn) {
 
-                await this.confirmBooking(bookingId);
+                await this.confirmBooking(confirmBookingBtn.getAttribute('data-confirm-booking'));
 
             }
 
 
 
-            if (target.matches('[data-cancel-booking]')) {
+            const cancelBookingBtn = e.target.closest('[data-cancel-booking]');
 
-                const bookingId = parseInt(target.getAttribute('data-cancel-booking'), 10);
+            if (cancelBookingBtn) {
 
-                await this.cancelBooking(bookingId);
+                await this.cancelBooking(cancelBookingBtn.getAttribute('data-cancel-booking'));
+
+            }
+
+
+
+            const completeBookingBtn = e.target.closest('[data-complete-booking]');
+
+            if (completeBookingBtn) {
+
+                await this.completeBooking(completeBookingBtn.getAttribute('data-complete-booking'));
 
             }
 
@@ -416,6 +426,8 @@ const Landlord = {
 
                 const statusClass = booking.status === 'confirmed' ? 'confirmed' :
 
+                    booking.status === 'completed' ? 'completed' :
+
                     booking.status === 'cancelled' ? 'cancelled' : 'pending';
 
 
@@ -514,7 +526,25 @@ const Landlord = {
 
                     </button>
 
-                    ` : `
+                    ` : ''}
+
+                    ${booking.status === 'confirmed' ? `
+
+                    <button class="btn btn--primary btn--sm" data-complete-booking="${booking.id}">
+
+                        ${i18n.t('admin.complete')}
+
+                    </button>
+
+                    <button class="btn btn--outline btn--sm" data-cancel-booking="${booking.id}">
+
+                        ${i18n.t('admin.cancel')}
+
+                    </button>
+
+                    ` : ''}
+
+                    ${booking.status === 'completed' || booking.status === 'cancelled' ? `
 
                     <span style="font-size: var(--font-size-sm); color: var(--text-secondary);">
 
@@ -522,7 +552,7 @@ const Landlord = {
 
                     </span>
 
-                    `}
+                    ` : ''}
 
                 </div>
 
@@ -615,6 +645,44 @@ const Landlord = {
         } catch (err) {
 
             console.error('Error cancelling booking:', err);
+
+            showNotification(i18n.t('common.error'), 'error');
+
+        }
+
+    },
+
+
+
+    async completeBooking(bookingId) {
+
+        const confirmed = await showConfirm({
+
+            message: i18n.t('admin.confirmComplete'),
+
+            confirmText: i18n.t('admin.complete')
+
+        });
+
+        if (!confirmed) {
+
+            return;
+
+        }
+
+
+
+        try {
+
+            await API.updateBooking(bookingId, { status: 'completed' });
+
+            showNotification(i18n.t('admin.bookingCompleted'), 'success');
+
+            await this.loadBookings();
+
+        } catch (err) {
+
+            console.error('Error completing booking:', err);
 
             showNotification(i18n.t('common.error'), 'error');
 
