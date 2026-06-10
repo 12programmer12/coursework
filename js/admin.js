@@ -2,6 +2,8 @@ import API from './api.js';
 import i18n from './i18n.js';
 import ThemeManager from './theme.js';
 import AccessibilityManager from "./accessibility.js";
+import { showNotification } from './main.js';
+import { showConfirm } from './components/confirm.js';
 
 function fixImagePath(path) {
     if (!path) return 'assets/images/placeholder.jpg';
@@ -59,7 +61,7 @@ const Admin = {
         }
         const user = JSON.parse(stored);
         if (user.role !== 'admin') {
-            alert(i18n.t('admin.accessDenied') || 'Доступ запрещён');
+            showNotification(i18n.t('admin.accessDenied') || 'Доступ запрещён', 'error');
             window.location.href = '../index.html';
         }
     },
@@ -214,24 +216,29 @@ const Admin = {
     async approveHouse(id) {
         try {
             await API.updateHouse(id, { status: 'approved' });
-            alert(i18n.t('admin.approved') || 'Объект одобрен');
+            showNotification(i18n.t('admin.approved') || 'Объект одобрен', 'success');
             this.loadModeration();
         } catch (error) {
             console.error('Error approving house:', error);
-            alert(i18n.t('common.error'));
+            showNotification(i18n.t('common.error'), 'error');
         }
     },
 
     async rejectHouse(id) {
-        if (confirm(i18n.t('admin.confirmReject') || 'Отклонить объект?')) {
-            try {
-                await API.updateHouse(id, { status: 'rejected' });
-                alert(i18n.t('admin.rejected') || 'Объект отклонён');
-                this.loadModeration();
-            } catch (error) {
-                console.error('Error rejecting house:', error);
-                alert(i18n.t('common.error'));
-            }
+        const confirmed = await showConfirm({
+            message: i18n.t('admin.confirmReject') || 'Отклонить объект?',
+            confirmText: i18n.t('admin.reject'),
+            danger: true
+        });
+        if (!confirmed) return;
+
+        try {
+            await API.updateHouse(id, { status: 'rejected' });
+            showNotification(i18n.t('admin.rejected') || 'Объект отклонён', 'success');
+            this.loadModeration();
+        } catch (error) {
+            console.error('Error rejecting house:', error);
+            showNotification(i18n.t('common.error'), 'error');
         }
     },
 
@@ -338,19 +345,23 @@ const Admin = {
     },
 
     async processSelection(id) {
-        if (!confirm(i18n.t('admin.confirmProcessSelection'))) return;
+        const confirmed = await showConfirm({
+            message: i18n.t('admin.confirmProcessSelection'),
+            confirmText: i18n.t('admin.markProcessed')
+        });
+        if (!confirmed) return;
 
         try {
             await API.updateSelectionRequest(id, {
                 status: 'processed',
                 processedAt: new Date().toISOString()
             });
-            alert(i18n.t('admin.selectionProcessed'));
+            showNotification(i18n.t('admin.selectionProcessed'), 'success');
             await this.loadSelections(document.getElementById('selectionsFilter')?.value || 'all');
             await this.updateSelectionsBadge();
         } catch (error) {
             console.error('Error processing selection:', error);
-            alert(i18n.t('common.error'));
+            showNotification(i18n.t('common.error'), 'error');
         }
     },
 
@@ -413,26 +424,37 @@ const Admin = {
     },
 
     async confirmBooking(id) {
+        const confirmed = await showConfirm({
+            message: i18n.t('admin.confirmBooking'),
+            confirmText: i18n.t('admin.confirm')
+        });
+        if (!confirmed) return;
+
         try {
             await API.updateBooking(id, { status: 'confirmed' });
-            alert(i18n.t('admin.bookingConfirmed') || 'Бронирование подтверждено');
-            this.loadBookings();
+            showNotification(i18n.t('admin.bookingConfirmed') || 'Бронирование подтверждено', 'success');
+            this.loadBookings(document.getElementById('bookingsFilter')?.value || 'all');
         } catch (error) {
             console.error('Error confirming booking:', error);
-            alert(i18n.t('common.error'));
+            showNotification(i18n.t('common.error'), 'error');
         }
     },
 
     async cancelBooking(id) {
-        if (confirm(i18n.t('admin.confirmCancel') || 'Отменить бронирование?')) {
-            try {
-                await API.updateBooking(id, { status: 'cancelled' });
-                alert(i18n.t('admin.bookingCancelled') || 'Бронирование отменено');
-                this.loadBookings();
-            } catch (error) {
-                console.error('Error cancelling booking:', error);
-                alert(i18n.t('common.error'));
-            }
+        const confirmed = await showConfirm({
+            message: i18n.t('admin.confirmCancel') || 'Отменить бронирование?',
+            confirmText: i18n.t('admin.cancel'),
+            danger: true
+        });
+        if (!confirmed) return;
+
+        try {
+            await API.updateBooking(id, { status: 'cancelled' });
+            showNotification(i18n.t('admin.bookingCancelled') || 'Бронирование отменено', 'success');
+            this.loadBookings(document.getElementById('bookingsFilter')?.value || 'all');
+        } catch (error) {
+            console.error('Error cancelling booking:', error);
+            showNotification(i18n.t('common.error'), 'error');
         }
     },
 
@@ -495,25 +517,30 @@ const Admin = {
 
         try {
             await API.updateHouse(id, data);
-            alert(i18n.t('admin.saved') || 'Сохранено');
+            showNotification(i18n.t('admin.saved') || 'Сохранено', 'success');
             document.querySelector('[data-modal="edit-modal"]').classList.remove('active');
             this.loadContent();
         } catch (error) {
             console.error('Error saving house:', error);
-            alert(i18n.t('common.error'));
+            showNotification(i18n.t('common.error'), 'error');
         }
     },
 
     async deleteHouse(id) {
-        if (confirm(i18n.t('admin.confirmDelete') || 'Удалить объект?')) {
-            try {
-                await API.deleteHouse(id);
-                alert(i18n.t('admin.deleted') || 'Удалено');
-                this.loadContent();
-            } catch (error) {
-                console.error('Error deleting house:', error);
-                alert(i18n.t('common.error'));
-            }
+        const confirmed = await showConfirm({
+            message: i18n.t('admin.confirmDelete') || 'Удалить объект?',
+            confirmText: i18n.t('admin.delete'),
+            danger: true
+        });
+        if (!confirmed) return;
+
+        try {
+            await API.deleteHouse(id);
+            showNotification(i18n.t('admin.deleted') || 'Удалено', 'success');
+            this.loadContent();
+        } catch (error) {
+            console.error('Error deleting house:', error);
+            showNotification(i18n.t('common.error'), 'error');
         }
     },
 

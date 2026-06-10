@@ -179,21 +179,26 @@ function createHouseCard(house) {
     return card;
 }
 
-function initSearch() {
-    const searchInput = document.querySelector('[data-search-input]');
-    if (!searchInput) return;
+        function initSearch() {
 
-    let debounceTimer;
-    searchInput.addEventListener('input', (e) => {
-        clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(() => {
-            const query = e.target.value.trim();
-            if (query.length >= 2) {
-                performSearch(query);
-            }
-        }, 300);
-    });
-}
+            const searchInput = document.querySelector('[data-search-input]');
+            if (!searchInput) return;
+
+            let debounceTimer;
+
+
+            searchInput.addEventListener('input', (e) => {
+                
+                clearTimeout(debounceTimer);
+
+                debounceTimer = setTimeout(() => {
+                    const query = e.target.value.trim();
+                    if (query.length >= 2) {
+                        performSearch(query);
+                    }
+                }, 300);
+            });
+        }
 
 async function performSearch(query) {
     try {
@@ -205,10 +210,15 @@ async function performSearch(query) {
 }
 
 function initFilters() {
+
     const filterButtons = document.querySelectorAll('[data-category]');
+
     filterButtons.forEach(btn => {
+
         btn.addEventListener('click', async () => {
+
             const category = btn.getAttribute('data-category');
+
             filterButtons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
@@ -220,7 +230,11 @@ function initFilters() {
             }
         });
     });
+
+
 }
+
+
 
 let favoritesInitialized = false;
 
@@ -235,6 +249,7 @@ async function initFavorites() {
     favoritesInitialized = true;
 
     document.addEventListener('click', async (e) => {
+
         const favoriteBtn = e.target.closest('[data-favorite]');
         if (!favoriteBtn) return;
 
@@ -247,8 +262,12 @@ async function initFavorites() {
         await handleFavoriteClick(houseId, favoriteBtn);
     });
 
+
+
     document.querySelectorAll('.header__favorites').forEach(btn => {
+
         btn.addEventListener('click', () => {
+
             const user = getCurrentUser();
             const profilePath = window.location.pathname.includes('/pages/')
                 ? 'profile.html#favorites'
@@ -258,11 +277,18 @@ async function initFavorites() {
                 : 'pages/login.html';
 
             window.location.href = user ? profilePath : loginPath;
+
         });
+
+
     });
+
+
 
     await updateFavoriteButtons();
 }
+
+
 
 async function handleFavoriteClick(houseId, btn) {
     const user = getCurrentUser();
@@ -296,6 +322,7 @@ async function handleFavoriteClick(houseId, btn) {
     }
 }
 
+
 async function getFavorites() {
     const user = getCurrentUser();
     if (!user) return [];
@@ -308,6 +335,8 @@ async function getFavorites() {
         return [];
     }
 }
+
+
 
 async function updateFavoriteButtons() {
     const favorites = await getFavorites();
@@ -348,6 +377,8 @@ function initForms() {
         });
     }
 
+
+
     const selectionForm = document.querySelector('[data-selection-form]');
     if (selectionForm) {
         selectionForm.addEventListener('submit', handleSelectionRequest);
@@ -375,6 +406,9 @@ function getCurrentUser() {
     return stored ? JSON.parse(stored) : null;
 }
 
+
+
+
 function prefillSelectionForm() {
     const user = getCurrentUser();
     const nameInput = document.getElementById('selectionName');
@@ -391,6 +425,9 @@ function prefillSelectionForm() {
         phoneInput.value = user.phone;
     }
 }
+
+
+
 
 async function handleSelectionRequest(e) {
     e.preventDefault();
@@ -447,6 +484,8 @@ async function handleBooking(e) {
     }
 }
 
+
+
 async function handleContactForm(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -461,19 +500,34 @@ async function handleContactForm(e) {
     }
 }
 
-function showNotification(message, type = 'info') {
-    document.querySelectorAll('.notification').forEach(n => n.remove());
+
+
+function showNotification(message, type = 'info', duration = 6000) {
+    const existing = document.querySelectorAll('.notification');
+    const stackOffset = existing.length * 72;
 
     const notification = document.createElement('div');
     notification.className = `notification notification--${type}`;
-    notification.innerHTML = `<div class="notification__message">${message}</div>`;
+    notification.style.top = `calc(var(--header-offset, var(--header-height, 80px)) + var(--spacing-md) + ${stackOffset}px)`;
+    notification.innerHTML = `
+        <div class="notification__message">${message}</div>
+        <button type="button" class="notification__close" aria-label="${i18n.t('common.close')}">&times;</button>
+    `;
     document.body.appendChild(notification);
 
-    setTimeout(() => {
+    let hideTimer = setTimeout(dismiss, duration);
+
+    function dismiss() {
+        clearTimeout(hideTimer);
         notification.classList.add('hiding');
         setTimeout(() => notification.remove(), 300);
-    }, 3000);
+    }
+
+    notification.querySelector('.notification__close')?.addEventListener('click', dismiss);
 }
+
+
+
 
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -509,6 +563,8 @@ function initLazyLoading() {
     }
 }
 
+
+
 function fixImagePath(path) {
     if (window.location.pathname.includes('/pages/')) {
         if (!path.startsWith('../') && !path.startsWith('http://') && !path.startsWith('https://')) {
@@ -518,19 +574,26 @@ function fixImagePath(path) {
     return path;
 }
 
+
+
 function initSettingsDropdown() {
+    
     const settingsMenu = document.querySelector('[data-settings-menu]');
     const settingsDropdown = document.querySelector('.header__settings-dropdown');
     const settingsBtn = document.querySelector('.header__settings-btn');
 
     if (settingsBtn && settingsDropdown) {
+
         settingsBtn.addEventListener('click', (e) => {
+
             e.stopPropagation();
             settingsDropdown.hidden = !settingsDropdown.hidden;
             settingsBtn.setAttribute('aria-expanded', !settingsDropdown.hidden);
+
         });
 
         document.addEventListener('click', (e) => {
+
             if (!settingsMenu?.contains(e.target) && !settingsDropdown.hidden) {
                 settingsDropdown.hidden = true;
                 settingsBtn.setAttribute('aria-expanded', 'false');
@@ -539,42 +602,69 @@ function initSettingsDropdown() {
     }
 }
 
+
+
 function initLanguageSwitcher() {
+
     document.querySelectorAll('[data-lang]').forEach(btn => {
+
         btn.addEventListener('click', (e) => {
+
             const lang = e.target.getAttribute('data-lang');
+
             if (typeof i18n !== 'undefined') {
+
                 i18n.setLanguage(lang);
+
             }
             document.querySelectorAll('[data-lang]').forEach(b => b.classList.remove('active'));
+
             e.target.classList.add('active');
+
             localStorage.setItem('language', lang);
+
             const settingsDropdown = document.querySelector('.header__settings-dropdown');
+
             if (settingsDropdown) {
                 settingsDropdown.hidden = true;
                 document.querySelector('.header__settings-btn')?.setAttribute('aria-expanded', 'false');
             }
+
         });
     });
+
 }
 
+
+
 function initThemeSwitcher() {
+
     document.querySelectorAll('[data-theme-toggle]').forEach(btn => {
+
         btn.addEventListener('click', (e) => {
+
             const theme = e.target.getAttribute('data-theme-toggle');
+            
             if (typeof ThemeManager !== 'undefined') {
                 ThemeManager.setTheme(theme);
             }
+
             document.querySelectorAll('[data-theme-toggle]').forEach(b => b.classList.remove('active'));
+
             e.target.classList.add('active');
+
             const settingsDropdown = document.querySelector('.header__settings-dropdown');
+
             if (settingsDropdown) {
                 settingsDropdown.hidden = true;
                 document.querySelector('.header__settings-btn')?.setAttribute('aria-expanded', 'false');
             }
         });
     });
+
 }
+
+
 
 function initResetSettings() {
     document.querySelector('[data-i18n="settings.reset"]')?.addEventListener('click', () => {
@@ -584,6 +674,8 @@ function initResetSettings() {
         location.reload();
     });
 }
+
+
 
 function initUserMenu() {
     const userBtn = document.querySelector('[data-user-menu]');
@@ -613,6 +705,8 @@ function initUserMenu() {
         });
     }
 }
+
+
 
 export {
     showNotification,

@@ -2,7 +2,7 @@ import API from './api.js';
 import i18n from './i18n.js';
 import Modal from './components/modal.js';
 
-import { fixImagePath } from './main.js';
+import { fixImagePath, showNotification } from './main.js';
 import AccessibilityManager from "./accessibility.js";
 import { initHeaderBehavior } from './header-behavior.js';
 import {
@@ -30,6 +30,7 @@ const Product = {
     currentImageIndex: 0,
     selectedRating: 0,
     selectedPhrases: [],
+    isOwnProperty: false,
 
     async init() {
         AccessibilityManager.init();
@@ -88,6 +89,7 @@ const Product = {
             this.renderAdditionalServices();
             this.renderRatingSummary();
             await this.renderReviewsSection();
+            await this.checkOwnPropertyAndUpdateUI();
 
         } catch (error) {
             console.error('❌ Error loading house:', error);
@@ -205,6 +207,79 @@ const Product = {
         return stored ? JSON.parse(stored) : null;
     },
 
+    formatPhoneForInput(phone) {
+        if (!phone) return '';
+        let value = String(phone).replace(/\D/g, '');
+        if (value.startsWith('8')) {
+            value = '375' + value.slice(1);
+        }
+        if (!value.startsWith('375')) {
+            value = '375' + value;
+        }
+        value = '+' + value;
+
+        const match = value.match(/^\+375(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})$/);
+        if (!match) return phone;
+
+        let formatted = '+375';
+        if (match[1]) formatted += ` (${match[1]}`;
+        if (match[2]) formatted += `) ${match[2]}`;
+        if (match[3]) formatted += `-${match[3]}`;
+        if (match[4]) formatted += `-${match[4]}`;
+        return formatted;
+    },
+
+    prefillBookingForm() {
+        const user = this.getCurrentUser();
+        const nameInput = document.getElementById('bookingName');
+        const phoneInput = document.getElementById('bookingPhone');
+
+        if (!user) return;
+
+        if (nameInput) {
+            const fullName = [user.firstName, user.lastName].filter(Boolean).join(' ').trim();
+            nameInput.value = fullName || user.name || '';
+        }
+
+        if (phoneInput && user.phone) {
+            phoneInput.value = this.formatPhoneForInput(user.phone);
+        }
+    },
+
+    async checkOwnPropertyAndUpdateUI() {
+        const user = this.getCurrentUser();
+        const bookBtn = document.querySelector('[data-modal-open="booking-modal"]');
+        if (!user || !bookBtn) return;
+
+        this.isOwnProperty = false;
+
+        if (user.role === 'landlord') {
+            const links = await API.getProperties({ houseId: this.houseId });
+            this.isOwnProperty = links.some(link => String(link.landlordId) === String(user.id));
+        }
+
+        let note = document.getElementById('ownPropertyNote');
+
+        if (this.isOwnProperty) {
+            bookBtn.disabled = true;
+            bookBtn.classList.add('btn--disabled');
+            if (!note) {
+                note = document.createElement('p');
+                note.id = 'ownPropertyNote';
+                note.className = 'booking-card__notice';
+                bookBtn.parentElement.insertBefore(note, bookBtn);
+            }
+            note.textContent = i18n.t('booking.ownPropertyDenied');
+            note.hidden = false;
+        } else {
+            bookBtn.disabled = false;
+            bookBtn.classList.remove('btn--disabled');
+            if (note) {
+                note.hidden = true;
+            }
+        }
+    },
+
     async renderReviewsSection() {
         await this.renderReviewForm();
         this.renderReviewsList();
@@ -316,7 +391,7 @@ const Product = {
     async submitReview(formContainer) {
         const user = this.getCurrentUser();
         if (!user?.id) {
-            alert(i18n.t('reviews.authRequired'));
+            showNotification(i18n.t('reviews.authRequired'), 'error');
             window.location.href = this.getLoginPath();
             return;
         }
@@ -324,12 +399,12 @@ const Product = {
         const text = formContainer.querySelector('#reviewText')?.value.trim() || '';
 
         if (!this.selectedRating) {
-            alert(i18n.t('reviews.ratingRequired'));
+            showNotification(i18n.t('reviews.ratingRequired'), 'error');
             return;
         }
 
         if (!text) {
-            alert(i18n.t('reviews.textRequired'));
+            showNotification(i18n.t('reviews.textRequired'), 'error');
             return;
         }
 
@@ -360,10 +435,10 @@ const Product = {
             formContainer.hidden = true;
             formContainer.innerHTML = '';
             this.renderReviewsList();
-            alert(i18n.t('reviews.success'));
+            showNotification(i18n.t('reviews.success'), 'success');
         } catch (error) {
             console.error('Review submit error:', error);
-            alert(i18n.t('common.error'));
+            showNotification(i18n.t('common.error'), 'error');
         } finally {
             submitBtn.disabled = false;
             submitBtn.textContent = originalText;
@@ -460,6 +535,18 @@ const Product = {
         document.getElementById('bookingForm')?.addEventListener('submit', async (e) => {
             e.preventDefault();
             await this.handleBooking(e.target);
+        });
+
+        document.querySelectorAll('[data-modal-open="booking-modal"]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                if (this.isOwnProperty) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    showNotification(i18n.t('booking.ownPropertyDenied'), 'error');
+                    return;
+                }
+                requestAnimationFrame(() => this.prefillBookingForm());
+            }, true);
         });
 
         document.querySelector('[data-contact-write]')?.setAttribute('href', CONTACT_TELEGRAM);
@@ -576,8 +663,13 @@ const Product = {
             const currentUser = storedUser ? JSON.parse(storedUser) : null;
 
             if (!currentUser || !currentUser.id) {
-                alert(i18n.t('booking.authRequired') || 'Для бронирования необходимо войти в аккаунт');
+                showNotification(i18n.t('booking.authRequired'), 'error');
                 window.location.href = this.getLoginPath();
+                return;
+            }
+
+            if (this.isOwnProperty) {
+                showNotification(i18n.t('booking.ownPropertyDenied'), 'error');
                 return;
             }
 
@@ -628,11 +720,12 @@ const Product = {
 
             this.showSuccessMessage(data.name);
             form.reset();
+            this.prefillBookingForm();
 
         } catch (error) {
             console.error('❌ Booking error:', error);
             if (error.message !== 'Validation failed') {
-                alert(i18n.t('common.error') + ': ' + error.message);
+                showNotification(i18n.t('common.error'), 'error');
             }
         } finally {
             submitBtn.disabled = false;
@@ -668,7 +761,10 @@ const Product = {
     `;
 
         document.body.appendChild(modal);
+        document.body.classList.add('modal-open');
+        document.body.style.overflow = 'hidden';
 
+        const closeButtons = modal.querySelectorAll('[data-modal-close]');
         const closeSuccessModal = () => {
             modal.classList.remove('active');
             document.body.classList.remove('modal-open');
@@ -676,7 +772,7 @@ const Product = {
             setTimeout(() => modal.remove(), 250);
         };
 
-        modal.querySelector('[data-modal-close]').addEventListener('click', closeSuccessModal);
+        closeButtons.forEach(btn => btn.addEventListener('click', closeSuccessModal));
 
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
