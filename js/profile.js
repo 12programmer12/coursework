@@ -1,6 +1,7 @@
 import API from './api.js';
 import i18n from './i18n.js';
-import { fixImagePath, updateFavoriteButtons, initFavorites } from './main.js';
+import { fixImagePath, getProductPath, showNotification, updateFavoriteButtons, initFavorites } from './main.js';
+import { normalizeId } from './reviews.js';
 import AccessibilityManager from "./accessibility.js";
 import { initHeaderBehavior } from './header-behavior.js';
 
@@ -183,7 +184,17 @@ const Profile = {
                 return booking;
             }));
 
-            container.innerHTML = bookings.map(booking => `
+            bookings.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+
+            const allReviews = await API.getAllReviews();
+
+            container.innerHTML = bookings.map(booking => {
+                const hasReview = allReviews.some(review =>
+                    normalizeId(review.userId) === normalizeId(this.currentUser.id) &&
+                    normalizeId(review.houseId) === normalizeId(booking.houseId)
+                );
+
+                return `
                 <div class="booking-card">
                     <div class="booking-card__header">
                         <a href="product.html?id=${booking.houseId}" class="booking-card__house">
@@ -203,12 +214,17 @@ const Profile = {
                         <span class="booking-card__total">${booking.totalPrice || 0} ${i18n.t('common.currency')}</span>
                     </div>
                     ${booking.status === 'completed' ? `
-                        <a href="product.html?id=${booking.houseId}#reviews" class="btn btn--outline btn--sm booking-card__review-link">
+                        <button type="button"
+                            class="btn btn--outline btn--sm booking-card__review-link"
+                            data-review-action
+                            data-house-id="${booking.houseId}"
+                            data-has-review="${hasReview}">
                             ${i18n.t('reviews.leaveReview')}
-                        </a>
+                        </button>
                     ` : ''}
                 </div>
-            `).join('');
+            `;
+            }).join('');
         } catch (error) {
             console.error('❌ Error loading bookings:', error);
             const container = document.getElementById('bookingsList');
@@ -248,9 +264,43 @@ const Profile = {
         });
     },
 
+    async handleReviewAction(houseId, hasReview) {
+        try {
+            const house = await API.getHouseById(houseId);
+            if (!house) {
+                showNotification(i18n.t('product.houseNotFound') || 'Дом не найден', 'error');
+                return;
+            }
+        } catch (error) {
+            console.error('Error checking house:', error);
+            showNotification(i18n.t('common.error'), 'error');
+            return;
+        }
+
+        const productUrl = getProductPath(houseId);
+
+        if (hasReview) {
+            sessionStorage.setItem('highlightOwnReview', String(houseId));
+            window.location.href = productUrl;
+            return;
+        }
+
+        window.location.href = `${productUrl}#reviews`;
+    },
+
     bindEvents() {
         document.querySelectorAll('.profile__tab').forEach(tab => {
             tab.addEventListener('click', () => this.switchTab(tab.dataset.tab));
+        });
+
+        document.getElementById('bookingsList')?.addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-review-action]');
+            if (!btn) return;
+
+            this.handleReviewAction(
+                btn.dataset.houseId,
+                btn.dataset.hasReview === 'true'
+            );
         });
 
         const logoutBtn = document.getElementById('logoutBtn');
