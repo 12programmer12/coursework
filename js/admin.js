@@ -103,41 +103,52 @@ const Admin = {
         });
 
         document.addEventListener('click', async (e) => {
-            const target = e.target;
-
-            if (target.matches('[data-approve-house]')) {
-                const houseId = parseInt(target.getAttribute('data-approve-house'));
-                await this.approveHouse(houseId);
+            const approveBtn = e.target.closest('[data-approve-house]');
+            if (approveBtn) {
+                await this.approveHouse(approveBtn.getAttribute('data-approve-house'));
+                return;
             }
 
-            if (target.matches('[data-reject-house]')) {
-                const houseId = parseInt(target.getAttribute('data-reject-house'));
-                await this.rejectHouse(houseId);
+            const rejectBtn = e.target.closest('[data-reject-house]');
+            if (rejectBtn) {
+                await this.rejectHouse(rejectBtn.getAttribute('data-reject-house'));
+                return;
             }
 
-            if (target.matches('[data-confirm-booking]')) {
-                const bookingId = parseInt(target.getAttribute('data-confirm-booking'));
-                await this.confirmBooking(bookingId);
+            const confirmBookingBtn = e.target.closest('[data-confirm-booking]');
+            if (confirmBookingBtn) {
+                await this.confirmBooking(confirmBookingBtn.getAttribute('data-confirm-booking'));
+                return;
             }
 
-            if (target.matches('[data-cancel-booking]')) {
-                const bookingId = parseInt(target.getAttribute('data-cancel-booking'));
-                await this.cancelBooking(bookingId);
+            const cancelBookingBtn = e.target.closest('[data-cancel-booking]');
+            if (cancelBookingBtn) {
+                await this.cancelBooking(cancelBookingBtn.getAttribute('data-cancel-booking'));
+                return;
             }
 
-            if (target.matches('[data-process-selection]')) {
-                const selectionId = target.getAttribute('data-process-selection');
-                await this.processSelection(selectionId);
+            const completeBookingBtn = e.target.closest('[data-complete-booking]');
+            if (completeBookingBtn) {
+                await this.completeBooking(completeBookingBtn.getAttribute('data-complete-booking'));
+                return;
             }
 
-            if (target.matches('[data-edit-house]')) {
-                const houseData = JSON.parse(target.getAttribute('data-edit-house'));
+            const processSelectionBtn = e.target.closest('[data-process-selection]');
+            if (processSelectionBtn) {
+                await this.processSelection(processSelectionBtn.getAttribute('data-process-selection'));
+                return;
+            }
+
+            const editHouseBtn = e.target.closest('[data-edit-house]');
+            if (editHouseBtn) {
+                const houseData = JSON.parse(editHouseBtn.getAttribute('data-edit-house'));
                 this.openEditModal(houseData);
+                return;
             }
 
-            if (target.matches('[data-delete-house]')) {
-                const houseId = parseInt(target.getAttribute('data-delete-house'));
-                await this.deleteHouse(houseId);
+            const deleteHouseBtn = e.target.closest('[data-delete-house]');
+            if (deleteHouseBtn) {
+                await this.deleteHouse(deleteHouseBtn.getAttribute('data-delete-house'));
             }
         });
     },
@@ -406,11 +417,18 @@ const Admin = {
                             <span class="booking-card__detail-value">${booking.totalPrice} BYN</span>
                         </div>
                     </div>
-                    ${booking.status === 'pending' ? `
+                    ${booking.status === 'pending' || booking.status === 'confirmed' ? `
                     <div class="booking-card__actions">
+                        ${booking.status === 'pending' ? `
                         <button class="btn btn--primary" data-confirm-booking="${booking.id}">
                             ${i18n.t('admin.confirm')}
                         </button>
+                        ` : ''}
+                        ${booking.status === 'confirmed' ? `
+                        <button class="btn btn--primary" data-complete-booking="${booking.id}">
+                            ${i18n.t('admin.complete')}
+                        </button>
+                        ` : ''}
                         <button class="btn btn--outline" data-cancel-booking="${booking.id}">
                             ${i18n.t('admin.cancel')}
                         </button>
@@ -454,6 +472,23 @@ const Admin = {
             this.loadBookings(document.getElementById('bookingsFilter')?.value || 'all');
         } catch (error) {
             console.error('Error cancelling booking:', error);
+            showNotification(i18n.t('common.error'), 'error');
+        }
+    },
+
+    async completeBooking(id) {
+        const confirmed = await showConfirm({
+            message: i18n.t('admin.confirmComplete'),
+            confirmText: i18n.t('admin.complete')
+        });
+        if (!confirmed) return;
+
+        try {
+            await API.updateBooking(id, { status: 'completed' });
+            showNotification(i18n.t('admin.bookingCompleted'), 'success');
+            this.loadBookings(document.getElementById('bookingsFilter')?.value || 'all');
+        } catch (error) {
+            console.error('Error completing booking:', error);
             showNotification(i18n.t('common.error'), 'error');
         }
     },
