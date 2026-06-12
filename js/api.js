@@ -16,7 +16,16 @@ const API = {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            return await response.json();
+            if (response.status === 204) {
+                return null;
+            }
+
+            const text = await response.text();
+            if (!text) {
+                return null;
+            }
+
+            return JSON.parse(text);
         } catch (error) {
             console.error('API Error:', error);
             throw error;
@@ -154,7 +163,12 @@ const API = {
         try {
             const all = await this.fetch('/favorites');
             const normalizedUserId = String(userId);
-            return all.filter(item => item.userId != null && String(item.userId) === normalizedUserId);
+            return all.filter(item =>
+                item.userId != null &&
+                String(item.userId) === normalizedUserId &&
+                item.houseId != null &&
+                item.houseId !== ''
+            );
         } catch (error) {
             console.error('API getFavorites error:', error);
             return [];
@@ -162,10 +176,20 @@ const API = {
     },
 
     async addToFavorites(favoriteData) {
+        const userId = favoriteData.userId;
+        const houseId = favoriteData.houseId;
+
+        if (userId == null || userId === '') {
+            throw new Error('userId is required');
+        }
+        if (houseId == null || houseId === '') {
+            throw new Error('houseId is required');
+        }
+
         const payload = {
             ...favoriteData,
-            userId: String(favoriteData.userId),
-            houseId: String(favoriteData.houseId)
+            userId: String(userId),
+            houseId: String(houseId)
         };
         return this.fetch('/favorites', {
             method: 'POST',
@@ -174,7 +198,10 @@ const API = {
     },
 
     async removeFromFavorites(id) {
-        return this.fetch(`/favorites/${id}`, {
+        if (id == null || id === '') {
+            throw new Error('Favorite id is required');
+        }
+        return this.fetch(`/favorites/${encodeURIComponent(id)}`, {
             method: 'DELETE'
         });
     },
@@ -282,7 +309,15 @@ const API = {
             const response = await fetch(`${this.baseURL}/houses/${id}`, {
                 method: 'DELETE'
             });
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+            if (response.status === 404) {
+                return true;
+            }
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
             return true;
         } catch (error) {
             console.error('API deleteHouse error:', error);

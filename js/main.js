@@ -1,4 +1,4 @@
-﻿import ThemeManager from './theme.js';
+import ThemeManager from './theme.js';
 import AccessibilityManager from './accessibility.js';
 import BurgerMenu from './components/burger-menu.js';
 import Slider from './components/slider.js';
@@ -7,7 +7,7 @@ import Modal from './components/modal.js';
 import API from './api.js';
 import i18n from './i18n.js';
 import { enrichHousesWithReviews, sortHouses, renderStars } from './reviews.js';
-import { getHouseAmenityLabels } from './house-common.js';
+import { compareDateStrings, getHouseAmenityLabels, getLocalDateString } from './house-common.js';
 import { initHeaderBehavior } from './header-behavior.js';
 
 
@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initThemeSwitcher();
     initResetSettings();
     initUserMenu();
+    initSelectionDateInputs();
 
     console.log('✅ DOMIKTUT application initialized successfully!');
 });
@@ -112,15 +113,15 @@ async function loadCatalog() {
 
 
 
-function createHouseCard(house) {
-    const getProductPath = (houseId) => {
-        const currentPath = window.location.pathname;
-        if (currentPath.includes('/pages/')) {
-            return `product.html?id=${houseId}`;
-        }
-        return `pages/product.html?id=${houseId}`;
-    };
+function getProductPath(houseId) {
+    const currentPath = window.location.pathname;
+    if (currentPath.includes('/pages/')) {
+        return `product.html?id=${houseId}`;
+    }
+    return `pages/product.html?id=${houseId}`;
+}
 
+function createHouseCard(house) {
     const card = document.createElement('article');
     card.className = 'catalog-card';
     card.setAttribute('data-house-card', '');
@@ -134,7 +135,7 @@ function createHouseCard(house) {
     card.innerHTML = `
         <div class="catalog-card__image">
             <img src="${imagePath}" alt="${houseName}" loading="lazy">
-            <button class="catalog-card__favorite" 
+            <button type="button" class="catalog-card__favorite" 
                     data-favorite="${house.id}"
                     aria-label="${i18n.t('catalog.addToFavorites')}"
                     data-i18n-aria="catalog.addToFavorites">
@@ -257,7 +258,7 @@ async function initFavorites() {
         e.stopPropagation();
 
         const houseId = favoriteBtn.getAttribute('data-favorite');
-        if (!houseId) return;
+        if (!houseId || houseId === 'null' || houseId === 'undefined') return;
 
         await handleFavoriteClick(houseId, favoriteBtn);
     });
@@ -300,22 +301,31 @@ async function handleFavoriteClick(houseId, btn) {
 
     try {
         const records = await API.getFavorites(user.id);
-        const existing = records.find(item => String(item.houseId) === String(houseId));
+        const existing = records.find(item =>
+            item.houseId != null &&
+            String(item.houseId) === String(houseId)
+        );
 
         if (existing) {
             await API.removeFromFavorites(existing.id);
-            showNotification(i18n.t('common.removedFromFavorites'), 'success');
         } else {
             await API.addToFavorites({
                 userId: String(user.id),
                 houseId: String(houseId),
                 createdAt: new Date().toISOString()
             });
-            showNotification(i18n.t('common.addedToFavorites'), 'success');
         }
 
         await updateFavoriteButtons();
-        window.dispatchEvent(new CustomEvent('favoritesChanged'));
+
+        const message = existing
+            ? i18n.t('common.removedFromFavorites')
+            : i18n.t('common.addedToFavorites');
+        showNotification(message, 'success');
+
+        window.dispatchEvent(new CustomEvent('favoritesChanged', {
+            detail: { houseId: String(houseId), added: !existing }
+        }));
     } catch (error) {
         console.error('❌ Favorite error:', error);
         showNotification(i18n.t('common.error'), 'error');
@@ -408,6 +418,28 @@ function getCurrentUser() {
 
 
 
+
+function initSelectionDateInputs() {
+    const checkin = document.getElementById('selectionCheckin');
+    const checkout = document.getElementById('selectionCheckout');
+    if (!checkin || !checkout) return;
+
+    const today = getLocalDateString();
+    checkin.min = today;
+    checkout.min = today;
+
+    checkin.addEventListener('change', () => {
+        const checkInDate = checkin.value;
+        if (checkInDate) {
+            checkout.min = compareDateStrings(checkInDate, today) >= 0 ? checkInDate : today;
+            if (checkout.value && compareDateStrings(checkout.value, checkInDate) <= 0) {
+                checkout.value = '';
+            }
+        } else {
+            checkout.min = today;
+        }
+    });
+}
 
 function prefillSelectionForm() {
     const user = getCurrentUser();
@@ -502,8 +534,23 @@ async function handleContactForm(e) {
 
 
 
-function showNotification(message, type = 'info', duration = 6000) {
-    const existing = document.querySelectorAll('.notification');
+const NOTIFICATION_FADE_MS = 450;
+const NOTIFICATION_VISIBLE_MS = 5000;
+
+function getNotificationRoot() {
+    let root = document.getElementById('notification-root');
+    if (!root) {
+        root = document.createElement('div');
+        root.id = 'notification-root';
+        root.className = 'notification-root';
+        document.body.appendChild(root);
+    }
+    return root;
+}
+
+function showNotification(message, type = 'info', duration = NOTIFICATION_VISIBLE_MS) {
+    const root = getNotificationRoot();
+    const existing = root.querySelectorAll('.notification:not(.hiding)');
     const stackOffset = existing.length * 72;
 
     const notification = document.createElement('div');
@@ -513,14 +560,22 @@ function showNotification(message, type = 'info', duration = 6000) {
         <div class="notification__message">${message}</div>
         <button type="button" class="notification__close" aria-label="${i18n.t('common.close')}">&times;</button>
     `;
-    document.body.appendChild(notification);
+    root.appendChild(notification);
+
+    requestAnimationFrame(() => {
+        notification.classList.add('notification--visible');
+    });
 
     let hideTimer = setTimeout(dismiss, duration);
+    let dismissing = false;
 
     function dismiss() {
+        if (dismissing) return;
+        dismissing = true;
         clearTimeout(hideTimer);
+        notification.classList.remove('notification--visible');
         notification.classList.add('hiding');
-        setTimeout(() => notification.remove(), 300);
+        setTimeout(() => notification.remove(), NOTIFICATION_FADE_MS);
     }
 
     notification.querySelector('.notification__close')?.addEventListener('click', dismiss);
@@ -713,6 +768,7 @@ export {
     createHouseCard,
     loadCatalog,
     fixImagePath,
+    getProductPath,
     initFavorites,
     getFavorites,
     updateFavoriteButtons,
