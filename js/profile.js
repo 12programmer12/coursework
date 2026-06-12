@@ -7,6 +7,15 @@ import { initHeaderBehavior } from './header-behavior.js';
 
 const Profile = {
     currentUser: null,
+    currentTab: 'bookings',
+
+    getTabFromHash() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash === 'favorites' || hash === 'settings' || hash === 'bookings') {
+            return hash;
+        }
+        return 'bookings';
+    },
 
     async init() {
         AccessibilityManager.init();
@@ -15,13 +24,40 @@ const Profile = {
         this.hidePreloader();
         this.checkAuth();
         await i18n.init();
-       
+
+        this.currentTab = this.getTabFromHash();
+        this.switchTab(this.currentTab, { updateHash: false });
+
         await initFavorites();
         await this.loadUserData();
         this.bindEvents();
-        const initialTab = window.location.hash === '#favorites' ? 'favorites' : 'bookings';
-        this.switchTab(initialTab);
-        window.addEventListener('favoritesChanged', () => {
+
+        window.addEventListener('hashchange', () => {
+            const tab = this.getTabFromHash();
+            if (tab !== this.currentTab) {
+                this.switchTab(tab, { updateHash: false });
+            }
+        });
+
+        window.addEventListener('favoritesChanged', (e) => {
+            const detail = e.detail;
+            if (detail && !detail.added) {
+                const removeBtn = document.querySelector(
+                    `.favorite-card__remove[data-favorite="${detail.houseId}"]`
+                );
+                const card = removeBtn?.closest('.favorite-card');
+                if (card) {
+                    card.classList.add('favorite-card--removing');
+                    setTimeout(() => {
+                        card.remove();
+                        const container = document.getElementById('favoritesList');
+                        if (container && !container.querySelector('.favorite-card')) {
+                            container.innerHTML = this.renderEmptyState('profile.favorites.empty');
+                        }
+                    }, 350);
+                    return;
+                }
+            }
             this.loadFavorites();
         });
     },
@@ -41,7 +77,12 @@ const Profile = {
             return;
         }
 
-        const uniqueHouseIds = [...new Set(records.map(record => String(record.houseId)))];
+        const uniqueHouseIds = [...new Set(
+            records
+                .map(record => record.houseId)
+                .filter(id => id != null && id !== '')
+                .map(id => String(id))
+        )];
 
         const houses = [];
         for (const houseId of uniqueHouseIds) {
@@ -74,7 +115,7 @@ const Profile = {
                         ${house.rating ? `<span class="favorite-card__rating">★ ${house.rating} · ${house.reviews || 0}</span>` : ''}
                     </div>
                 </a>
-                <button class="btn btn--outline btn--sm favorite-card__remove" data-favorite="${house.id}">
+                <button type="button" class="btn btn--outline btn--sm favorite-card__remove" data-favorite="${house.id}">
                     ${i18n.t('common.removeFromFavorites') || 'Удалить'}
                 </button>
             </article>
@@ -255,13 +296,21 @@ const Profile = {
         }
     },
 
-    switchTab(tabName) {
+    switchTab(tabName, { updateHash = true } = {}) {
+        if (!tabName) return;
+
+        this.currentTab = tabName;
+
         document.querySelectorAll('.profile__tab').forEach(tab => {
             tab.classList.toggle('active', tab.dataset.tab === tabName);
         });
         document.querySelectorAll('.profile__panel').forEach(panel => {
             panel.classList.toggle('active', panel.id === `${tabName}Panel`);
         });
+
+        if (updateHash && window.location.hash !== `#${tabName}`) {
+            history.replaceState(null, '', `#${tabName}`);
+        }
     },
 
     async handleReviewAction(houseId, hasReview) {
@@ -336,13 +385,14 @@ const Profile = {
                     storage.setItem('currentUser', JSON.stringify(this.currentUser));
 
                     this.renderUserInfo();
-                    alert(i18n.t('profile.settings.success'));
+                    showNotification(i18n.t('profile.settings.success'), 'success');
                 } catch (error) {
                     console.error('Error updating profile:', error);
-                    alert(i18n.t('common.error'));
+                    showNotification(i18n.t('common.error'), 'error');
                 } finally {
                     submitBtn.disabled = false;
                     submitBtn.textContent = originalText;
+                    this.switchTab(this.currentTab, { updateHash: false });
                 }
             });
         }
