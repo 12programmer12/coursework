@@ -16,8 +16,10 @@ import {
 } from './reviews.js';
 import {
     calculateHousePrices,
+    compareDateStrings,
+    getHouseAmenityLabels,
     getHouseServiceLabels,
-    getHouseAmenityLabels
+    getLocalDateString
 } from './house-common.js';
 
 const CONTACT_PHONE = '+3758435286548';
@@ -35,6 +37,7 @@ const Product = {
     async init() {
         AccessibilityManager.init();
         initHeaderBehavior();
+        this.hidePreloader();
 
         this.getHouseIdFromURL();
         await this.loadHouseData();
@@ -68,6 +71,14 @@ const Product = {
 
         if (window.location.hash !== '#reviews') return;
         this.scrollToOwnReview();
+    },
+
+    hidePreloader() {
+        const preloader = document.querySelector('[data-preloader]');
+        if (preloader) {
+            preloader.classList.add('hidden');
+            preloader.style.display = 'none';
+        }
     },
 
     getHouseIdFromURL() {
@@ -574,6 +585,8 @@ const Product = {
             }
         });
 
+        this.initBookingDateInputs();
+
         document.getElementById('bookingForm')?.addEventListener('submit', async (e) => {
             e.preventDefault();
             await this.handleBooking(e.target);
@@ -630,9 +643,31 @@ const Product = {
         });
     },
 
+    initBookingDateInputs() {
+        const checkin = document.getElementById('bookingCheckin');
+        const checkout = document.getElementById('bookingCheckout');
+        if (!checkin || !checkout) return;
+
+        const today = getLocalDateString();
+        checkin.min = today;
+        checkout.min = today;
+
+        checkin.addEventListener('change', () => {
+            const checkInDate = checkin.value;
+            if (checkInDate) {
+                checkout.min = compareDateStrings(checkInDate, today) >= 0 ? checkInDate : today;
+                if (checkout.value && compareDateStrings(checkout.value, checkInDate) <= 0) {
+                    checkout.value = '';
+                }
+            } else {
+                checkout.min = today;
+            }
+        });
+    },
+
     validateBookingForm(data) {
         const errors = [];
-        const today = new Date().toISOString().split('T')[0];
+        const today = getLocalDateString();
 
         if (!data.name || data.name.trim().length < 2) {
             errors.push({ field: 'bookingName', message: i18n.t('validation.required') });
@@ -644,17 +679,18 @@ const Product = {
 
         if (!data.checkIn) {
             errors.push({ field: 'bookingCheckin', message: i18n.t('validation.required') });
-        } else if (data.checkIn < today) {
+        } else if (compareDateStrings(data.checkIn, today) < 0) {
             errors.push({ field: 'bookingCheckin', message: i18n.t('validation.invalidDate') });
         }
 
         if (!data.checkOut) {
             errors.push({ field: 'bookingCheckout', message: i18n.t('validation.required') });
-        } else if (data.checkOut <= data.checkIn) {
+        } else if (data.checkIn && compareDateStrings(data.checkOut, data.checkIn) <= 0) {
             errors.push({ field: 'bookingCheckout', message: i18n.t('validation.checkoutAfterCheckin') });
         }
 
-        if (!data.guests || data.guests < 1) {
+        const guests = Number(data.guests);
+        if (!guests || guests < 1) {
             errors.push({ field: 'bookingGuests', message: i18n.t('validation.required') });
         }
 
